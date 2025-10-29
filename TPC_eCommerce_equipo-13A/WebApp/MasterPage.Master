@@ -29,6 +29,10 @@
                         <a class="nav-link" href="/Contacto.aspx">Contacto</a>
                         <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                     </div>
+                    <div class="navbar-nav">
+                        <a class="nav-link" href="/MarcaGestion.aspx">Gestión de Marcas</a>
+                        <a class="nav-link" href="/CategoriaGestion.aspx">Gestión de Categorías</a>
+                    </div>
                 </div>
             </div>
         </nav>
