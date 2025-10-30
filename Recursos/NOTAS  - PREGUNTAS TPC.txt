@@ -1,3 +1,0 @@
-Uso de OnRow en Categorias y Marcas
-Se debe tener una tabla stock?
-La baja es física o lógica?

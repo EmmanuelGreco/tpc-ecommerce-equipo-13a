@@ -1,0 +1,6 @@
+Se usó OnRow en Categorias y Marcas por tener solo 1 columna.
+El Eliminar de Categorias y Marcas, puede ser con un cartel de aviso?
+
+Se debe tener una tabla Stock? Ó puede ser un atributo en Productos.
+
+La baja es física o lógica?
