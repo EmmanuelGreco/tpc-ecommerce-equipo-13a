@@ -8,7 +8,7 @@ namespace Dominio
 {
     public class Marca
     {
-        public int Id { get; set; }
+        public int Id { get; set; }                         //PK
         public string Nombre { get; set; }
 
         public override string ToString()

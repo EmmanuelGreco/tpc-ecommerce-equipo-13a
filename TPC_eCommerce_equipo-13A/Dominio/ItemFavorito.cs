@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Categoria
+    public class ItemFavorito
     {
         public int Id { get; set; }                         //PK
-        public string Nombre { get; set; }
-
-        public override string ToString()
-        {
-            return Nombre;
-        }
+        public Producto Producto { get; set; }
+        public string FechaAgregado { get; set; }
     }
 }
