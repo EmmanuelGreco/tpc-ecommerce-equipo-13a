@@ -44,7 +44,7 @@
     <Compile Include="Carrito.cs" />
     <Compile Include="Categoria.cs" />
     <Compile Include="Empleado.cs" />
-    <Compile Include="Imagen.cs" />
+    <Compile Include="ProductoImagen.cs" />
     <Compile Include="ItemFavorito.cs" />
     <Compile Include="ListaFavoritos.cs" />
     <Compile Include="Marca.cs" />

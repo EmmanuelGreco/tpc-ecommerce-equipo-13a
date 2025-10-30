@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1>Gestión de Marcas</h1>
+    <h1 style="margin-bottom:40px;">Gestión de Marcas</h1>
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:UpdatePanel ID="updMarcas" runat="server">
@@ -13,8 +13,7 @@
                 OnRowDataBound="dgvMarcas_RowDataBound"
                 OnRowEditing="dgvMarcas_RowEditing"
                 OnRowUpdating="dgvMarcas_RowUpdating"
-                OnRowCancelingEdit="dgvMarcas_RowCancelingEdit"
-                style="margin-top:40px;">
+                OnRowCancelingEdit="dgvMarcas_RowCancelingEdit">
                 <Columns>
                     <asp:BoundField HeaderText="Nombre" Datafield="Nombre" />
                     <asp:CommandField HeaderText="Acción" ShowEditButton="true"

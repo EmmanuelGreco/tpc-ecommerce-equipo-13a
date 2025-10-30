@@ -1,8 +1,8 @@
 USE master
 GO
 
-/*DROP DATABASE IF EXISTS TPC_ECOMMERCE
-GO*/
+DROP DATABASE IF EXISTS TPC_ECOMMERCE
+GO
 
 CREATE DATABASE TPC_ECOMMERCE
 GO
@@ -98,11 +98,14 @@ CREATE TABLE [dbo].[Clientes](
 GO
 
 
-insert into MARCAS values ('Wilson'), ('Logitech'), ('Royal Kludge'), ('Huawei'), ('Motorola')
-insert into CATEGORIAS values ('Mochilas'),('Periféricos'), ('Accesorios')
-insert into PRODUCTOS values ('M01', 'Mochila Porta Notebook', 'Esta mochila combina un diseño elegante y profesional con la robustez necesaria para enfrentar el ajetreo urbano y los viajes de negocios.', 1, 1, 'China', 49999, 0),
+insert into MARCAS values ('Wilson'), ('Logitech'), ('Royal Kludge'), ('Lenovo'), ('Samsung'), ('Sony'), ('LG'), ('Dell'), ('Asus')
+insert into CATEGORIAS values ('Mochilas'),('Periféricos'), ('Accesorios'), ('Televisores'), ('Notebooks')
+insert into PRODUCTOS values
+('M01', 'Mochila Porta Notebook', 'Esta mochila combina un diseño elegante y profesional con la robustez necesaria para enfrentar el ajetreo urbano y los viajes de negocios.', 1, 1, 'China', 49999, 0),
 ('P03', 'Mouse Gamer Hero G502', 'Sumérgete en el mundo de los videojuegos con el mouse gamer Logitech G Series Hero G502 en color negro', 2, 2, 'Corea', 64999, 0),
-('P08', 'Teclado Mecánico 75% Rk M75', 'Este teclado cuenta con un diseño compacto con 81 teclas, por lo que es fácil de transportar y usar en cualquier lugar.', 2, 3, 'Japon', 185000, 0)
+('P08', 'Teclado Mecánico 75% Rk M75', 'Este teclado cuenta con un diseño compacto con 81 teclas, por lo que es fácil de transportar y usar en cualquier lugar.', 2, 3, 'Japon', 185000, 0),
+('65BRAVIA8II', 'Televisor 65" BRAVIA 8 OLED 4K', 'Televisor OLED 4K con tecnología QD-OLED', 6, 4, 'Japon', 6399000, 0),
+('65X855', 'Televisor 65" Serie X855 4K', 'Este televisor cuenta con resolucion 4K y Triluminos Display', 6, 4, 'Japon', 2300000, 0)
 
 insert into imagenes values
 (1, 'https://http2.mlstatic.com/D_NQ_NP_703368-MLU76300898146_052024-O.webp'),
@@ -113,7 +116,13 @@ insert into imagenes values
 (2, 'https://http2.mlstatic.com/D_NQ_NP_793119-MLU72761228270_112023-O.webp'),
 (3, 'https://http2.mlstatic.com/D_NQ_NP_767460-MLA74282172500_022024-O.webp'),
 (3, 'https://http2.mlstatic.com/D_NQ_NP_848157-MLA74517144673_022024-O.webp'),
-(3, 'https://http2.mlstatic.com/D_NQ_NP_616027-MLA74397845971_022024-O.webp')
+(3, 'https://http2.mlstatic.com/D_NQ_NP_616027-MLA74397845971_022024-O.webp'),
+(4, 'https://sony.scene7.com/is/image/sonyglobalsolutions/TVFY24_UM_1_FrontWithStand_M?$productIntroPlatemobile$&fmt=png-alpha'),
+(4, 'https://sony.scene7.com/is/image/sonyglobalsolutions/TVFY24_UM_2_CW_M?$productIntroPlatemobile$&fmt=png-alpha'),
+(4, 'https://sony.scene7.com/is/image/sonyglobalsolutions/TVFY24_UM_3_CCW_M?$productIntroPlatemobile$&fmt=png-alpha'),
+(4, 'https://sony.scene7.com/is/image/sonyglobalsolutions/TVFY24_UM_5_Bezel_M?$productIntroPlatemobile$&fmt=png-alpha'),
+(4, 'https://sony.scene7.com/is/image/sonyglobalsolutions/TVFY24_UM_6_Stand_M?$productIntroPlatemobile$&fmt=png-alpha'),
+(4, 'https://sony.scene7.com/is/image/sonyglobalsolutions/TVFY24_UM_0_insitu_M?$productIntroPlatemobile$&fmt=png-alpha')
 
 insert into clientes values ('32333222', 'Doug', 'Narinas', 'doug@narinas.com','avenida 123', 'chuletas city', 1234)
 
