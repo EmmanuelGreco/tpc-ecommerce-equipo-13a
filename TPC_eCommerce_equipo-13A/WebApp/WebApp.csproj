@@ -72,6 +72,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="MarcaGestion.aspx" />
+    <Content Include="ProductoGestion.aspx" />
     <Content Include="Productos.aspx" />
     <Content Include="SobreNosotros.aspx" />
     <Content Include="Web.config" />
@@ -114,6 +115,13 @@
     </Compile>
     <Compile Include="MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="ProductoGestion.aspx.cs">
+      <DependentUpon>ProductoGestion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductoGestion.aspx.designer.cs">
+      <DependentUpon>ProductoGestion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Productos.aspx.cs">
       <DependentUpon>Productos.aspx</DependentUpon>

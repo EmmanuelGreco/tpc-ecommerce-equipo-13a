@@ -32,6 +32,7 @@
                     <div class="navbar-nav">
                         <a class="nav-link" href="/MarcaGestion.aspx">Gestión de Marcas</a>
                         <a class="nav-link" href="/CategoriaGestion.aspx">Gestión de Categorías</a>
+                        <a class="nav-link" href="/ProductoGestion.aspx">Gestión de Productos</a>
                     </div>
                 </div>
             </div>
