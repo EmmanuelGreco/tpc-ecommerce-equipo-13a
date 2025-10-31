@@ -7,31 +7,42 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:UpdatePanel ID="updMarcas" runat="server">
         <ContentTemplate>
-
-            <asp:GridView ID="dgvMarcas" runat="server" CssClass="table" DataKeyNames="Id"
-                AutoGenerateColumns="false"
-                OnRowDataBound="dgvMarcas_RowDataBound"
-                OnRowEditing="dgvMarcas_RowEditing"
-                OnRowUpdating="dgvMarcas_RowUpdating"
-                OnRowCancelingEdit="dgvMarcas_RowCancelingEdit">
-                <Columns>
-                    <asp:BoundField HeaderText="Nombre" Datafield="Nombre" />
-                    <asp:CommandField HeaderText="Acción" ShowEditButton="true"
-                        EditText="&#128221"
-                        UpdateText="💾 Guardar"
-                        CancelText="❌ Cancelar"/>
-                </Columns>
-            </asp:GridView>
-
-            <div class="col mb-2 d-flex flex-column" style="width: 300px; margin-top:40px;">
-                <asp:Label runat="server" CssClass="form-label" for="txtNuevaMarca">Nueva marca:</asp:Label>
-                <asp:TextBox ID="txtNuevaMarca" CssClass="form-control" placeholder="Ejemplo: Sony" MaxLength="50" runat="server"></asp:TextBox>
-                <div style="min-height: 1.5em;">
-                    <asp:CustomValidator ID="errorMarcaCustom" runat="server" ControlToValidate="txtNuevaMarca" ErrorMessage="Aca va el error del back" ForeColor="Red" Display="Dynamic" EnableClientScript="false" />
-                </div>
-                <asp:Button ID="btnAgregar" runat="server" Text="➕ Agregar" CssClass="btn btn-primary mt-2" OnClick="btnAgregar_Click" />
+            
+            <div class="container w-100">
+                <asp:GridView ID="dgvMarcas" runat="server" CssClass="table" DataKeyNames="Id"
+                    AutoGenerateColumns="false"
+                    OnRowDataBound="dgvMarcas_RowDataBound"
+                    OnRowEditing="dgvMarcas_RowEditing"
+                    OnRowUpdating="dgvMarcas_RowUpdating"
+                    OnRowCancelingEdit="dgvMarcas_RowCancelingEdit">
+                    <Columns>
+                        <asp:BoundField HeaderText="Nombre" Datafield="Nombre" />
+                        <asp:CommandField HeaderText="Acción" ShowEditButton="true"
+                            EditText="&#128221"
+                            UpdateText="💾 Guardar"
+                            CancelText="❌ Cancelar"/>
+                    </Columns>
+                </asp:GridView>
             </div>
 
+            <h3 style="margin-top: 40px">Agregar marca:</h3>
+            <div class="container w-100">
+                <div class="row">
+                    <div class="col-md-8">
+                        <asp:TextBox ID="txtNuevaMarca" CssClass="form-control" placeholder="Ejemplo: Sony" MaxLength="50" runat="server"></asp:TextBox>
+                    </div>
+                    <div class="col-md-4">
+                        <asp:Button ID="btnAgregar" runat="server" Text="➕ Agregar" CssClass="btn btn-primary w-100" OnClick="btnAgregar_Click" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div style="min-height: 1.5em;">
+                            <asp:CustomValidator ID="errorMarcaCustom" runat="server" ControlToValidate="txtNuevaMarca" ErrorMessage="Aca va el error del back" ForeColor="Red" Display="Dynamic" EnableClientScript="false" />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

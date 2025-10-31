@@ -5,26 +5,28 @@
     <h1 style="margin-bottom:40px;">Gestión de Productos</h1>
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <asp:UpdatePanel ID="updCategorias" runat="server">
+    <asp:UpdatePanel ID="updProductos" runat="server">
         <ContentTemplate>
 
-          <%--  <asp:GridView ID="dgvCategorias" runat="server" CssClass="table" DataKeyNames="Id"
-                AutoGenerateColumns="false"
-                OnRowDataBound="dgvCategorias_RowDataBound"
-                OnRowEditing="dgvCategorias_RowEditing"
-                OnRowUpdating="dgvCategorias_RowUpdating"
-                OnRowCancelingEdit="dgvCategorias_RowCancelingEdit">
-                <Columns>
-                    <asp:BoundField HeaderText="Nombre" Datafield="Nombre" />
-                    <asp:CommandField HeaderText="Acción" ShowEditButton="true"
-                        EditText="&#128221"
-                        UpdateText="💾 Guardar"
-                        CancelText="❌ Cancelar"/>
-                </Columns>
-            </asp:GridView>--%>
+            <div class="container  w-100">
+                <asp:GridView ID="dgvProductos" runat="server" CssClass="table" DataKeyNames="Id"
+                    AutoGenerateColumns="false"
+                    OnRowDataBound="dgvProductos_RowDataBound"
+                    OnRowEditing="dgvProductos_RowEditing"
+                    OnRowUpdating="dgvProductos_RowUpdating"
+                    OnRowCancelingEdit="dgvProductos_RowCancelingEdit">
+                    <Columns>
+                        <asp:BoundField HeaderText="Nombre" Datafield="Nombre" />
+                        <asp:CommandField HeaderText="Acción" ShowEditButton="true"
+                            EditText="&#128221"
+                            UpdateText="💾 Guardar"
+                            CancelText="❌ Cancelar"/>
+                    </Columns>
+                </asp:GridView>
+            </div>
 
-            <%--<div class="col mb-2 d-flex flex-column w-50" style="margin-top:40px;"> <%--width: 300px; --%>
-            <div class="container w-75">
+            <h3 style="margin-top: 40px">Agregar producto:</h3>
+            <div class="container  w-100">
                 <div class="row">
                     <div class="col-md-8">
                         <asp:Label runat="server" CssClass="form-label" for="txtNombre">Nombre:</asp:Label>

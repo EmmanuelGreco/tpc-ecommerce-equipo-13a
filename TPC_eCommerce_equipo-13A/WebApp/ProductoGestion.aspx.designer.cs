@@ -24,13 +24,22 @@ namespace WebApp
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// updCategorias control.
+        /// updProductos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updCategorias;
+        protected global::System.Web.UI.UpdatePanel updProductos;
+
+        /// <summary>
+        /// dgvProductos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView dgvProductos;
 
         /// <summary>
         /// txtNombre control.

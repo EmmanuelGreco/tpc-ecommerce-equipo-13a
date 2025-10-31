@@ -29,18 +29,17 @@ namespace WebApp
                 ddlCategoria.DataTextField = "Nombre";
                 ddlCategoria.DataValueField = "Id";
                 ddlCategoria.DataBind();
-                //    ListarCategorias();
+                ListarProductos();
             }
         }
-/*
-        private void ListarCategorias()
+        private void ListarProductos()
         {
-            dgvCategorias.DataSource = negocio.listar();
-            dgvCategorias.DataBind();
+            dgvProductos.DataSource = productoNegocio.listar();
+            dgvProductos.DataBind();
         }
 
         // Este metodo es para que aparezca el cartel "Editar" al pasar el mouse por el ícono de Acción.
-        protected void dgvCategorias_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void dgvProductos_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
@@ -54,18 +53,18 @@ namespace WebApp
             }
         }
 
-        protected void dgvCategorias_RowEditing(object sender, System.Web.UI.WebControls.GridViewEditEventArgs e)
+        protected void dgvProductos_RowEditing(object sender, System.Web.UI.WebControls.GridViewEditEventArgs e)
         {
-            dgvCategorias.EditIndex = e.NewEditIndex;
-            ListarCategorias();
+            dgvProductos.EditIndex = e.NewEditIndex;
+            ListarProductos();
         }
 
-        protected void dgvCategorias_RowUpdating(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
+        protected void dgvProductos_RowUpdating(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
         {
             try
             {
-                int id = Convert.ToInt32(dgvCategorias.DataKeys[e.RowIndex].Value);
-                GridViewRow fila = dgvCategorias.Rows[e.RowIndex];
+                int id = Convert.ToInt32(dgvProductos.DataKeys[e.RowIndex].Value);
+                GridViewRow fila = dgvProductos.Rows[e.RowIndex];
 
                 TextBox texto = (TextBox)fila.Cells[0].Controls[0];
                 string nuevoNombre = texto.Text.Trim();
@@ -76,10 +75,10 @@ namespace WebApp
                     return;
                 }
 
-                negocio.modificar(id, nuevoNombre);
+                //productoNegocio.modificar(id, nuevoNombre);
 
-                dgvCategorias.EditIndex = -1;
-                ListarCategorias();
+                dgvProductos.EditIndex = -1;
+                ListarProductos();
             }
             catch (Exception ex)
             {
@@ -87,12 +86,12 @@ namespace WebApp
             }
         }
 
-        protected void dgvCategorias_RowCancelingEdit(object sender, System.Web.UI.WebControls.GridViewCancelEditEventArgs e)
+        protected void dgvProductos_RowCancelingEdit(object sender, System.Web.UI.WebControls.GridViewCancelEditEventArgs e)
         {
-            dgvCategorias.EditIndex = -1;
-            ListarCategorias();
+            dgvProductos.EditIndex = -1;
+            ListarProductos();
         }
-*/
+
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
             try

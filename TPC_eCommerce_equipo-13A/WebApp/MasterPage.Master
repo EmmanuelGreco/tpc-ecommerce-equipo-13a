@@ -25,14 +25,14 @@
                     <div class="navbar-nav">
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
                         <a class="nav-link" href="/Productos.aspx">Productos</a>
-                        <a class="nav-link" href="/SobreNosotros.aspx">Sobre Nosotros</a>
-                        <a class="nav-link" href="/Contacto.aspx">Contacto</a>
-                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                        <%--<a class="nav-link disabled" aria-disabled="true">Disabled</a>--%>
                     </div>
                     <div class="navbar-nav">
                         <a class="nav-link" href="/MarcaGestion.aspx">Gestión de Marcas</a>
                         <a class="nav-link" href="/CategoriaGestion.aspx">Gestión de Categorías</a>
                         <a class="nav-link" href="/ProductoGestion.aspx">Gestión de Productos</a>
+                        <a class="nav-link" href="/SobreNosotros.aspx">Sobre Nosotros</a>
+                        <a class="nav-link" href="/Contacto.aspx">Contacto</a>
                     </div>
                 </div>
             </div>
