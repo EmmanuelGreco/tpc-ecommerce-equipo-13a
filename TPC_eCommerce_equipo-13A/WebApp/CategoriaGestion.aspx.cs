@@ -46,30 +46,44 @@ namespace WebApp
             listarCategorias();
         }
 
-        protected void dgvCategorias_RowUpdating(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
+        protected void dgvCategorias_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
+            GridViewRow fila = dgvCategorias.Rows[e.RowIndex];
+
+            TextBox txtNombre = fila.FindControl("txtNombre") as TextBox;
+            Label lblError = fila.FindControl("lblError") as Label;
+
+            string nombre = txtNombre.Text.Trim();
+
+            lblError.Visible = false;
+            lblError.Text = "";
+
             try
             {
-                int id = Convert.ToInt32(dgvCategorias.DataKeys[e.RowIndex].Value);
-                GridViewRow fila = dgvCategorias.Rows[e.RowIndex];
-
-                TextBox texto = (TextBox)fila.Cells[0].Controls[0];
-                string nuevoNombre = texto.Text.Trim();
-
-                if (string.IsNullOrEmpty(nuevoNombre))
+                if (string.IsNullOrWhiteSpace(nombre))
                 {
-                    Response.Write("<script>alert('El nombre no puede estar vacío');</script>");
+                    lblError.Text = "¡El nombre es requerido!";
+                    lblError.Visible = true;
                     return;
                 }
 
-                categoriaNegocio.modificar(id, nuevoNombre);
+                if (categoriaNegocio.existe(nombre, 0))
+                {
+                    lblError.Text = "¡Ya existe una marca con ese nombre!";
+                    lblError.Visible = true;
+                    return;
+                }
+
+                int id = Convert.ToInt32(dgvCategorias.DataKeys[e.RowIndex].Value);
+                categoriaNegocio.modificar(id, nombre);
 
                 dgvCategorias.EditIndex = -1;
                 listarCategorias();
             }
             catch (Exception ex)
             {
-                Response.Write("<script>alert('Error: " + ex.Message.Replace("'", "") + "');</script>");
+                lblGlobalError.Text = "Error al actualizar: " + ex.Message;
+                lblGlobalError.Visible = true;
             }
         }
 

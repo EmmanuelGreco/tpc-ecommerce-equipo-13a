@@ -9,21 +9,30 @@
     <asp:UpdatePanel ID="updCategorias" runat="server">
         <ContentTemplate>
 
-            <div class="container">
+            <div class="container w-100">
                 <asp:GridView ID="dgvCategorias" runat="server" CssClass="table" DataKeyNames="Id"
                     AutoGenerateColumns="false"
-                    OnRowDataBound="dgvCategorias_RowDataBound"
                     OnRowEditing="dgvCategorias_RowEditing"
                     OnRowUpdating="dgvCategorias_RowUpdating"
                     OnRowCancelingEdit="dgvCategorias_RowCancelingEdit">
                     <Columns>
-                        <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
+                        <asp:TemplateField HeaderText="Nombre">
+                            <ItemTemplate>
+                                <%# Eval("Nombre") %>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtNombre" runat="server" Text='<%# Bind("Nombre") %>'></asp:TextBox>
+                                <asp:Label ID="lblError" runat="server" ForeColor="Red" Visible="False"></asp:Label>
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+
                         <asp:CommandField HeaderText="Acción" ShowEditButton="true"
                             EditText="📝"
                             UpdateText="💾 Guardar"
-                            CancelText="❌ Cancelar" />
+                            CancelText="❌ Cancelar"/>
                     </Columns>
                 </asp:GridView>
+                <asp:Label ID="lblGlobalError" runat="server" ForeColor="Red" Visible="False"></asp:Label>
             </div>
 
             <h3 style="margin-top: 40px">Agregar categoría:</h3>

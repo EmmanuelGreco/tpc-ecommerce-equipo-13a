@@ -11,18 +11,27 @@
             <div class="container w-100">
                 <asp:GridView ID="dgvMarcas" runat="server" CssClass="table" DataKeyNames="Id"
                     AutoGenerateColumns="false"
-                    OnRowDataBound="dgvMarcas_RowDataBound"
                     OnRowEditing="dgvMarcas_RowEditing"
                     OnRowUpdating="dgvMarcas_RowUpdating"
                     OnRowCancelingEdit="dgvMarcas_RowCancelingEdit">
                     <Columns>
-                        <asp:BoundField HeaderText="Nombre" Datafield="Nombre" />
+                        <asp:TemplateField HeaderText="Nombre">
+                            <ItemTemplate>
+                                <%# Eval("Nombre") %>
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtNombre" runat="server" Text='<%# Bind("Nombre") %>'></asp:TextBox>
+                                <asp:Label ID="lblError" runat="server" ForeColor="Red" Visible="False"></asp:Label>
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+
                         <asp:CommandField HeaderText="Acción" ShowEditButton="true"
                             EditText="📝"
                             UpdateText="💾 Guardar"
                             CancelText="❌ Cancelar"/>
                     </Columns>
                 </asp:GridView>
+                <asp:Label ID="lblGlobalError" runat="server" ForeColor="Red" Visible="False"></asp:Label>
             </div>
 
             <h3 style="margin-top: 40px">Agregar marca:</h3>
