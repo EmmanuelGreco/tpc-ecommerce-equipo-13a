@@ -11,17 +11,17 @@ namespace WebApp
 {
     public partial class MarcaGestion : System.Web.UI.Page
     {
-        MarcaNegocio negocio = new MarcaNegocio();
+        MarcaNegocio marcaNegocio = new MarcaNegocio();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                ListarMarcas();
+                listarMarcas();
         }
 
-        private void ListarMarcas()
+        private void listarMarcas()
         {
-            dgvMarcas.DataSource = negocio.listar();
+            dgvMarcas.DataSource = marcaNegocio.listar();
             dgvMarcas.DataBind();
         }
 
@@ -43,7 +43,7 @@ namespace WebApp
         protected void dgvMarcas_RowEditing(object sender, System.Web.UI.WebControls.GridViewEditEventArgs e)
         {
             dgvMarcas.EditIndex = e.NewEditIndex;
-            ListarMarcas();
+            listarMarcas();
         }
 
         protected void dgvMarcas_RowUpdating(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
@@ -62,10 +62,10 @@ namespace WebApp
                     return;
                 }
 
-                negocio.modificar(id, nuevoNombre);
+                marcaNegocio.modificar(id, nuevoNombre);
 
                 dgvMarcas.EditIndex = -1;
-                ListarMarcas();
+                listarMarcas();
             }
             catch (Exception ex)
             {
@@ -76,7 +76,7 @@ namespace WebApp
         protected void dgvMarcas_RowCancelingEdit(object sender, System.Web.UI.WebControls.GridViewCancelEditEventArgs e)
         {
             dgvMarcas.EditIndex = -1;
-            ListarMarcas();
+            listarMarcas();
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)
@@ -95,7 +95,7 @@ namespace WebApp
                     return;
                 }
 
-                if (negocio.existe(nombre, 0))
+                if (marcaNegocio.existe(nombre, 0))
                 {
                     errorMarcaCustom.IsValid = false;
                     errorMarcaCustom.ForeColor = Color.Red;
@@ -103,14 +103,14 @@ namespace WebApp
                     return;
                 }
 
-                negocio.agregar(nombre);
+                marcaNegocio.agregar(nombre);
 
                 errorMarcaCustom.IsValid = false;
                 errorMarcaCustom.ForeColor = Color.Green;
                 errorMarcaCustom.ErrorMessage = "✅ Marca agregada exitosamente.";
 
                 txtNuevaMarca.Text = "";
-                ListarMarcas();
+                listarMarcas();
             }
             catch (Exception)
             {

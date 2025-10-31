@@ -11,17 +11,17 @@ namespace WebApp
 {
     public partial class CategoriaGestion : System.Web.UI.Page
     {
-        CategoriaNegocio negocio = new CategoriaNegocio();
+        CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                ListarCategorias();
+                listarCategorias();
         }
 
-        private void ListarCategorias()
+        private void listarCategorias()
         {
-            dgvCategorias.DataSource = negocio.listar();
+            dgvCategorias.DataSource = categoriaNegocio.listar();
             dgvCategorias.DataBind();
         }
 
@@ -43,7 +43,7 @@ namespace WebApp
         protected void dgvCategorias_RowEditing(object sender, System.Web.UI.WebControls.GridViewEditEventArgs e)
         {
             dgvCategorias.EditIndex = e.NewEditIndex;
-            ListarCategorias();
+            listarCategorias();
         }
 
         protected void dgvCategorias_RowUpdating(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
@@ -62,10 +62,10 @@ namespace WebApp
                     return;
                 }
 
-                negocio.modificar(id, nuevoNombre);
+                categoriaNegocio.modificar(id, nuevoNombre);
 
                 dgvCategorias.EditIndex = -1;
-                ListarCategorias();
+                listarCategorias();
             }
             catch (Exception ex)
             {
@@ -76,7 +76,7 @@ namespace WebApp
         protected void dgvCategorias_RowCancelingEdit(object sender, System.Web.UI.WebControls.GridViewCancelEditEventArgs e)
         {
             dgvCategorias.EditIndex = -1;
-            ListarCategorias();
+            listarCategorias();
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)
@@ -95,7 +95,7 @@ namespace WebApp
                     return;
                 }
 
-                if (negocio.existe(nombre, 0))
+                if (categoriaNegocio.existe(nombre, 0))
                 {
                     errorCategoriaCustom.IsValid = false;
                     errorCategoriaCustom.ForeColor = Color.Red;
@@ -103,14 +103,14 @@ namespace WebApp
                     return;
                 }
 
-                negocio.agregar(nombre);
+                categoriaNegocio.agregar(nombre);
 
                 errorCategoriaCustom.IsValid = false;
                 errorCategoriaCustom.ForeColor = Color.Green;
                 errorCategoriaCustom.ErrorMessage = "✅ Categoría agregada exitosamente.";
 
                 txtNuevaCategoria.Text = "";
-                ListarCategorias();
+                listarCategorias();
             }
             catch (Exception)
             {

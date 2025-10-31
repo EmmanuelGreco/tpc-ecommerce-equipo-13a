@@ -12,7 +12,7 @@ namespace Negocio
         public List<Producto> listar()
         {
             List<Producto> listaProducto = new List<Producto>();
-            ProductoImagenNegocio ProductoImagenNegocio = new ProductoImagenNegocio();
+            ProductoImagenNegocio productoImagenNegocio = new ProductoImagenNegocio();
             AccesoDatos datos = new AccesoDatos();
 
             try
@@ -48,7 +48,7 @@ namespace Negocio
 
                     //Agregar lista de imagenes
                     List<ProductoImagen> listaImagen = new List<ProductoImagen>();
-                    aux.ListaImagen = ProductoImagenNegocio.listarPorIdProducto(aux.Id);
+                    aux.ListaImagen = productoImagenNegocio.listarPorIdProducto(aux.Id);
 
                     listaProducto.Add(aux);
                 }
@@ -63,6 +63,7 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
         public void agregar(string codigo, string nombre, string descripcion, int idMarca, int idCategoria, string origen, decimal precio)
         {
             AccesoDatos datos = new AccesoDatos();

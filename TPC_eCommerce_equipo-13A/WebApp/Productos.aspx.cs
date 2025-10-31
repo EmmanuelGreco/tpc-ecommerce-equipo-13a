@@ -12,7 +12,7 @@ namespace WebApp
 {
     public partial class Productos : System.Web.UI.Page
     {
-        public List<Producto> ListaProducto {  get; set; }
+        public List<Producto> listaProducto {  get; set; }
         ProductoNegocio productoNegocio = new ProductoNegocio();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -21,9 +21,9 @@ namespace WebApp
             {
                 if (!IsPostBack)
                 {
-                    ListaProducto = productoNegocio.listar();
+                    listaProducto = productoNegocio.listar();
 
-                    foreach (Producto art in ListaProducto)
+                    foreach (Producto art in listaProducto)
                     {
                         if (art.ListaImagen == null)
                             art.ListaImagen = new List<ProductoImagen>();
@@ -35,7 +35,7 @@ namespace WebApp
                         }
                     }
 
-                    RepeaterProductos.DataSource = ListaProducto;
+                    RepeaterProductos.DataSource = listaProducto;
                     RepeaterProductos.DataBind();
                 }
             }

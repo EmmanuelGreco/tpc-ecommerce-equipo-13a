@@ -11,7 +11,7 @@ namespace WebApp
 {
 
 
-    public partial class Default
+    public partial class Carrito
     {
     }
 }

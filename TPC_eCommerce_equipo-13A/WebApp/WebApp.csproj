@@ -67,17 +67,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Carrito.aspx" />
     <Content Include="CategoriaGestion.aspx" />
     <Content Include="Contacto.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="MarcaGestion.aspx" />
+    <Content Include="ProductoFormABM.aspx" />
     <Content Include="ProductoGestion.aspx" />
     <Content Include="Productos.aspx" />
     <Content Include="SobreNosotros.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Carrito.aspx.cs">
+      <DependentUpon>Carrito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Carrito.aspx.designer.cs">
+      <DependentUpon>Carrito.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CategoriaGestion.aspx.cs">
       <DependentUpon>CategoriaGestion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -115,6 +124,13 @@
     </Compile>
     <Compile Include="MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="ProductoFormABM.aspx.cs">
+      <DependentUpon>ProductoFormABM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductoFormABM.aspx.designer.cs">
+      <DependentUpon>ProductoFormABM.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProductoGestion.aspx.cs">
       <DependentUpon>ProductoGestion.aspx</DependentUpon>

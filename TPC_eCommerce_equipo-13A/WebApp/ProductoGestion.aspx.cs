@@ -16,23 +16,11 @@ namespace WebApp
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            MarcaNegocio marcaNegocio = new MarcaNegocio();
-            CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
             if (!IsPostBack)
-            {
-                ddlMarca.DataSource = marcaNegocio.listar();
-                ddlMarca.DataTextField = "Nombre";
-                ddlMarca.DataValueField = "Id";
-                ddlMarca.DataBind();
-                
-                ddlCategoria.DataSource = categoriaNegocio.listar();
-                ddlCategoria.DataTextField = "Nombre";
-                ddlCategoria.DataValueField = "Id";
-                ddlCategoria.DataBind();
-                ListarProductos();
-            }
+                listarProductos();
         }
-        private void ListarProductos()
+
+        private void listarProductos()
         {
             dgvProductos.DataSource = productoNegocio.listar();
             dgvProductos.DataBind();
@@ -47,7 +35,7 @@ namespace WebApp
                 {
                     if (control is LinkButton btn && btn.CommandName == "Edit")
                     {
-                        btn.ToolTip = "Editar categoría";
+                        btn.ToolTip = "Editar producto";
                     }
                 }
             }
@@ -56,7 +44,7 @@ namespace WebApp
         protected void dgvProductos_RowEditing(object sender, System.Web.UI.WebControls.GridViewEditEventArgs e)
         {
             dgvProductos.EditIndex = e.NewEditIndex;
-            ListarProductos();
+            listarProductos();
         }
 
         protected void dgvProductos_RowUpdating(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
@@ -78,7 +66,7 @@ namespace WebApp
                 //productoNegocio.modificar(id, nuevoNombre);
 
                 dgvProductos.EditIndex = -1;
-                ListarProductos();
+                listarProductos();
             }
             catch (Exception ex)
             {
@@ -89,49 +77,7 @@ namespace WebApp
         protected void dgvProductos_RowCancelingEdit(object sender, System.Web.UI.WebControls.GridViewCancelEditEventArgs e)
         {
             dgvProductos.EditIndex = -1;
-            ListarProductos();
-        }
-
-        protected void btnAgregar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                errorNombre.IsValid = true;
-
-                string codigo = txtCodigo.Text.Trim();
-                string nombre = txtNombre.Text.Trim();
-                string descripcion = txtDescripcion.Text.Trim();
-                int idMarca = int.Parse(ddlMarca.SelectedItem.Value);
-                int idCategoria = int.Parse(ddlCategoria.SelectedItem.Value);
-                string origen = txtOrigen.Text.Trim();
-                decimal precio = decimal.Parse(txtPrecio.Text.Trim());
-
-                if (string.IsNullOrWhiteSpace(nombre))
-                {
-                    errorNombre.IsValid = false;
-                    errorNombre.ForeColor = Color.Red;
-                    errorNombre.ErrorMessage = "¡El nombre es requerido!";
-                    return;
-                }
-
-                productoNegocio.agregar(codigo, nombre, descripcion, idMarca, idCategoria, origen, precio);
-
-                errorNombre.IsValid = false;
-                errorNombre.ForeColor = Color.Green;
-                errorNombre.ErrorMessage = "✅ Categoría agregada exitosamente.";
-
-                txtCodigo.Text = "";
-                txtNombre.Text = "";
-                txtDescripcion.Text = "";
-                txtOrigen.Text = "";
-                txtPrecio.Text = "";
-            }
-            catch (Exception)
-            {
-                errorNombre.IsValid = false;
-                errorNombre.ForeColor = Color.Red;
-                errorNombre.ErrorMessage = "❌ Ocurrió un error al agregar la categoría. Intenta nuevamente.";
-            }
+            listarProductos();
         }
     }
 }
