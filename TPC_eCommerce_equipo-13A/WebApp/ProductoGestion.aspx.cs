@@ -41,43 +41,55 @@ namespace WebApp
             }
         }
 
-        protected void dgvProductos_RowEditing(object sender, System.Web.UI.WebControls.GridViewEditEventArgs e)
+        protected void dgvProductos_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
         {
-            dgvProductos.EditIndex = e.NewEditIndex;
-            listarProductos();
-        }
+         
+            //BORRADO ACÁ
+                int id = int.Parse(e.CommandArgument.ToString());
 
-        protected void dgvProductos_RowUpdating(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
-        {
-            try
-            {
-                int id = Convert.ToInt32(dgvProductos.DataKeys[e.RowIndex].Value);
-                GridViewRow fila = dgvProductos.Rows[e.RowIndex];
+                ProductoNegocio negocio = new ProductoNegocio();
+                negocio.eliminarPorId(id);
 
-                TextBox texto = (TextBox)fila.Cells[0].Controls[0];
-                string nuevoNombre = texto.Text.Trim();
-
-                if (string.IsNullOrEmpty(nuevoNombre))
-                {
-                    Response.Write("<script>alert('El nombre no puede estar vacío');</script>");
-                    return;
-                }
-
-                //productoNegocio.modificar(id, nuevoNombre);
-
-                dgvProductos.EditIndex = -1;
                 listarProductos();
-            }
-            catch (Exception ex)
-            {
-                Response.Write("<script>alert('Error: " + ex.Message.Replace("'", "") + "');</script>");
-            }
         }
 
-        protected void dgvProductos_RowCancelingEdit(object sender, System.Web.UI.WebControls.GridViewCancelEditEventArgs e)
-        {
-            dgvProductos.EditIndex = -1;
-            listarProductos();
-        }
+        //protected void dgvProductos_RowEditing(object sender, System.Web.UI.WebControls.GridViewEditEventArgs e)
+        //{
+        //    dgvProductos.EditIndex = e.NewEditIndex;
+        //    listarProductos();
+        //}
+
+        //protected void dgvProductos_RowUpdating(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
+        //{
+        //    try
+        //    {
+        //        int id = Convert.ToInt32(dgvProductos.DataKeys[e.RowIndex].Value);
+        //        GridViewRow fila = dgvProductos.Rows[e.RowIndex];
+
+        //        TextBox texto = (TextBox)fila.Cells[0].Controls[0];
+        //        string nuevoNombre = texto.Text.Trim();
+
+        //        if (string.IsNullOrEmpty(nuevoNombre))
+        //        {
+        //            Response.Write("<script>alert('El nombre no puede estar vacío');</script>");
+        //            return;
+        //        }
+
+        //        //productoNegocio.modificar(id, nuevoNombre);
+
+        //        dgvProductos.EditIndex = -1;
+        //        listarProductos();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Response.Write("<script>alert('Error: " + ex.Message.Replace("'", "") + "');</script>");
+        //    }
+        //}
+
+        //protected void dgvProductos_RowCancelingEdit(object sender, System.Web.UI.WebControls.GridViewCancelEditEventArgs e)
+        //{
+        //    dgvProductos.EditIndex = -1;
+        //    listarProductos();
+        //}
     }
 }
