@@ -9,7 +9,7 @@ namespace Negocio
 {
     public class ProductoNegocio
     {
-        public List<Producto> listar()
+        public List<Producto> listar(int filtro = 2)
         {
             List<Producto> listaProducto = new List<Producto>();
             ProductoImagenNegocio productoImagenNegocio = new ProductoImagenNegocio();
@@ -17,10 +17,18 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT P.Id, P.Codigo, P.Nombre, P.Descripcion, P.IdMarca, M.Nombre Marca, " +
+                string consulta = "SELECT P.Id, P.Codigo, P.Nombre, P.Descripcion, P.IdMarca, P.Stock, P.Activo, M.Nombre Marca, " +
                                      "P.IdCategoria, C.Nombre Categoria, P.Origen, Precio " +
                                      "FROM PRODUCTOS P, MARCAS M, CATEGORIAS C " +
-                                     "WHERE M.Id = P.IdMarca AND C.Id = P.IdCategoria");
+                                     "WHERE M.Id = P.IdMarca AND C.Id = P.IdCategoria";
+
+                //0 inactivos, 1 activos, 2 (o "n") ambos
+                if (filtro == 0)
+                    consulta += " AND P.Activo = 0";
+                else if (filtro == 1)
+                    consulta += " AND P.Activo = 1";
+
+                datos.setearConsulta(consulta);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -30,6 +38,8 @@ namespace Negocio
                     aux.Codigo = (string)datos.Lector["Codigo"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.Stock = (int)datos.Lector["Stock"];
+                    aux.Activo = bool.Parse(datos.Lector["Activo"].ToString());
 
                     aux.Marca = new Marca();
                     aux.Marca.Id = (int)datos.Lector["IdMarca"];
@@ -64,7 +74,7 @@ namespace Negocio
             }
         }
 
-        public void agregar(string codigo, string nombre, string descripcion, int idMarca, int idCategoria, string origen, decimal precio)
+        public void agregar(string codigo, string nombre, string descripcion, int idMarca, int idCategoria, string origen, int stock, decimal precio)
         {
             AccesoDatos datos = new AccesoDatos();
 
@@ -72,14 +82,15 @@ namespace Negocio
             {
 
 
-                datos.setearConsulta(@"INSERT INTO PRODUCTOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Origen, Precio ) 
-                                       VALUES (@Codigo, @Nombre, @Descripcion, @IdMarca, @IdCategoria, @Origen, @Precio);");
+                datos.setearConsulta(@"INSERT INTO PRODUCTOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Origen, Stock, Precio ) 
+                                       VALUES (@Codigo, @Nombre, @Descripcion, @IdMarca, @IdCategoria, @Origen, @Stock, @Precio);");
                 datos.setearParametro("@Codigo", codigo);
                 datos.setearParametro("@Nombre", nombre);
                 datos.setearParametro("@Descripcion", descripcion);
                 datos.setearParametro("@IdMarca", idMarca);
                 datos.setearParametro("@IdCategoria", idCategoria);
                 datos.setearParametro("@Origen", origen);
+                datos.setearParametro("@Stock", stock);
                 datos.setearParametro("@Precio", precio);
                 datos.ejecutarLectura();
             }
@@ -93,7 +104,7 @@ namespace Negocio
             }
         }
 
-        public void modificar(int id, string codigo, string nombre, string descripcion, int idMarca, int idCategoria, string origen, decimal precio)
+        public void modificar(int id, string codigo, string nombre, string descripcion, int idMarca, int idCategoria, string origen, int stock, decimal precio)
         {
             AccesoDatos datos = new AccesoDatos();
 
@@ -107,6 +118,7 @@ namespace Negocio
                                                             IdMarca = @IdMarca, 
                                                             IdCategoria = @IdCategoria, 
                                                             Origen = @Origen, 
+                                                            Stock = @Stock,
                                                             Precio = @Precio
                                         WHERE Id = @Id;");
                 datos.setearParametro("@Id", id);
@@ -116,6 +128,7 @@ namespace Negocio
                 datos.setearParametro("@IdMarca", idMarca);
                 datos.setearParametro("@IdCategoria", idCategoria);
                 datos.setearParametro("@Origen", origen);
+                datos.setearParametro("@Stock", stock);
                 datos.setearParametro("@Precio", precio);
                 datos.ejecutarLectura();
             }
@@ -137,7 +150,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT P.Id, P.Codigo, P.Nombre, P.Descripcion, P.IdMarca, M.Nombre Marca, " +
+                datos.setearConsulta("SELECT P.Id, P.Codigo, P.Nombre, P.Descripcion, P.IdMarca, P.Stock, P.Activo, M.Nombre Marca, " +
                                      "P.IdCategoria, C.Nombre Categoria, P.Origen, Precio " +
                                      "FROM PRODUCTOS P, MARCAS M, CATEGORIAS C " +
                                      "WHERE M.Id = P.IdMarca AND C.Id = P.IdCategoria AND P.Id = @IdProducto");
@@ -150,6 +163,8 @@ namespace Negocio
                     producto.Codigo = (string)datos.Lector["Codigo"];
                     producto.Nombre = (string)datos.Lector["Nombre"];
                     producto.Descripcion = (string)datos.Lector["Descripcion"];
+                    producto.Stock = (int)datos.Lector["Stock"];
+                    producto.Activo = bool.Parse(datos.Lector["Activo"].ToString());
 
                     producto.Marca = new Marca();
                     producto.Marca.Id = (int)datos.Lector["IdMarca"];
@@ -182,14 +197,26 @@ namespace Negocio
             }
         }
 
-        public void eliminarPorId(int idProducto)
+        public void eliminarLogico(int idProducto)
         {
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                datos.setearConsulta("DELETE FROM PRODUCTOS WHERE Id = @IdProducto");
+                //Obtengo estatus actual
+                datos.setearConsulta("SELECT Activo FROM PRODUCTOS WHERE Id = @IdProducto");
                 datos.setearParametro("@IdProducto", idProducto);
+                datos.ejecutarLectura();
+
+                bool estadoActual = true;
+                while (datos.Lector.Read())
+                    estadoActual = bool.Parse(datos.Lector["Activo"].ToString());
+                datos.cerrarConexion();
+
+                //Lo modifico al contrario
+                datos.setearConsulta("UPDATE PRODUCTOS SET Activo = @EstadoActual WHERE Id = @IdProducto");
+                //datos.setearParametro("@IdProducto", idProducto); // NO HACE FALTA DECLARARLA DE NUEVO
+                datos.setearParametro("@EstadoActual", !estadoActual);
                 datos.ejecutarLectura();
             }
             catch (Exception ex)

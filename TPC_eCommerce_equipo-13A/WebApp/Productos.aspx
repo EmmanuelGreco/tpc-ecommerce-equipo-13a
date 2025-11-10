@@ -68,8 +68,9 @@
                             </a>
                         </div>
 
-                        <div class="card-footer">
+                        <div class="card-footer d-flex justify-content-between">
                             <small class="text-muted">Código: <%# Eval("Codigo") %></small>
+                            <small class="text-muted">Stock: <%# Eval("Stock") %>u.</small>
                         </div>
 
                     </div>

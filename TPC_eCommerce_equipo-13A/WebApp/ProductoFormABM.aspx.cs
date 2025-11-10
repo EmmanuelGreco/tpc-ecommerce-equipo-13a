@@ -16,7 +16,7 @@ namespace WebApp
     {
         ProductoNegocio productoNegocio = new ProductoNegocio();
         public List<ProductoImagen> listaImagenes = new List<ProductoImagen>();
-        //List<ProductoImagen> listaImagenes { get; set; }
+        public Producto producto = new Producto();
         protected void Page_Load(object sender, EventArgs e)
         {
             MarcaNegocio marcaNegocio = new MarcaNegocio();
@@ -35,20 +35,15 @@ namespace WebApp
                 ddlCategoria.DataValueField = "Id";
                 ddlCategoria.DataBind();
 
-                //Cargar las imágenes
-                listaImagenes.Add(new ProductoImagen
-                {
-                    ImagenUrl = "https://www.svgrepo.com/show/508699/landscape-placeholder.svg"
-                });
 
 
                 //Si viene de un click al "editar", te traés el ID
                 string idStr = Request.QueryString["id"];
                 if (!string.IsNullOrEmpty(idStr))
                 {
+
                     //Te traés el producto correspondiente
                     int id = int.Parse(idStr);
-                    Producto producto = new Producto();
                     producto = productoNegocio.buscarPorId(id);
 
                     //Cargas en los campos de texto los datos del producto
@@ -56,7 +51,18 @@ namespace WebApp
                     txtCodigo.Text = producto.Codigo;
                     txtDescripcion.Text = producto.Descripcion;
                     txtOrigen.Text = producto.Origen;
+                    txtStock.Text = producto.Stock.ToString();
                     txtPrecio.Text = producto.Precio.ToString("0.00");
+
+                    //Cargar las imágenes
+                    if (producto.ListaImagen == null)
+                        producto.ListaImagen = new List<ProductoImagen>();
+
+                    if (producto.ListaImagen.Count < 1)
+                    {
+                        producto.ListaImagen.Add(new ProductoImagen());
+                        producto.ListaImagen[0].ImagenUrl = "https://www.svgrepo.com/show/508699/landscape-placeholder.svg";
+                    }
 
                     btnAgregar.Text = "💾 Guardar";
 
@@ -83,6 +89,7 @@ namespace WebApp
                 int idMarca = int.Parse(ddlMarca.SelectedItem.Value);
                 int idCategoria = int.Parse(ddlCategoria.SelectedItem.Value);
                 string origen = txtOrigen.Text.Trim();
+                int stock = int.Parse(txtStock.Text.Trim());
                 decimal precio = decimal.Parse(txtPrecio.Text.Trim());
 
                 if (string.IsNullOrWhiteSpace(nombre))
@@ -95,57 +102,12 @@ namespace WebApp
 
                 string idStr = Request.QueryString["id"];
                 if (!string.IsNullOrEmpty(idStr))
-                {
-                    int id = int.Parse(idStr);
-                    productoNegocio.modificar(id, codigo, nombre, descripcion, idMarca, idCategoria, origen, precio);
-                    errorNombre.IsValid = false;
-                    errorNombre.ForeColor = Color.Green;
-                    errorNombre.ErrorMessage = "✅ Producto modificado exitosamente.";
-                }
+                    productoNegocio.modificar(int.Parse(idStr), codigo, nombre, descripcion, idMarca, idCategoria, origen, stock, precio);
                 else
-                { 
-                    productoNegocio.agregar(codigo, nombre, descripcion, idMarca, idCategoria, origen, precio);
-                    errorNombre.IsValid = false;
-                    errorNombre.ForeColor = Color.Green;
-                    errorNombre.ErrorMessage = "✅ Producto agregado exitosamente.";
-                }
+                    productoNegocio.agregar(codigo, nombre, descripcion, idMarca, idCategoria, origen, stock, precio);
 
 
-                txtCodigo.Text = "";
-                txtNombre.Text = "";
-                txtDescripcion.Text = "";
-                txtOrigen.Text = "";
-                txtPrecio.Text = "";
-
-
-                //PODRIA USARSE PARA VOLVER AL INICIO, EN VEZ DE PONER LOS CAMPOS EN ""
-                    //HtmlMeta meta = new HtmlMeta();
-                    //meta.HttpEquiv = "refresh";
-                    //meta.Content = "2;url=Default.aspx";
-                    //Page.Header.Controls.Add(meta);
-                    //return;
-            }
-            catch (Exception)
-            {
-                errorNombre.IsValid = false;
-                errorNombre.ForeColor = Color.Red;
-                errorNombre.ErrorMessage = "❌ Ocurrió un error al agregar el producto. Intenta nuevamente.";
-            }
-        }
-
-        protected void btnAgregarImagen_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                listaImagenes.Add(new ProductoImagen
-                {
-                    ImagenUrl = URLImagen.Text
-                });
-                listaImagenes.Add(new ProductoImagen
-                {
-                    ImagenUrl = "https://www.svgrepo.com/show/508699/landscape-placeholder.svg"
-                });
-
+                Response.Redirect("ProductoGestion.aspx", false);
             }
             catch (Exception)
             {

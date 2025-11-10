@@ -43,6 +43,7 @@ CREATE TABLE [dbo].[PRODUCTOS](
 	[IdCategoria] [int] NULL,
     [Origen] [varchar](50) NULL,
 	[Precio] [money] NULL,
+	[Stock] [int] NOT NULL DEFAULT 0,
     [Activo] [bit] NOT NULL DEFAULT 1,
  CONSTRAINT [PK_PRODUCTOS] PRIMARY KEY CLUSTERED 
 (

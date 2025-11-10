@@ -21,3 +21,5 @@ WHERE M.Id = P.IdMarca AND C.Id = P.IdCategoria*/
 --SELECT * FROM PRODUCTOS
 --SELECT * FROM MARCAS
 --SELECT * FROM CATEGORIAS
+
+select * from Productos

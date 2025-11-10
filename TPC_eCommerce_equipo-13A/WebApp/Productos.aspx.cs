@@ -21,7 +21,7 @@ namespace WebApp
             {
                 if (!IsPostBack)
                 {
-                    listaProducto = productoNegocio.listar();
+                    listaProducto = productoNegocio.listar(1);
 
                     foreach (Producto art in listaProducto)
                     {

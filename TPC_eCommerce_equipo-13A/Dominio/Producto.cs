@@ -16,6 +16,8 @@ namespace Dominio
         public Categoria Categoria { get; set; }
         public string Origen { get; set; }
         public decimal Precio { get; set; }
+        public int Stock { get; set; }
         public List<ProductoImagen> ListaImagen { get; set; }
+        public bool Activo { get; set; }
     }
 }

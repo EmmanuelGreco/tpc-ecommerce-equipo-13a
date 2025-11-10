@@ -3,6 +3,7 @@ using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -27,31 +28,58 @@ namespace WebApp
         }
 
         // Este metodo es para que aparezca el cartel "Editar" al pasar el mouse por el ícono de Acción.
-        protected void dgvProductos_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void dgvProductos_RowDataBound(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
+                bool activo = Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "Activo"));
+                Button btnInactivar = (Button)e.Row.FindControl("btnInactivar");
+
+                if (btnInactivar != null)
+                {
+                    btnInactivar.Text = activo ? "Inactivar" : "Activar";
+                    btnInactivar.CssClass = activo ? "btn btn-warning" : "btn btn-success";
+                }
+
                 foreach (Control control in e.Row.Cells[1].Controls)
                 {
+
                     if (control is LinkButton btn && btn.CommandName == "Edit")
-                    {
                         btn.ToolTip = "Editar producto";
-                    }
                 }
             }
         }
 
         protected void dgvProductos_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
         {
-         
+
             //BORRADO ACÁ
-                int id = int.Parse(e.CommandArgument.ToString());
+            int id = int.Parse(e.CommandArgument.ToString());
 
-                ProductoNegocio negocio = new ProductoNegocio();
-                negocio.eliminarPorId(id);
+            productoNegocio.eliminarLogico(id);
 
-                listarProductos();
+            listarProductos();
         }
+
+        protected void btnInactivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Button btn = (Button)sender;
+                GridViewRow row = (GridViewRow)btn.NamingContainer;
+                int id = Convert.ToInt32(dgvProductos.DataKeys[row.RowIndex].Value);
+
+                productoNegocio.eliminarLogico(id);
+                
+                listarProductos();
+                
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+            }
+        }
+
 
         //protected void dgvProductos_RowEditing(object sender, System.Web.UI.WebControls.GridViewEditEventArgs e)
         //{

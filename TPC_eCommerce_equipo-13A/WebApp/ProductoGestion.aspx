@@ -7,31 +7,40 @@
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:UpdatePanel ID="updProductos" runat="server">
-        <ContentTemplate>
+        <contenttemplate>
 
             <div class="container  w-100">
                 <asp:GridView ID="dgvProductos" runat="server" CssClass="table" DataKeyNames="Id"
                     AutoGenerateColumns="false"
-                    OnRowCommand="dgvProductos_RowCommand">
-                    <Columns>
+                    OnRowCommand="dgvProductos_RowCommand"
+                    OnRowDataBound="dgvProductos_RowDataBound">
+                    <columns>
                         <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
                         <asp:TemplateField HeaderText="Acción">
-                            <ItemTemplate>
-                                <a href='<%# "ProductoFormABM.aspx?id=" + Eval("Id") %>' class="btn btn-link">📝 Editar</a>
+                            <itemtemplate>
+                                <a href='<%# "ProductoFormABM.aspx?id=" + Eval("Id") %>' class="btn">📝</a>
 
-                                <asp:LinkButton ID="btnEliminar" runat="server"
-                                    Text="🗑️ Eliminar"
+                                <%--<asp:LinkButton ID="btnEliminar" runat="server"
+                                    Text="🗑️"
                                     CommandName="EliminarProducto"
                                     CommandArgument='<%# Eval("Id") %>'
-                                    CssClass="btn btn-link text-danger"
-                                    OnClientClick="return confirm('¿Estás seguro de que deseas eliminar este producto?');" />
-                            </ItemTemplate>
+                                    CssClass="btn" />--%>
+                            </itemtemplate>
                         </asp:TemplateField>
-                    </Columns>
+
+                        <asp:CheckBoxField HeaderText="Activo" DataField="Activo" />
+
+                        <asp:TemplateField HeaderText="Estado">
+                            <itemtemplate>
+                                <asp:Button Text="Inactivar" ID="btnInactivar" CssClass="btn btn-warning"
+                                    OnClick="btnInactivar_Click" runat="server" />
+                            </itemtemplate>
+                        </asp:TemplateField>
+                    </columns>
                 </asp:GridView>
                 <a href="ProductoFormABM.aspx" class="btn btn-primary" style="margin-top: 40px;">➕ Agregar</a>
             </div>
 
-        </ContentTemplate>
+        </contenttemplate>
     </asp:UpdatePanel>
 </asp:Content>
