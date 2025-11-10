@@ -13,6 +13,7 @@ GO
 CREATE TABLE [dbo].[CATEGORIAS](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Nombre] [varchar](50) NULL,
+	[Activo] [bit] NOT NULL DEFAULT 1,
  CONSTRAINT [PK_CATEGORIAS] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -24,6 +25,7 @@ GO
 CREATE TABLE [dbo].[MARCAS](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Nombre] [varchar](50) NULL,
+	[Activo] [bit] NOT NULL DEFAULT 1,
  CONSTRAINT [PK_MARCAS] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -41,7 +43,7 @@ CREATE TABLE [dbo].[PRODUCTOS](
 	[IdCategoria] [int] NULL,
     [Origen] [varchar](50) NULL,
 	[Precio] [money] NULL,
-    [Estado] [bit] NOT NULL DEFAULT 1,
+    [Activo] [bit] NOT NULL DEFAULT 1,
  CONSTRAINT [PK_PRODUCTOS] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -98,8 +100,8 @@ CREATE TABLE [dbo].[Clientes](
 GO
 
 
-insert into MARCAS values ('Wilson'), ('Logitech'), ('Royal Kludge'), ('Lenovo'), ('Samsung'), ('Sony'), ('LG'), ('Dell'), ('Asus')
-insert into CATEGORIAS values ('Mochilas'),('Periféricos'), ('Accesorios'), ('Televisores'), ('Notebooks')
+insert into MARCAS (Nombre) values ('Wilson'), ('Logitech'), ('Royal Kludge'), ('Lenovo'), ('Samsung'), ('Sony'), ('LG'), ('Dell'), ('Asus')
+insert into CATEGORIAS (Nombre) values ('Mochilas'),('Periféricos'), ('Accesorios'), ('Televisores'), ('Notebooks')
 insert into PRODUCTOS values
 ('M01', 'Mochila Porta Notebook', 'Esta mochila combina un diseño elegante y profesional con la robustez necesaria para enfrentar el ajetreo urbano y los viajes de negocios.', 1, 1, 'China', 49999, 0),
 ('P03', 'Mouse Gamer Hero G502', 'Sumérgete en el mundo de los videojuegos con el mouse gamer Logitech G Series Hero G502 en color negro', 2, 2, 'Corea', 64999, 0),

@@ -16,7 +16,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT Id, Nombre FROM MARCAS");
+                datos.setearConsulta("SELECT Id, Nombre, Activo FROM MARCAS");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -24,6 +24,7 @@ namespace Negocio
                     Marca aux = new Marca();
                     aux.Id = (int)datos.Lector["Id"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Activo = bool.Parse(datos.Lector["Activo"].ToString());
 
                     listaMarca.Add(aux);
                 }
@@ -103,6 +104,28 @@ namespace Negocio
                     return true;
                 } 
                 
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminarLogico(int id, bool activo = false)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {   
+                datos.setearConsulta(@"UPDATE MARCAS SET Activo = @activo
+                                       WHERE Id = @id;");
+                datos.setearParametro("@id", id);
+                datos.setearParametro("@activo", activo);
+                datos.ejecutarAccion();
             }
             catch (Exception ex)
             {

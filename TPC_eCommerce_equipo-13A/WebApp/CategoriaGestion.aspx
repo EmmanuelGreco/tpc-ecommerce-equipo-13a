@@ -1,12 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="CategoriaGestion.aspx.cs" Inherits="WebApp.CategoriaGestion" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1 style="margin-bottom: 40px;">📝 Gestión de Categorías</h1>
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <asp:UpdatePanel ID="updCategorias" runat="server">
+    <asp:UpdatePanel ID="updCategorias" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
         <ContentTemplate>
 
             <div class="container w-100">
@@ -14,7 +13,8 @@
                     AutoGenerateColumns="false"
                     OnRowEditing="dgvCategorias_RowEditing"
                     OnRowUpdating="dgvCategorias_RowUpdating"
-                    OnRowCancelingEdit="dgvCategorias_RowCancelingEdit">
+                    OnRowCancelingEdit="dgvCategorias_RowCancelingEdit"
+                    OnRowDataBound="dgvCategorias_RowDataBound">
                     <Columns>
                         <asp:TemplateField HeaderText="Nombre">
                             <ItemTemplate>
@@ -24,6 +24,15 @@
                                 <asp:TextBox ID="txtNombre" runat="server" Text='<%# Bind("Nombre") %>'></asp:TextBox>
                                 <asp:Label ID="lblError" runat="server" ForeColor="Red" Visible="False"></asp:Label>
                             </EditItemTemplate>
+                        </asp:TemplateField>
+
+                        <asp:CheckBoxField HeaderText="Activo" DataField="Activo"/>
+
+                         <asp:TemplateField HeaderText="Estado">
+                            <ItemTemplate>
+                                <asp:Button Text="Inactivar" ID="btnInactivar" CssClass="btn btn-warning"
+                                    OnClick="btnInactivar_Click" runat="server"/>
+                            </ItemTemplate>
                         </asp:TemplateField>
 
                         <asp:CommandField HeaderText="Acción" ShowEditButton="true"

@@ -23,14 +23,17 @@ namespace WebApp
         {
             dgvMarcas.DataSource = marcaNegocio.listar();
             dgvMarcas.DataBind();
+
         }
 
         // Este metodo es para que aparezca el cartel "Editar" al pasar el mouse por el ícono de Acción.
         protected void dgvMarcas_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow)
+            if (e.Row.RowType != DataControlRowType.DataRow) return;
+
+            foreach (TableCell cell in e.Row.Cells)
             {
-                foreach (Control control in e.Row.Cells[1].Controls)
+                foreach (Control control in cell.Controls)
                 {
                     if (control is LinkButton btn && btn.CommandName == "Edit")
                     {
@@ -49,7 +52,6 @@ namespace WebApp
         protected void dgvMarcas_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             GridViewRow fila = dgvMarcas.Rows[e.RowIndex];
-
             TextBox txtNombre = fila.FindControl("txtNombre") as TextBox;
             Label lblError = fila.FindControl("lblError") as Label;
 
@@ -67,14 +69,15 @@ namespace WebApp
                     return;
                 }
 
-                if (marcaNegocio.existe(nombre, 0))
+                int id = Convert.ToInt32(dgvMarcas.DataKeys[e.RowIndex].Value);
+
+                if (marcaNegocio.existe(nombre, id))
                 {
                     lblError.Text = "¡Ya existe una marca con ese nombre!";
                     lblError.Visible = true;
                     return;
                 }
 
-                int id = Convert.ToInt32(dgvMarcas.DataKeys[e.RowIndex].Value);
                 marcaNegocio.modificar(id, nombre);
 
                 dgvMarcas.EditIndex = -1;
@@ -91,6 +94,24 @@ namespace WebApp
         {
             dgvMarcas.EditIndex = -1;
             listarMarcas();
+        }
+
+        protected void btnInactivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Button btn = (Button)sender;
+                GridViewRow row = (GridViewRow)btn.NamingContainer;
+                int id = Convert.ToInt32(dgvMarcas.DataKeys[row.RowIndex].Value);
+
+                marcaNegocio.eliminarLogico(id);
+
+                listarMarcas();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+            }
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)

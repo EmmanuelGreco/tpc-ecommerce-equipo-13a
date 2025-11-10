@@ -10,6 +10,7 @@ namespace Dominio
     {
         public int Id { get; set; }                         //PK
         public string Nombre { get; set; }
+        public bool Activo { get; set; }
 
         public override string ToString()
         {

@@ -16,7 +16,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT Id, Nombre FROM CATEGORIAS");
+                datos.setearConsulta("SELECT Id, Nombre, Activo FROM CATEGORIAS");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -24,6 +24,7 @@ namespace Negocio
                     Categoria aux = new Categoria();
                     aux.Id = (int)datos.Lector["Id"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Activo = bool.Parse(datos.Lector["Activo"].ToString());
 
                     listaCategoria.Add(aux);
                 }
@@ -103,6 +104,28 @@ namespace Negocio
                     return true;
                 }
 
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminarLogico(int id, bool activo = false)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(@"UPDATE CATEGORIAS SET Activo = @activo
+                                       WHERE Id = @id;");
+                datos.setearParametro("@id", id);
+                datos.setearParametro("@activo", activo);
+                datos.ejecutarAccion();
             }
             catch (Exception ex)
             {
