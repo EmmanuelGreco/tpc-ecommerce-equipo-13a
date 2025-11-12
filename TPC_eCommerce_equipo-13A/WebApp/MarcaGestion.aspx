@@ -5,7 +5,7 @@
     <h1 style="margin-bottom: 40px;">📝 Gestión de Marcas</h1>
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <asp:UpdatePanel ID="updMarcas" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
+    <asp:UpdatePanel ID="updMarcas" runat="server">
         <ContentTemplate>
             
             <div class="container w-100">
@@ -26,9 +26,16 @@
                             </EditItemTemplate>
                         </asp:TemplateField>
 
-                        <asp:CheckBoxField HeaderText="Activo" DataField="Activo"/>
+                        <asp:TemplateField HeaderText="Activo">
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chkActivo" runat="server" Checked='<%# Eval("Activo") %>' Enabled="false" />
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:CheckBox ID="chkActivoEdit" runat="server" Checked='<%# Bind("Activo") %>' Enabled="false" />
+                            </EditItemTemplate>
+                        </asp:TemplateField>
 
-                         <asp:TemplateField HeaderText="Estado">
+                        <asp:TemplateField HeaderText="Estado">
                             <ItemTemplate>
                                 <asp:Button Text="Inactivar" ID="btnInactivar" CssClass="btn btn-warning"
                                     OnClick="btnInactivar_Click" runat="server"/>

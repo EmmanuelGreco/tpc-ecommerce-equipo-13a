@@ -204,27 +204,15 @@ namespace Negocio
             }
         }
 
-        public void eliminarLogico(int idProducto)
+        public void alternarEstado(int idProducto)
         {
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                //Obtengo estatus actual
-                datos.setearConsulta("SELECT Activo FROM PRODUCTOS WHERE Id = @IdProducto");
+                datos.setearConsulta("UPDATE PRODUCTOS SET Activo = CASE WHEN Activo = 1 THEN 0 ELSE 1 END WHERE Id = @IdProducto");
                 datos.setearParametro("@IdProducto", idProducto);
-                datos.ejecutarLectura();
-
-                bool estadoActual = true;
-                while (datos.Lector.Read())
-                    estadoActual = bool.Parse(datos.Lector["Activo"].ToString());
-                datos.cerrarConexion();
-
-                //Lo modifico al contrario
-                datos.setearConsulta("UPDATE PRODUCTOS SET Activo = @EstadoActual WHERE Id = @IdProducto");
-                //datos.setearParametro("@IdProducto", idProducto); // NO HACE FALTA DECLARARLA DE NUEVO
-                datos.setearParametro("@EstadoActual", !estadoActual);
-                datos.ejecutarLectura();
+                datos.ejecutarAccion();
             }
             catch (Exception ex)
             {

@@ -7,34 +7,34 @@
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:UpdatePanel ID="updProductos" runat="server">
-        <contenttemplate>
+        <ContentTemplate>
 
-            <div class="container  w-100">
+            <div class="container w-100">
                 <asp:GridView ID="dgvProductos" runat="server" CssClass="table" DataKeyNames="Id"
                     AutoGenerateColumns="false"
                     OnRowCommand="dgvProductos_RowCommand"
                     OnRowDataBound="dgvProductos_RowDataBound">
-                    <columns>
-                        <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
-                        <asp:TemplateField HeaderText="Acción">
-                            <itemtemplate>
-                                <a href='<%# "ProductoFormABM.aspx?id=" + Eval("Id") %>' class="btn">📝</a>
-                            </itemtemplate>
-                        </asp:TemplateField>
+                    <Columns>
+                        <asp:BoundField HeaderText="Nombre" DataField="Nombre"/>
 
-                        <asp:CheckBoxField HeaderText="Activo" DataField="Activo" />
+                        <asp:CheckBoxField HeaderText="Activo" DataField="Activo"/>
 
                         <asp:TemplateField HeaderText="Estado">
-                            <itemtemplate>
+                            <ItemTemplate>
                                 <asp:Button Text="Inactivar" ID="btnInactivar" CssClass="btn btn-warning"
-                                    OnClick="btnInactivar_Click" runat="server" />
-                            </itemtemplate>
+                                    OnClick="btnInactivar_Click" runat="server"/>
+                            </ItemTemplate>
                         </asp:TemplateField>
-                    </columns>
+                        <asp:TemplateField HeaderText="Acción">
+                            <ItemTemplate>
+                                <a href='<%# "ProductoFormABM.aspx?id=" + Eval("Id") %>' class="btn" title="Editar Producto 📝">📝</a>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
                 </asp:GridView>
                 <a href="ProductoFormABM.aspx" class="btn btn-primary" style="margin-top: 40px;">➕ Agregar</a>
             </div>
 
-        </contenttemplate>
+        </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

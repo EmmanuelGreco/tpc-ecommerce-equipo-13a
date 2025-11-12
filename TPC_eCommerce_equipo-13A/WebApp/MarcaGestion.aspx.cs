@@ -23,25 +23,44 @@ namespace WebApp
         {
             dgvMarcas.DataSource = marcaNegocio.listar();
             dgvMarcas.DataBind();
-
         }
 
         // Este metodo es para que aparezca el cartel "Editar" al pasar el mouse por el ícono de Acción.
-        protected void dgvMarcas_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void dgvMarcas_RowDataBound(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
         {
-            if (e.Row.RowType != DataControlRowType.DataRow) return;
-
-            foreach (TableCell cell in e.Row.Cells)
+            if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                foreach (Control control in cell.Controls)
+                bool activo = Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "Activo"));
+                Button btnInactivar = (Button)e.Row.FindControl("btnInactivar");
+
+                if (btnInactivar != null)
                 {
-                    if (control is LinkButton btn && btn.CommandName == "Edit")
+                    btnInactivar.Text = activo ? "Inactivar" : "Activar";
+                    btnInactivar.CssClass = activo ? "btn btn-warning" : "btn btn-success";
+                }
+
+                foreach (TableCell cell in e.Row.Cells)
+                {
+                    foreach (Control control in cell.Controls)
                     {
-                        btn.ToolTip = "Editar marca";
+                        if (control is LinkButton btn && btn.CommandName == "Edit")
+                        {
+                            btn.ToolTip = "Editar Marca 📝";
+                        }
                     }
                 }
             }
         }
+
+        /*protected void dgvMarcas_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
+        {
+            //BORRADO ACÁ
+            int id = int.Parse(e.CommandArgument.ToString());
+
+            marcaNegocio.alternarEstado(id);
+
+            listarMarcas();
+        }*/
 
         protected void dgvMarcas_RowEditing(object sender, System.Web.UI.WebControls.GridViewEditEventArgs e)
         {
@@ -104,7 +123,7 @@ namespace WebApp
                 GridViewRow row = (GridViewRow)btn.NamingContainer;
                 int id = Convert.ToInt32(dgvMarcas.DataKeys[row.RowIndex].Value);
 
-                marcaNegocio.eliminarLogico(id);
+                marcaNegocio.alternarEstado(id);
 
                 listarMarcas();
             }

@@ -115,16 +115,14 @@ namespace Negocio
             }
         }
 
-        public void eliminarLogico(int id, bool activo = false)
+        public void alternarEstado(int idCategoria)
         {
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                datos.setearConsulta(@"UPDATE CATEGORIAS SET Activo = @activo
-                                       WHERE Id = @id;");
-                datos.setearParametro("@id", id);
-                datos.setearParametro("@activo", activo);
+                datos.setearConsulta("UPDATE CATEGORIAS SET Activo = CASE WHEN Activo = 1 THEN 0 ELSE 1 END WHERE Id = @IdCategoria");
+                datos.setearParametro("@IdCategoria", idCategoria);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

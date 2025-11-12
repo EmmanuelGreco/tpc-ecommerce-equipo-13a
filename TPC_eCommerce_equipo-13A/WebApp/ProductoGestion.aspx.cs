@@ -40,23 +40,15 @@ namespace WebApp
                     btnInactivar.Text = activo ? "Inactivar" : "Activar";
                     btnInactivar.CssClass = activo ? "btn btn-warning" : "btn btn-success";
                 }
-
-                foreach (Control control in e.Row.Cells[1].Controls)
-                {
-
-                    if (control is LinkButton btn && btn.CommandName == "Edit")
-                        btn.ToolTip = "Editar producto";
-                }
             }
         }
 
         protected void dgvProductos_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
         {
-
             //BORRADO ACÁ
             int id = int.Parse(e.CommandArgument.ToString());
 
-            productoNegocio.eliminarLogico(id);
+            productoNegocio.alternarEstado(id);
 
             listarProductos();
         }
@@ -69,10 +61,9 @@ namespace WebApp
                 GridViewRow row = (GridViewRow)btn.NamingContainer;
                 int id = Convert.ToInt32(dgvProductos.DataKeys[row.RowIndex].Value);
 
-                productoNegocio.eliminarLogico(id);
+                productoNegocio.alternarEstado(id);
                 
-                listarProductos();
-                
+                listarProductos();                
             }
             catch (Exception ex)
             {
