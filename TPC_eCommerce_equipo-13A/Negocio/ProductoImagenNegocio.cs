@@ -1,6 +1,8 @@
 ﻿using Dominio;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +32,48 @@ namespace Negocio
                     listaProductoImagen.Add(aux);
                 }
                 return listaProductoImagen;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void agregar(int idProducto, string imagenUrl)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(@"INSERT INTO IMAGENES (IdProducto, ImagenUrl) 
+                                       VALUES (@IdProducto, @ImagenUrl);");
+                datos.setearParametro("@IdProducto", idProducto);
+                datos.setearParametro("@ImagenUrl", imagenUrl);
+                datos.ejecutarLectura();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminar(int idImagen)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(@"DELETE FROM IMAGENES WHERE Id = @IdImagen;");
+                datos.setearParametro("@IdImagen", idImagen);
+                datos.ejecutarLectura();
             }
             catch (Exception ex)
             {

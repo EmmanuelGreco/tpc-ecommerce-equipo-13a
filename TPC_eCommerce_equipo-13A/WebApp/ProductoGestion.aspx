@@ -19,12 +19,6 @@
                         <asp:TemplateField HeaderText="Acción">
                             <itemtemplate>
                                 <a href='<%# "ProductoFormABM.aspx?id=" + Eval("Id") %>' class="btn">📝</a>
-
-                                <%--<asp:LinkButton ID="btnEliminar" runat="server"
-                                    Text="🗑️"
-                                    CommandName="EliminarProducto"
-                                    CommandArgument='<%# Eval("Id") %>'
-                                    CssClass="btn" />--%>
                             </itemtemplate>
                         </asp:TemplateField>
 

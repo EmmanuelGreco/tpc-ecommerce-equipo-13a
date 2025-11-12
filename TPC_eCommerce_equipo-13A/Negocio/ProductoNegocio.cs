@@ -74,16 +74,17 @@ namespace Negocio
             }
         }
 
-        public void agregar(string codigo, string nombre, string descripcion, int idMarca, int idCategoria, string origen, int stock, decimal precio)
+        public int agregar(string codigo, string nombre, string descripcion, int idMarca, int idCategoria, string origen, int stock, decimal precio)
         {
             AccesoDatos datos = new AccesoDatos();
-
+            int idInsertado = 0;
             try
             {
 
 
                 datos.setearConsulta(@"INSERT INTO PRODUCTOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Origen, Stock, Precio ) 
-                                       VALUES (@Codigo, @Nombre, @Descripcion, @IdMarca, @IdCategoria, @Origen, @Stock, @Precio);");
+                                       VALUES (@Codigo, @Nombre, @Descripcion, @IdMarca, @IdCategoria, @Origen, @Stock, @Precio);
+                                       SELECT CAST(SCOPE_IDENTITY() AS INT) AS 'IdInsertado';");
                 datos.setearParametro("@Codigo", codigo);
                 datos.setearParametro("@Nombre", nombre);
                 datos.setearParametro("@Descripcion", descripcion);
@@ -93,6 +94,12 @@ namespace Negocio
                 datos.setearParametro("@Stock", stock);
                 datos.setearParametro("@Precio", precio);
                 datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    idInsertado = (int)datos.Lector["IdInsertado"];
+                }
+                return idInsertado;
             }
             catch (Exception ex)
             {

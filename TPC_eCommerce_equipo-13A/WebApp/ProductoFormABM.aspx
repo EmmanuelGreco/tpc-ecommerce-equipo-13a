@@ -54,9 +54,35 @@
         <%--CAROUSEL--%>
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
-        <asp:UpdatePanel runat="server">
+        <asp:UpdatePanel runat="server" ID="CarouselUP">
             <ContentTemplate>
-
+                <%  
+                        idImagen = (int)Session["sessionIdImagen"];
+                %>
+                <div class="col">
+                    <div class="card h-100">
+                        <div id="carouselImagenes" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active" style="height: 300px">
+                                    <img src="<%:listaImagenes.Count != 0 ? listaImagenes[idImagen-1].ImagenUrl.ToString() : "https://www.svgrepo.com/show/508699/landscape-placeholder.svg" %>" class="d-block w-100" style="max-height: 300px; object-fit: contain;">
+                                </div>
+                            </div>
+                            <% if (listaImagenes.Count > 1)
+                                {%>
+                            <asp:Button ID="Button1" runat="server" CssClass="carousel-control-prev" Style="filter: invert(1)" Text="←" OnClick="btnAnterior_Click" />
+                            <asp:Button ID="Button2" runat="server" CssClass="carousel-control-next" Style="filter: invert(1)" Text="→" OnClick="btnSiguiente_Click" />
+                            <%} %>
+                        </div>
+                        <div class="card-body">
+                            <label class="form-label">URL imagen <%: idImagen %>:</label>
+                            <asp:TextBox ID="txtURLImagen" CssClass="form-control" placeholder="https://images.example.com/products/img01.jpg" MaxLength="200" runat="server"></asp:TextBox>
+                            <asp:Button ID="btnConfirmarImagen" runat="server" Text="✔ Confirmar Imagen" CssClass="btn btn-primary mt-2" OnClick="btnConfirmarImagen_Click"/>
+                            <asp:Button ID="btnAgregarImagen" runat="server" Text="➕ Agregar Imagen" CssClass="btn btn-primary mt-2" OnClick="btnAgregarImagen_Click"/>
+                            <asp:Button ID="btnRemoverImagen" runat="server" Text="➖ Remover Imagen" CssClass="btn btn-primary mt-2" OnClick="btnRemoverImagen_Click"/>
+                        </div>
+                    </div>
+                </div>
+                </div>
             </ContentTemplate>
         </asp:UpdatePanel>
         <%--CAROUSEL--%>
@@ -64,7 +90,4 @@
         <asp:Button ID="btnAgregar" runat="server" Text="➕ Agregar" CssClass="btn btn-primary mt-2" OnClick="btnAgregar_Click" />
         <a id="btnCancelar" class="btn btn-primary mt-2" href="/ProductoGestion.aspx" />❌ Cancelar</a>
     </div>
-
-
-
 </asp:Content>

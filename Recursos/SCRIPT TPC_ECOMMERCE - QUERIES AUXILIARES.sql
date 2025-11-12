@@ -4,11 +4,11 @@ GO
 USE TPC_ECOMMERCE
 GO
 
-alter table productos 
-ADD CONSTRAINT df_estado_producto DEFAULT 1 FOR Estado;
+-- alter table productos 
+-- ADD CONSTRAINT df_estado_producto DEFAULT 1 FOR Estado;
 
-ALTER TABLE Productos
-ALTER COLUMN Estado bit NOT NULL;
+-- ALTER TABLE Productos
+-- ALTER COLUMN Estado bit NOT NULL;
 
 
 
@@ -23,3 +23,11 @@ WHERE M.Id = P.IdMarca AND C.Id = P.IdCategoria*/
 --SELECT * FROM CATEGORIAS
 
 select * from Productos
+
+
+-- INSERT INTO PRODUCTOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Origen, Stock, Precio ) 
+--                                        VALUES (1, 1, 1, 1, 1, 1, 1, 1);
+--                                        SELECT SCOPE_IDENTITY() AS 'IdInsertado';
+SELECT * from IMAGENES
+
+-- delete from PRODUCTOS where id >= 10
