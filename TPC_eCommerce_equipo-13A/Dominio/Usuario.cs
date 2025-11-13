@@ -8,9 +8,16 @@ namespace Dominio
 {
     public class Usuario
     {
-        public string Email { get; set; }                         //PK
+        public int Id { get; set; }                               //PK
+        public int Documento { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public DateTime FechaNacimiento { get; set; }
+        public int Telefono { get; set; }
+        public string Direccion { get; set; }
+        public string CodigoPostal { get; set; }
+        public string Email { get; set; }
         public string Contrasenia { get; set; }
-        public Persona Persona { get; set; }
-        public string FechaAlta { get; set; }
+        public DateTime FechaAlta { get; set; }
     }
 }

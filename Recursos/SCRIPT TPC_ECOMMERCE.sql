@@ -1,8 +1,8 @@
 USE master
 GO
 
-DROP DATABASE IF EXISTS TPC_ECOMMERCE
-GO
+ALTER DATABASE TPC_ECOMMERCE SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+DROP DATABASE TPC_ECOMMERCE;
 
 CREATE DATABASE TPC_ECOMMERCE
 GO
@@ -52,14 +52,14 @@ CREATE TABLE [dbo].[PRODUCTOS](
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[PRODUCTOS]  WITH CHECK ADD  CONSTRAINT [FK_PRODUCTOS_CATEGORIAS] FOREIGN KEY([IdCategoria])
+ALTER TABLE [dbo].[PRODUCTOS]  WITH CHECK ADD CONSTRAINT [FK_PRODUCTOS_CATEGORIAS] FOREIGN KEY([IdCategoria])
 REFERENCES [dbo].[CATEGORIAS] ([Id])
 GO
 
 ALTER TABLE [dbo].[PRODUCTOS] CHECK CONSTRAINT [FK_PRODUCTOS_CATEGORIAS]
 GO
 
-ALTER TABLE [dbo].[PRODUCTOS]  WITH CHECK ADD  CONSTRAINT [FK_PRODUCTOS_MARCAS] FOREIGN KEY([IdMarca])
+ALTER TABLE [dbo].[PRODUCTOS]  WITH CHECK ADD CONSTRAINT [FK_PRODUCTOS_MARCAS] FOREIGN KEY([IdMarca])
 REFERENCES [dbo].[MARCAS] ([Id])
 GO
 
@@ -77,38 +77,82 @@ CREATE TABLE [dbo].[IMAGENES](
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[IMAGENES]  WITH CHECK ADD  CONSTRAINT [FK_IMAGENES_PRODUCTOS] FOREIGN KEY([IdProducto])
+ALTER TABLE [dbo].[IMAGENES]  WITH CHECK ADD CONSTRAINT [FK_IMAGENES_PRODUCTOS] FOREIGN KEY([IdProducto])
 REFERENCES [dbo].[PRODUCTOS] ([Id])
 GO
 
 ALTER TABLE [dbo].[IMAGENES] CHECK CONSTRAINT [FK_IMAGENES_PRODUCTOS]
 GO
 
-CREATE TABLE [dbo].[Clientes](
+
+CREATE TABLE [dbo].[USUARIOS](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Documento] [varchar](50) NOT NULL,
+	[Documento] [int] NOT NULL,
 	[Nombre] [varchar](50) NOT NULL,
 	[Apellido] [varchar](50) NOT NULL,
+	[FechaNacimiento] [date] NOT NULL,
+	[Telefono] [int] NOT NULL,
+	[Direccion] [varchar](100) NOT NULL,
+	[CodigoPostal] [varchar](20) NOT NULL,
 	[Email] [varchar](50) NOT NULL,
-	[Direccion] [varchar](50) NOT NULL,
-	[Ciudad] [varchar](50) NOT NULL,
-	[CP] [int] NOT NULL,
- CONSTRAINT [PK_Clientes] PRIMARY KEY CLUSTERED 
+	[Contrasenia] [varchar](20) NOT NULL,
+	[FechaAlta] [datetime] NOT NULL,
+ CONSTRAINT [PK_USUARIO] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 
+CREATE TABLE [dbo].[CLIENTES](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[IdUsuario] [int] NOT NULL,
+	[Activo] [bit] NOT NULL DEFAULT 1,
+ CONSTRAINT [PK_CLIENTES] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[CLIENTES]  WITH CHECK ADD CONSTRAINT [FK_CLIENTES_USUARIOS] FOREIGN KEY([IdUsuario])
+REFERENCES [dbo].[USUARIOS] ([Id])
+GO
+
+ALTER TABLE [dbo].[CLIENTES] CHECK CONSTRAINT [FK_CLIENTES_USUARIOS]
+GO
+
+CREATE TABLE [dbo].[EMPLEADOS](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[IdUsuario] [int] NOT NULL,
+	[Legajo] [int] NOT NULL,
+	[Cargo] [varchar](50) NOT NULL,
+	[FechaIngreso] [date] NOT NULL,
+	[FechaFin] [date] NULL,
+	[Activo] [bit] NOT NULL DEFAULT 1,
+ CONSTRAINT [PK_EMPLEADOS] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[EMPLEADOS]  WITH CHECK ADD CONSTRAINT [FK_EMPLEADOS_USUARIOS] FOREIGN KEY([IdUsuario])
+REFERENCES [dbo].[USUARIOS] ([Id])
+GO
+
+ALTER TABLE [dbo].[EMPLEADOS] CHECK CONSTRAINT [FK_EMPLEADOS_USUARIOS]
+GO
+
 
 insert into MARCAS (Nombre) values ('Wilson'), ('Logitech'), ('Royal Kludge'), ('Lenovo'), ('Samsung'), ('Sony'), ('LG'), ('Dell'), ('Asus')
 insert into CATEGORIAS (Nombre) values ('Mochilas'),('Periféricos'), ('Accesorios'), ('Televisores'), ('Notebooks')
-insert into PRODUCTOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Origen, Precio, Stock) values
-('M01', 'Mochila Porta Notebook', 'Esta mochila combina un diseño elegante y profesional con la robustez necesaria para enfrentar el ajetreo urbano y los viajes de negocios.', 1, 1, 'China', 49999, 15),
-('P03', 'Mouse Gamer Hero G502', 'Sumérgete en el mundo de los videojuegos con el mouse gamer Logitech G Series Hero G502 en color negro', 2, 2, 'Corea', 64999, 50),
-('P08', 'Teclado Mecánico 75% Rk M75', 'Este teclado cuenta con un diseño compacto con 81 teclas, por lo que es fácil de transportar y usar en cualquier lugar.', 2, 3, 'Japon', 185000, 20),
-('65BRAVIA8II', 'Televisor 65" BRAVIA 8 OLED 4K', 'Televisor OLED 4K con tecnología QD-OLED', 6, 4, 'Japon', 6399000, 5),
-('65X855', 'Televisor 65" Serie X855 4K', 'Este televisor cuenta con resolucion 4K y Triluminos Display', 6, 4, 'Japon', 2300000, 10)
+insert into PRODUCTOS values
+('M01', 'Mochila Porta Notebook', 'Esta mochila combina un diseño elegante y profesional con la robustez necesaria para enfrentar el ajetreo urbano y los viajes de negocios.', 1, 1, 'China', 49999, 1, 0),
+('P03', 'Mouse Gamer Hero G502', 'Sumérgete en el mundo de los videojuegos con el mouse gamer Logitech G Series Hero G502 en color negro', 2, 2, 'Corea', 64999, 2, 0),
+('P08', 'Teclado Mecánico 75% Rk M75', 'Este teclado cuenta con un diseño compacto con 81 teclas, por lo que es fácil de transportar y usar en cualquier lugar.', 2, 3, 'Japon', 185000, 10, 0),
+('65BRAVIA8II', 'Televisor 65" BRAVIA 8 OLED 4K', 'Televisor OLED 4K con tecnología QD-OLED', 6, 4, 'Japon', 6399000, 100, 0),
+('65X855', 'Televisor 65" Serie X855 4K', 'Este televisor cuenta con resolucion 4K y Triluminos Display', 6, 4, 'Japon', 2300000, 0, 0)
 
 insert into imagenes values
 (1, 'https://http2.mlstatic.com/D_NQ_NP_703368-MLU76300898146_052024-O.webp'),
@@ -127,8 +171,31 @@ insert into imagenes values
 (4, 'https://sony.scene7.com/is/image/sonyglobalsolutions/TVFY24_UM_6_Stand_M?$productIntroPlatemobile$&fmt=png-alpha'),
 (4, 'https://sony.scene7.com/is/image/sonyglobalsolutions/TVFY24_UM_0_insitu_M?$productIntroPlatemobile$&fmt=png-alpha')
 
-insert into clientes values ('32333222', 'Doug', 'Narinas', 'doug@narinas.com','avenida 123', 'chuletas city', 1234)
+insert into Usuarios (Documento, Nombre, Apellido, FechaNacimiento, Telefono, Direccion, CodigoPostal, Email, Contrasenia, FechaAlta) 
+	values ('34902784', 'Carlos', 'Perez', '2001-10-11', 1149283928, 'Rivadavia 1138', 'C1398', 'carlitosp@gmail.com', 'aguantecarlitos123', '2025-11-11 14:39:22')
+insert into Usuarios (Documento, Nombre, Apellido, FechaNacimiento, Telefono, Direccion, CodigoPostal, Email, Contrasenia, FechaAlta)
+	values ('23919203', 'Jose', 'Gonzalez', '2011-08-07', 1139282950, 'Av. La Plata 132', 'C1402', 'JoseElG@gmail.com', 'gonzalezgod!$', '2025-10-09 08:12:37')
 
+insert into Clientes (IdUsuario) values (1)
+
+insert into Empleados (idUsuario, Legajo, Cargo, FechaIngreso) values (1, 1001, 'Vendedor', '2024-05-02')
 --SELECT * FROM MARCAS
 --SELECT * FROM CATEGORIAS
 --SELECT * FROM PRODUCTOS
+select * from Usuarios
+select * from Clientes
+select * from Empleados
+
+SELECT C.Id,
+		U.Documento,
+		U.Nombre,
+		U.Apellido,
+		U.FechaNacimiento,
+		U.Telefono,
+		U.Direccion,
+		U.CodigoPostal,
+		U.Email,
+		U.Contrasenia,
+		U.FechaAlta,
+		C.Activo 
+FROM Clientes C INNER JOIN Usuarios U ON C.IdUsuario = U.Id

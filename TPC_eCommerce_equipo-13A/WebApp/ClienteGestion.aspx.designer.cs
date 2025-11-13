@@ -11,7 +11,7 @@ namespace WebApp
 {
 
 
-    public partial class ProductoGestion
+    public partial class ClienteGestion
     {
 
         /// <summary>
@@ -24,21 +24,21 @@ namespace WebApp
         protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// updProductos control.
+        /// updClientes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updProductos;
+        protected global::System.Web.UI.UpdatePanel updClientes;
 
         /// <summary>
-        /// dgvProductos control.
+        /// dgvClientes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvProductos;
+        protected global::System.Web.UI.WebControls.GridView dgvClientes;
     }
 }

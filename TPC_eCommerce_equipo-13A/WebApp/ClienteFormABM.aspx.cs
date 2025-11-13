@@ -1,0 +1,79 @@
+﻿using Dominio;
+using Negocio;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Xml.Linq;
+
+namespace WebApp
+{
+    public partial class ClienteFormABM : System.Web.UI.Page
+    {
+        public ClienteNegocio clienteNegocio = new ClienteNegocio();
+        public Cliente cliente = new Cliente();
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            string idStr = Request.QueryString["id"];
+            int idCliente = idStr != null ? int.Parse(idStr) : 0;
+            if (!IsPostBack)
+            {
+                //Si viene de un click al "editar", te traés el ID
+                if (!string.IsNullOrEmpty(idStr))
+                {
+                    cliente = clienteNegocio.buscarPorId(idCliente);
+
+                    txtDocumento.Text = cliente.Usuario.Documento.ToString();
+                    txtNombre.Text = cliente.Usuario.Nombre;
+                    txtApellido.Text = cliente.Usuario.Apellido;
+                    txtFechaNacimiento.Text = cliente.Usuario.FechaNacimiento.ToString("yyyy-MM-dd");
+                    txtTelefono.Text = cliente.Usuario.Telefono.ToString();
+                    txtDireccion.Text = cliente.Usuario.Direccion;
+                    txtCodigoPostal.Text = cliente.Usuario.CodigoPostal;
+                    txtEmail.Text = cliente.Usuario.Email;
+                    txtFechaAlta.Text = cliente.Usuario.FechaAlta.ToString("yyyy-MM-dd");
+
+                    btnAgregar.Text = "💾 Guardar";
+                }
+            }
+        }
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int documento = int.Parse(txtDocumento.Text);
+                string nombre = txtNombre.Text.Trim();
+                string apellido = txtApellido.Text.Trim();
+                DateTime fechaNacimiento = DateTime.Parse(txtFechaNacimiento.Text);
+                int telefono = int.Parse(txtTelefono.Text);
+                string direccion = txtDireccion.Text.Trim();
+                string codigoPostal = txtCodigoPostal.Text.Trim();
+                string email = txtEmail.Text.Trim();
+                string contrasenia = txtContrasenia.Text.Trim();
+                DateTime fechaAlta = DateTime.Parse(txtFechaAlta.Text);
+
+
+                string idStr = Request.QueryString["id"];
+                if (!string.IsNullOrEmpty(idStr))
+                {
+                    int idCliente = int.Parse(idStr);
+                    clienteNegocio.modificar(idCliente, documento, nombre, apellido, fechaNacimiento, telefono, direccion, codigoPostal, email, contrasenia, fechaAlta);
+                }
+                else
+                {
+                    clienteNegocio.agregar(documento, nombre, apellido, fechaNacimiento, telefono, direccion, codigoPostal, email, contrasenia, fechaAlta);
+                }
+
+
+                Response.Redirect("ClienteGestion.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+            }
+        }
+    }
+}

@@ -69,8 +69,11 @@
   <ItemGroup>
     <Content Include="Carrito.aspx" />
     <Content Include="CategoriaGestion.aspx" />
+    <Content Include="ClienteFormABM.aspx" />
+    <Content Include="ClienteGestion.aspx" />
     <Content Include="Contacto.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="EmpleadoGestion.aspx" />
     <Content Include="Global.asax" />
     <Content Include="MarcaGestion.aspx" />
     <Content Include="ProductoFormABM.aspx" />
@@ -94,6 +97,20 @@
     <Compile Include="CategoriaGestion.aspx.designer.cs">
       <DependentUpon>CategoriaGestion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ClienteFormABM.aspx.cs">
+      <DependentUpon>ClienteFormABM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClienteFormABM.aspx.designer.cs">
+      <DependentUpon>ClienteFormABM.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClienteGestion.aspx.cs">
+      <DependentUpon>ClienteGestion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClienteGestion.aspx.designer.cs">
+      <DependentUpon>ClienteGestion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Contacto.aspx.cs">
       <DependentUpon>Contacto.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -107,6 +124,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmpleadoGestion.aspx.cs">
+      <DependentUpon>EmpleadoGestion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmpleadoGestion.aspx.designer.cs">
+      <DependentUpon>EmpleadoGestion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
