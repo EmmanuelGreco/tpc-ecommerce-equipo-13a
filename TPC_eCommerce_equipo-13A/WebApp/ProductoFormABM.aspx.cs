@@ -61,7 +61,7 @@ namespace WebApp
                     listaImagenes = imagenNegocio.listarPorIdProducto(idProducto);
                     txtURLImagen.Text = listaImagenes[0].ImagenUrl;
 
-
+                    Titulo.InnerText = "Modificar producto";
                     btnAgregar.Text = "💾 Guardar";
 
                     //Cargas en las ddl la marca y cat. correspondiente

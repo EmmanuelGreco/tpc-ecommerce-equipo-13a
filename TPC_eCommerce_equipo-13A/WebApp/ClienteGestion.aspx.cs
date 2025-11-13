@@ -14,10 +14,10 @@ namespace WebApp
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                listarProductos();
+                listarClientes();
         }
 
-        private void listarProductos()
+        private void listarClientes()
         {
             dgvClientes.DataSource = clienteNegocio.listar();
             dgvClientes.DataBind();
@@ -47,7 +47,7 @@ namespace WebApp
 
                 clienteNegocio.alternarEstado(id);
 
-                listarProductos();
+                listarClientes();
             }
             catch (Exception ex)
             {

@@ -73,6 +73,7 @@
     <Content Include="ClienteGestion.aspx" />
     <Content Include="Contacto.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="EmpleadoFormABM.aspx" />
     <Content Include="EmpleadoGestion.aspx" />
     <Content Include="Global.asax" />
     <Content Include="MarcaGestion.aspx" />
@@ -124,6 +125,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmpleadoFormABM.aspx.cs">
+      <DependentUpon>EmpleadoFormABM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmpleadoFormABM.aspx.designer.cs">
+      <DependentUpon>EmpleadoFormABM.aspx</DependentUpon>
     </Compile>
     <Compile Include="EmpleadoGestion.aspx.cs">
       <DependentUpon>EmpleadoGestion.aspx</DependentUpon>

@@ -13,7 +13,7 @@ namespace Dominio
         public int Legajo { get; set; }
         public string Cargo { get; set; }
         public DateTime FechaIngreso { get; set; }
-        public DateTime FechaFin { get; set; }
+        public DateTime? FechaFin { get; set; }
         public bool Activo { get; set; }
     }
 }

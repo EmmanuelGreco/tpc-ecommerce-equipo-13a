@@ -179,6 +179,7 @@ insert into Usuarios (Documento, Nombre, Apellido, FechaNacimiento, Telefono, Di
 insert into Clientes (IdUsuario) values (1)
 
 insert into Empleados (idUsuario, Legajo, Cargo, FechaIngreso) values (1, 1001, 'Vendedor', '2024-05-02')
+insert into Empleados (idUsuario, Legajo, Cargo, FechaIngreso, FechaFin) values (2, 1002, 'ClienteSecreto', '2024-10-10', '2025-12-12')
 --SELECT * FROM MARCAS
 --SELECT * FROM CATEGORIAS
 --SELECT * FROM PRODUCTOS
@@ -199,3 +200,25 @@ SELECT C.Id,
 		U.FechaAlta,
 		C.Activo 
 FROM Clientes C INNER JOIN Usuarios U ON C.IdUsuario = U.Id
+
+SELECT E.Id,
+		E.Legajo,
+		E.Cargo,
+		E.FechaIngreso,
+		E.FechaFin,
+		U.Documento,
+		U.Nombre,
+		U.Apellido,
+		U.FechaNacimiento,
+		U.Telefono,
+		U.Direccion,
+		U.CodigoPostal,
+		U.Email,
+		U.Contrasenia,
+		U.FechaAlta,
+		E.Activo 
+FROM Empleados E INNER JOIN Usuarios U ON E.IdUsuario = U.Id
+
+SELECT IdUsuario FROM CLIENTES WHERE Id = 2
+
+select * from USUARIOS

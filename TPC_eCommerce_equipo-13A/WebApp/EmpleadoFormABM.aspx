@@ -1,10 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="ClienteFormABM.aspx.cs" Inherits="WebApp.ClienteFormABM" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="EmpleadoFormABM.aspx.cs" Inherits="WebApp.EmpleadoFormABM" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <h1 runat="server" ID="Titulo" style="margin-bottom: 40px;">Agregar cliente</h1>
+    <h1 runat="server" ID="Titulo" style="margin-bottom: 40px;">Agregar empleado</h1>
     <div class="container  w-100">
         <div class="row">
             <div class="col-md-3">
@@ -41,7 +41,7 @@
         <div class="row">
             <div class="col-md-4">
                 <asp:Label runat="server" CssClass="form-label" for="txtEmail">Email:</asp:Label>
-                <asp:TextBox ID="txtEmail" CssClass="form-control" TextMode="email"  runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtEmail" CssClass="form-control" TextMode="email" runat="server"></asp:TextBox>
             </div>
             <div class="col-md-4">
                 <asp:Label runat="server" CssClass="form-label" for="txtContrasenia">Contraseña:</asp:Label>
@@ -53,12 +53,32 @@
             </div>
         </div>
 
+        <div style="margin: 50px"></div>
+        <div class="row">
+            <div class="col-md-3">
+                <asp:Label runat="server" CssClass="form-label" for="txtLegajo">Legajo:</asp:Label>
+                <asp:TextBox ID="txtLegajo" CssClass="form-control" TextMode="number" placeholder="1001" MaxLength="50" runat="server"></asp:TextBox>
+            </div>
+            <div class="col-md-3">
+                <asp:Label runat="server" CssClass="form-label" for="txtCargo">Cargo:</asp:Label>
+                <asp:TextBox ID="txtCargo" CssClass="form-control" placeholder="Ejemplo: Vendedor" MaxLength="50" runat="server"></asp:TextBox>
+            </div>
+            <div class="col-md-3">
+                <asp:Label runat="server" CssClass="form-label" for="txtFechaIngreso">Fecha de ingreso:</asp:Label>
+                <asp:TextBox ID="txtFechaIngreso" CssClass="form-control" TextMode="Date" runat="server"></asp:TextBox>
+            </div>
+            <div class="col-md-3">
+                <asp:Label runat="server" CssClass="form-label" for="txtFechaFin">Fecha de despido:</asp:Label>
+                <asp:TextBox ID="txtFechaFin" CssClass="form-control" TextMode="Date" runat="server"></asp:TextBox>
+            </div>
+        </div>
+
 
         <%--<div style="min-height: 1.5em;">
             <asp:CustomValidator ID="errorNombre" runat="server" ControlToValidate="txtNombre" ErrorMessage="Error en el nombre" ForeColor="Red" Display="Dynamic" EnableClientScript="false" />
         </div>--%>
 
         <asp:Button ID="btnAgregar" runat="server" Text="➕ Agregar" CssClass="btn btn-primary mt-2" OnClick="btnAgregar_Click" />
-        <a id="btnCancelar" class="btn btn-primary mt-2" href="/ClienteGestion.aspx" />❌ Cancelar</a>
+        <a id="btnCancelar" class="btn btn-primary mt-2" href="/EmpleadoGestion.aspx" />❌ Cancelar</a>
     </div>
 </asp:Content>

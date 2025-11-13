@@ -36,6 +36,7 @@ namespace WebApp
                     txtEmail.Text = cliente.Usuario.Email;
                     txtFechaAlta.Text = cliente.Usuario.FechaAlta.ToString("yyyy-MM-dd");
 
+                    Titulo.InnerText = "Modificar cliente";
                     btnAgregar.Text = "💾 Guardar";
                 }
             }
