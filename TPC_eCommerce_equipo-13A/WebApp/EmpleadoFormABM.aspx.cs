@@ -37,7 +37,7 @@ namespace WebApp
                     txtLegajo.Text = empleado.Legajo.ToString();
                     txtCargo.Text = empleado.Cargo.ToString();
                     txtFechaIngreso.Text = empleado.FechaIngreso.ToString("yyyy-MM-dd");
-                    txtFechaFin.Text = empleado.FechaFin?.ToString("yyyy-MM-dd");
+                    txtFechaDespido.Text = empleado.FechaDespido?.ToString("yyyy-MM-dd");
 
                     Titulo.InnerText = "Modificar empleado";
                     btnAgregar.Text = "💾 Guardar";
@@ -62,18 +62,18 @@ namespace WebApp
                 int legajo = int.Parse(txtLegajo.Text);
                 string cargo = txtCargo.Text.Trim();
                 DateTime fechaIngreso = DateTime.Parse(txtFechaIngreso.Text);
-                DateTime? fechaFin = txtFechaFin.Text != "" ? (DateTime?)DateTime.Parse(txtFechaFin.Text) : (DateTime?)null;
+                DateTime? fechaDespido = txtFechaDespido.Text != "" ? (DateTime?)DateTime.Parse(txtFechaDespido.Text) : (DateTime?)null;
 
 
                 string idStr = Request.QueryString["id"];
                 if (!string.IsNullOrEmpty(idStr))
                 {
                     int idEmpleado = int.Parse(idStr);
-                    empleadoNegocio.modificar(idEmpleado, legajo, cargo, fechaIngreso, fechaFin, documento, nombre, apellido, fechaNacimiento, telefono, direccion, codigoPostal, email, contrasenia, fechaAlta);
+                    empleadoNegocio.modificar(idEmpleado, legajo, cargo, fechaIngreso, fechaDespido, documento, nombre, apellido, fechaNacimiento, telefono, direccion, codigoPostal, email, contrasenia, fechaAlta);
                 }
                 else
                 {
-                    empleadoNegocio.agregar(legajo, cargo, fechaIngreso, fechaFin, documento, nombre, apellido, fechaNacimiento, telefono, direccion, codigoPostal, email, contrasenia, fechaAlta);
+                    empleadoNegocio.agregar(legajo, cargo, fechaIngreso, fechaDespido, documento, nombre, apellido, fechaNacimiento, telefono, direccion, codigoPostal, email, contrasenia, fechaAlta);
                 }
 
 

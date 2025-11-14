@@ -128,7 +128,7 @@ CREATE TABLE [dbo].[EMPLEADOS](
 	[Legajo] [int] NOT NULL,
 	[Cargo] [varchar](50) NOT NULL,
 	[FechaIngreso] [date] NOT NULL,
-	[FechaFin] [date] NULL,
+	[FechaDespido] [date] NULL,
 	[Activo] [bit] NOT NULL DEFAULT 1,
  CONSTRAINT [PK_EMPLEADOS] PRIMARY KEY CLUSTERED 
 (
@@ -147,12 +147,12 @@ GO
 
 insert into MARCAS (Nombre) values ('Wilson'), ('Logitech'), ('Royal Kludge'), ('Lenovo'), ('Samsung'), ('Sony'), ('LG'), ('Dell'), ('Asus')
 insert into CATEGORIAS (Nombre) values ('Mochilas'),('Periféricos'), ('Accesorios'), ('Televisores'), ('Notebooks')
-insert into PRODUCTOS values
-('M01', 'Mochila Porta Notebook', 'Esta mochila combina un diseño elegante y profesional con la robustez necesaria para enfrentar el ajetreo urbano y los viajes de negocios.', 1, 1, 'China', 49999, 1, 0),
-('P03', 'Mouse Gamer Hero G502', 'Sumérgete en el mundo de los videojuegos con el mouse gamer Logitech G Series Hero G502 en color negro', 2, 2, 'Corea', 64999, 2, 0),
-('P08', 'Teclado Mecánico 75% Rk M75', 'Este teclado cuenta con un diseño compacto con 81 teclas, por lo que es fácil de transportar y usar en cualquier lugar.', 2, 3, 'Japon', 185000, 10, 0),
-('65BRAVIA8II', 'Televisor 65" BRAVIA 8 OLED 4K', 'Televisor OLED 4K con tecnología QD-OLED', 6, 4, 'Japon', 6399000, 100, 0),
-('65X855', 'Televisor 65" Serie X855 4K', 'Este televisor cuenta con resolucion 4K y Triluminos Display', 6, 4, 'Japon', 2300000, 0, 0)
+insert into PRODUCTOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Origen, Precio, Stock) values
+('M01', 'Mochila Porta Notebook', 'Esta mochila combina un diseño elegante y profesional con la robustez necesaria para enfrentar el ajetreo urbano y los viajes de negocios.', 1, 1, 'China', 49999, 15),
+('P03', 'Mouse Gamer Hero G502', 'Sumérgete en el mundo de los videojuegos con el mouse gamer Logitech G Series Hero G502 en color negro', 2, 2, 'Corea', 64999, 2),
+('P08', 'Teclado Mecánico 75% Rk M75', 'Este teclado cuenta con un diseño compacto con 81 teclas, por lo que es fácil de transportar y usar en cualquier lugar.', 2, 3, 'Japon', 185000, 10),
+('65BRAVIA8II', 'Televisor 65" BRAVIA 8 OLED 4K', 'Televisor OLED 4K con tecnología QD-OLED', 6, 4, 'Japon', 6399000, 100),
+('65X855', 'Televisor 65" Serie X855 4K', 'Este televisor cuenta con resolucion 4K y Triluminos Display', 6, 4, 'Japon', 2300000, 0)
 
 insert into imagenes values
 (1, 'https://http2.mlstatic.com/D_NQ_NP_703368-MLU76300898146_052024-O.webp'),
@@ -179,13 +179,13 @@ insert into Usuarios (Documento, Nombre, Apellido, FechaNacimiento, Telefono, Di
 insert into Clientes (IdUsuario) values (1)
 
 insert into Empleados (idUsuario, Legajo, Cargo, FechaIngreso) values (1, 1001, 'Vendedor', '2024-05-02')
-insert into Empleados (idUsuario, Legajo, Cargo, FechaIngreso, FechaFin) values (2, 1002, 'ClienteSecreto', '2024-10-10', '2025-12-12')
+insert into Empleados (idUsuario, Legajo, Cargo, FechaIngreso, FechaDespido) values (2, 1002, 'ClienteSecreto', '2024-10-10', '2025-12-12')
 --SELECT * FROM MARCAS
 --SELECT * FROM CATEGORIAS
 --SELECT * FROM PRODUCTOS
-select * from Usuarios
-select * from Clientes
-select * from Empleados
+SELECT * FROM USUARIOS
+SELECT * FROM CLIENTES
+SELECT * FROM EMPLEADOS
 
 SELECT C.Id,
 		U.Documento,
@@ -205,7 +205,7 @@ SELECT E.Id,
 		E.Legajo,
 		E.Cargo,
 		E.FechaIngreso,
-		E.FechaFin,
+		E.FechaDespido,
 		U.Documento,
 		U.Nombre,
 		U.Apellido,

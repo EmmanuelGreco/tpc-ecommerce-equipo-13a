@@ -20,7 +20,7 @@ namespace Negocio
 		                                E.Legajo,
 		                                E.Cargo,
 		                                E.FechaIngreso,
-		                                E.FechaFin,
+		                                E.FechaDespido,
 		                                U.Documento,
 		                                U.Nombre,
 		                                U.Apellido,
@@ -44,7 +44,7 @@ namespace Negocio
                     aux.Legajo = (int)datos.Lector["Legajo"];
                     aux.Cargo = (string)datos.Lector["Cargo"];
                     aux.FechaIngreso = (DateTime)datos.Lector["FechaIngreso"];
-                    aux.FechaFin = datos.Lector["FechaFin"] != DBNull.Value ? (DateTime)datos.Lector["FechaFin"] : (DateTime?)null;
+                    aux.FechaDespido = datos.Lector["FechaDespido"] != DBNull.Value ? (DateTime)datos.Lector["FechaDespido"] : (DateTime?)null;
                     aux.Usuario.Documento = (int)datos.Lector["Documento"];
                     aux.Usuario.Nombre = (string)datos.Lector["Nombre"];
                     aux.Usuario.Apellido = (string)datos.Lector["Apellido"];
@@ -81,7 +81,7 @@ namespace Negocio
 		                                E.Legajo,
 		                                E.Cargo,
 		                                E.FechaIngreso,
-		                                E.FechaFin,
+		                                E.FechaDespido,
 		                                U.Documento,
 		                                U.Nombre,
 		                                U.Apellido,
@@ -106,7 +106,7 @@ namespace Negocio
                     aux.Legajo = (int)datos.Lector["Legajo"];
                     aux.Cargo = (string)datos.Lector["Cargo"];
                     aux.FechaIngreso = (DateTime)datos.Lector["FechaIngreso"];
-                    aux.FechaFin = datos.Lector["FechaFin"] != DBNull.Value ? (DateTime)datos.Lector["FechaFin"] : (DateTime?)null;
+                    aux.FechaDespido = datos.Lector["FechaDespido"] != DBNull.Value ? (DateTime)datos.Lector["FechaDespido"] : (DateTime?)null;
                     aux.Usuario.Documento = (int)datos.Lector["Documento"];
                     aux.Usuario.Nombre = (string)datos.Lector["Nombre"];
                     aux.Usuario.Apellido = (string)datos.Lector["Apellido"];
@@ -130,7 +130,7 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-        public void modificar(int idEmpleado, int legajo, string cargo, DateTime fechaIngreso, DateTime? fechaFin,
+        public void modificar(int idEmpleado, int legajo, string cargo, DateTime fechaIngreso, DateTime? fechaDespido,
                               int documento, string nombre, string apellido, DateTime fechaNacimiento, int telefono,
                               string direccion, string codigoPostal, string email, string contrasenia, DateTime fechaAlta)
         {
@@ -175,15 +175,15 @@ namespace Negocio
                                         Legajo = @Legajo, 
                                         Cargo = @Cargo, 
                                         FechaIngreso = @FechaIngreso,
-                                        FechaFin = @FechaFin 
+                                        FechaDespido = @FechaDespido 
                                      WHERE Id = @IdEmpleado");
                 datos.setearParametro("@Legajo", legajo);
                 datos.setearParametro("@Cargo", cargo);
                 datos.setearParametro("@FechaIngreso", fechaIngreso);
-                if (fechaFin != null)
-                    datos.setearParametro("@FechaFin", fechaFin);
+                if (fechaDespido != null)
+                    datos.setearParametro("@FechaDespido", fechaDespido);
                 else
-                    datos.setearParametro("@FechaFin", DBNull.Value);
+                    datos.setearParametro("@FechaDespido", DBNull.Value);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -195,7 +195,7 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-        public void agregar(int legajo, string cargo, DateTime fechaIngreso, DateTime? fechaFin,
+        public void agregar(int legajo, string cargo, DateTime fechaIngreso, DateTime? fechaDespido,
                               int documento, string nombre, string apellido, DateTime fechaNacimiento, int telefono,
                               string direccion, string codigoPostal, string email, string contrasenia, DateTime fechaAlta)
         {
@@ -222,16 +222,16 @@ namespace Negocio
                     idInsertado = (int)datos.Lector["IdInsertado"];
                 datos.cerrarConexion();
 
-                datos.setearConsulta(@"INSERT INTO EMPLEADOS (IdUsuario, Legajo, Cargo, FechaIngreso, FechaFin) 
-                                       VALUES (@IdInsertado, @Legajo, @Cargo, @FechaIngreso, @FechaFin);");
+                datos.setearConsulta(@"INSERT INTO EMPLEADOS (IdUsuario, Legajo, Cargo, FechaIngreso, FechaDespido) 
+                                       VALUES (@IdInsertado, @Legajo, @Cargo, @FechaIngreso, @FechaDespido);");
                 datos.setearParametro("@IdInsertado", idInsertado);
                 datos.setearParametro("@Legajo", legajo);
                 datos.setearParametro("@Cargo", cargo);
                 datos.setearParametro("@FechaIngreso", fechaIngreso);
-                if (fechaFin != null)
-                    datos.setearParametro("@FechaFin", fechaFin);
+                if (fechaDespido != null)
+                    datos.setearParametro("@FechaDespido", fechaDespido);
                 else
-                    datos.setearParametro("@FechaFin", DBNull.Value);
+                    datos.setearParametro("@FechaDespido", DBNull.Value);
                 datos.ejecutarAccion();
 
             }

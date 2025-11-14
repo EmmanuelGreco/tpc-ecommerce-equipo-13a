@@ -22,13 +22,15 @@ WHERE M.Id = P.IdMarca AND C.Id = P.IdCategoria*/
 --SELECT * FROM MARCAS
 --SELECT * FROM CATEGORIAS
 
-select * from Productos
-
 
 -- INSERT INTO PRODUCTOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Origen, Stock, Precio ) 
 --                                        VALUES (1, 1, 1, 1, 1, 1, 1, 1);
 --                                        SELECT SCOPE_IDENTITY() AS 'IdInsertado';
-SELECT * from IMAGENES
+--SELECT * FROM IMAGENES
 
-DELETE from IMAGENES where IdProducto >= 10
-delete from PRODUCTOS where id >= 10
+--DELETE FROM IMAGENES where IdProducto >= 10
+--delete FROM PRODUCTOS where id >= 10
+
+SELECT * FROM EMPLEADOS
+SELECT * FROM USUARIOS
+SELECT * FROM CLIENTES
