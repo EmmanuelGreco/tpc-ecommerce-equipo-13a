@@ -96,15 +96,6 @@ namespace WebApp
         protected global::System.Web.UI.WebControls.TextBox txtStock;
 
         /// <summary>
-        /// errorNombre control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator errorNombre;
-
-        /// <summary>
         /// ScriptManager1 control.
         /// </summary>
         /// <remarks>
@@ -175,6 +166,15 @@ namespace WebApp
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnRemoverImagen;
+
+        /// <summary>
+        /// errorImg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator errorImg;
 
         /// <summary>
         /// btnAgregar control.

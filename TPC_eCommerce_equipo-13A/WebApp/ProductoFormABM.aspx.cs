@@ -94,8 +94,6 @@ namespace WebApp
         {
             try
             {
-                errorNombre.IsValid = true;
-
                 string codigo = txtCodigo.Text.Trim();
                 string nombre = txtNombre.Text.Trim();
                 string descripcion = txtDescripcion.Text.Trim();
@@ -116,9 +114,9 @@ namespace WebApp
                 listaImagenes = (List<ProductoImagen>)Session["sessionListaImagenes"];
                 if (listaImagenes.All(img => img.ImagenUrl == "https://www.svgrepo.com/show/508699/landscape-placeholder.svg"))
                 {
-                    errorNombre.IsValid = false;
-                    errorNombre.ForeColor = Color.Red;
-                    errorNombre.ErrorMessage = "¡Debes agregar al menos una imagen!";
+                    errorImg.IsValid = false;
+                    errorImg.ForeColor = Color.Red;
+                    errorImg.ErrorMessage = "¡Debes agregar al menos una imagen!";
                     return;
                 }
 
@@ -152,10 +150,7 @@ namespace WebApp
             }
             catch (Exception)
             {
-                errorNombre.IsValid = false;
-                errorNombre.ForeColor = Color.Red;
-                errorNombre.ErrorMessage = "❌ Ocurrió un error al agregar el producto. Intenta nuevamente.";
-                return;
+
             }
         }
 
@@ -223,6 +218,15 @@ namespace WebApp
             Session.Add("sessionIdImagen", listaImagenes.Count);
             txtURLImagen.Text = listaImagenes.Last().ImagenUrl != "https://www.svgrepo.com/show/508699/landscape-placeholder.svg" ? listaImagenes.Last().ImagenUrl : "";
             Session.Add("sessionListaImagenes", listaImagenes);
+        }
+
+        protected void errorImg_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            listaImagenes = (List<ProductoImagen>)Session["sessionListaImagenes"];
+            if (listaImagenes == null || listaImagenes.All(i => i.ImagenUrl == "https://www.svgrepo.com/show/508699/landscape-placeholder.svg"))
+                args.IsValid = false;
+            else
+                args.IsValid = true;
         }
     }
 }

@@ -4,51 +4,78 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <h1 runat="server" ID="Titulo" style="margin-bottom: 40px;">Agregar producto</h1>
+    <h1 runat="server" id="Titulo" style="margin-bottom: 40px;">Agregar producto</h1>
     <div class="container  w-100">
         <div class="row">
             <div class="col-md-8">
                 <asp:Label runat="server" CssClass="form-label" for="txtNombre">Nombre:</asp:Label>
                 <asp:TextBox ID="txtNombre" CssClass="form-control" placeholder="Ejemplo: Televisor" MaxLength="50" runat="server"></asp:TextBox>
+                <div style="min-height: 1.5em;">
+                    <asp:RequiredFieldValidator ErrorMessage="¡El Nombre es requerido!" ForeColor="Red" ControlToValidate="txtNombre" runat="server" ValidationGroup="Producto" />
+                </div>
             </div>
             <div class="col-md-4">
                 <asp:Label runat="server" CssClass="form-label" for="txtCodigo">Codigo:</asp:Label>
                 <asp:TextBox ID="txtCodigo" CssClass="form-control" placeholder="Ejemplo: M01" MaxLength="50" runat="server"></asp:TextBox>
+                <div style="min-height: 1.5em;">
+                    <asp:RequiredFieldValidator ErrorMessage="¡El Código es requerido!" ForeColor="Red" ControlToValidate="txtCodigo" runat="server" ValidationGroup="Producto" />
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col">
                 <asp:Label runat="server" CssClass="form-label" for="txtDescripcion">Descripción:</asp:Label>
                 <asp:TextBox ID="txtDescripcion" CssClass="form-control" TextMode="MultiLine" placeholder="Ejemplo: El televisor más nuevo..." MaxLength="150" runat="server"></asp:TextBox>
+                <div style="min-height: 1.5em;">
+                    <asp:RequiredFieldValidator ErrorMessage="¡La Descripción es requerida!" ForeColor="Red" ControlToValidate="txtDescripcion" runat="server" ValidationGroup="Producto" />
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
                 <asp:Label runat="server" CssClass="form-label" for="ddlMarca">Marca:</asp:Label>
                 <asp:DropDownList ID="ddlMarca" CssClass="form-select" runat="server"></asp:DropDownList>
+                <%-- NO SÉ COMO PODRÍA QUEDAR VACÍA UNA DDL, PERO POR LAS DUDAS AGREGO EL VALIDATOR --%>
+                <div style="min-height: 1.5em;">
+                    <asp:RequiredFieldValidator ErrorMessage="¡La Marca es requerida!" ForeColor="Red" ControlToValidate="ddlMarca" runat="server" ValidationGroup="Producto" />
+                </div>
             </div>
             <div class="col-md-6">
                 <asp:Label runat="server" CssClass="form-label" for="ddlCategoria">Categoria:</asp:Label>
                 <asp:DropDownList ID="ddlCategoria" CssClass="form-select" runat="server"></asp:DropDownList>
+                <div style="min-height: 1.5em;">
+                    <asp:RequiredFieldValidator ErrorMessage="¡La Categoría es requerida!" ForeColor="Red" ControlToValidate="ddlCategoria" runat="server" ValidationGroup="Producto" />
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
                 <asp:Label runat="server" CssClass="form-label" for="txtOrigen">País de origen:</asp:Label>
                 <asp:TextBox ID="txtOrigen" CssClass="form-control" placeholder="Ejemplo: Argentina" MaxLength="50" runat="server"></asp:TextBox>
+                <div style="min-height: 1.5em;">
+                    <asp:RequiredFieldValidator ErrorMessage="¡El País de Origen es requerido!" ForeColor="Red" ControlToValidate="txtOrigen" runat="server" ValidationGroup="Producto" />
+                </div>
             </div>
             <div class="col-md-4">
                 <asp:Label runat="server" CssClass="form-label" for="txtPrecio">Precio:</asp:Label>
-                <asp:TextBox ID="txtPrecio" CssClass="form-control" placeholder="Ejemplo: 50.000" MaxLength="50" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtPrecio" CssClass="form-control" placeholder="Ejemplo: 50.000" MaxLength="9" runat="server"></asp:TextBox>
+                <div style="min-height: 1.5em;">
+                    <asp:RequiredFieldValidator ErrorMessage="¡El Precio es requerido!" ForeColor="Red" Display="Dynamic" ControlToValidate="txtPrecio" runat="server" ValidationGroup="Producto" />
+                    <asp:RegularExpressionValidator ErrorMessage="¡El Precio debe ser numérico!" ForeColor="Red" Display="Dynamic"
+                        ValidationExpression="^\d{1,50}$" ControlToValidate="txtPrecio" runat="server" ValidationGroup="Producto" />
+                    <%--<asp:CustomValidator ID="errorPrecio" ControlToValidate="txtPrecio" ErrorMessage="Aca va el Error" ForeColor="Red" Display="Dynamic" EnableClientScript="false" runat="server" />--%>
+                </div>
             </div>
             <div class="col-md-4">
                 <asp:Label runat="server" CssClass="form-label" for="txtStock">Stock:</asp:Label>
-                <asp:TextBox ID="txtStock" CssClass="form-control" placeholder="Ejemplo: 1000" MaxLength="50" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtStock" CssClass="form-control" placeholder="Ejemplo: 1000" MaxLength="9" runat="server"></asp:TextBox>
+                <div style="min-height: 1.5em;">
+                    <asp:RequiredFieldValidator ErrorMessage="¡El Stock es requerido!" ForeColor="Red" Display="Dynamic" ControlToValidate="txtStock" runat="server" ValidationGroup="Producto" />
+                    <asp:RegularExpressionValidator ErrorMessage="¡El Stock debe ser numérico!" ForeColor="Red" Display="Dynamic"
+                        ValidationExpression="^\d{1,50}$" ControlToValidate="txtStock" runat="server" ValidationGroup="Producto" />
+                    <%--<asp:CustomValidator ID="errorPrecio" ControlToValidate="txtStock" ErrorMessage="Aca va el Error" ForeColor="Red" Display="Dynamic" EnableClientScript="false" runat="server" />--%>
+                </div>
             </div>
-        </div>
-
-        <div style="min-height: 1.5em;">
-            <asp:CustomValidator ID="errorNombre" runat="server" ControlToValidate="txtNombre" ErrorMessage="Error en el nombre" ForeColor="Red" Display="Dynamic" EnableClientScript="false" />
         </div>
 
         <%--CAROUSEL--%>
@@ -57,7 +84,7 @@
         <asp:UpdatePanel runat="server" ID="CarouselUP">
             <ContentTemplate>
                 <%  
-                        idImagen = (int)Session["sessionIdImagen"];
+                    idImagen = (int)Session["sessionIdImagen"];
                 %>
                 <div class="col">
                     <div class="card h-100">
@@ -76,18 +103,30 @@
                         <div class="card-body">
                             <label class="form-label">URL imagen <%: idImagen %>:</label>
                             <asp:TextBox ID="txtURLImagen" CssClass="form-control" placeholder="https://images.example.com/products/img01.jpg" MaxLength="200" runat="server"></asp:TextBox>
-                            <asp:Button ID="btnConfirmarImagen" runat="server" Text="✔ Confirmar Imagen" CssClass="btn btn-primary mt-2" OnClick="btnConfirmarImagen_Click"/>
-                            <asp:Button ID="btnAgregarImagen" runat="server" Text="➕ Agregar Imagen" CssClass="btn btn-primary mt-2" OnClick="btnAgregarImagen_Click"/>
-                            <asp:Button ID="btnRemoverImagen" runat="server" Text="➖ Remover Imagen" CssClass="btn btn-primary mt-2" OnClick="btnRemoverImagen_Click"/>
+                            <asp:Button ID="btnConfirmarImagen" runat="server" Text="✔ Confirmar Imagen" CssClass="btn btn-primary mt-2" OnClick="btnConfirmarImagen_Click" CausesValidation="false" />
+                            <asp:Button ID="btnAgregarImagen" runat="server" Text="➕ Agregar Imagen" CssClass="btn btn-primary mt-2" OnClick="btnAgregarImagen_Click" CausesValidation="false" />
+                            <asp:Button ID="btnRemoverImagen" runat="server" Text="➖ Remover Imagen" CssClass="btn btn-primary mt-2" OnClick="btnRemoverImagen_Click" CausesValidation="false" />
                         </div>
                     </div>
                 </div>
+                <div style="min-height: 1.5em;">
+                    <%--<asp:CustomValidator ID="errorImg" runat="server" ErrorMessage="" ForeColor="Red" Display="Dynamic" EnableClientScript="false" />--%>
+                    <asp:CustomValidator
+                        ID="errorImg"
+                        runat="server"
+                        ErrorMessage="Debes cargar al menos una imagen válida."
+                        ForeColor="Red"
+                        Display="Dynamic"
+                        OnServerValidate="errorImg_ServerValidate"
+                        ValidationGroup="Producto" />
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
         <%--CAROUSEL--%>
 
-        <asp:Button ID="btnAgregar" runat="server" Text="➕ Agregar" CssClass="btn btn-primary mt-2" OnClick="btnAgregar_Click" />
+
+
+        <asp:Button ID="btnAgregar" runat="server" Text="➕ Agregar" CssClass="btn btn-primary mt-2" OnClick="btnAgregar_Click" ValidationGroup="Producto" />
         <a id="btnCancelar" class="btn btn-primary mt-2" href="/ProductoGestion.aspx" />❌ Cancelar</a>
     </div>
 </asp:Content>

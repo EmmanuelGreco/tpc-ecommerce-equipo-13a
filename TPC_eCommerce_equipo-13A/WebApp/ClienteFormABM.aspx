@@ -70,7 +70,7 @@
                 <asp:Label runat="server" CssClass="form-label" for="txtFechaAlta">Fecha de dado de alta:</asp:Label>
                 <asp:TextBox ID="txtFechaAlta" CssClass="form-control" TextMode="Date" runat="server"></asp:TextBox>
                 <div style="min-height: 1.5em;">
-                    <asp:RequiredFieldValidator ErrorMessage="¡La Fecha de Alta es requerida!" ForeColor="Red" ControlToValidate="txtFechaNacimiento" runat="server" />
+                    <asp:RequiredFieldValidator ErrorMessage="¡La Fecha de Alta es requerida!" ForeColor="Red" ControlToValidate="txtFechaAlta" runat="server" />
                 </div>
             </div>
         </div>

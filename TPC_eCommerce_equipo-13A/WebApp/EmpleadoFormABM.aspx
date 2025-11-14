@@ -123,9 +123,6 @@
             <div class="col-md-3">
                 <asp:Label runat="server" CssClass="form-label" for="txtFechaDespido">Fecha de despido:</asp:Label>
                 <asp:TextBox ID="txtFechaDespido" CssClass="form-control" TextMode="Date" runat="server"></asp:TextBox>
-                <div style="min-height: 1.5em;">
-                    <asp:RequiredFieldValidator ErrorMessage="¡La Fecha de Despido es requerida!" ForeColor="Red" ControlToValidate="txtFechaDespido" runat="server" />
-                </div>
             </div>
         </div>
 
