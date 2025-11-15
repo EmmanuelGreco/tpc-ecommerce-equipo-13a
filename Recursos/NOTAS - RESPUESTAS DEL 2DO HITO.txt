@@ -1,0 +1,30 @@
+marca y categoría
+	-en agregar, no mostrar las inactivas.
+	-en modificar, pueden estar pero avisando las q no se trabajan mas.
+	
+	
+18 años en el feha nacimiento ??
+
+
+EMPLEADOS:
+sacar despido de AGREGAR - al desactivar, guardar fecha de despido.
+
+Solo dejar manual la fecha de ingreso.
+
+
+CONTRASEÑA:
+generar una aleatoria basica, y mandarsela por correo al empleado (por ej. nombre + docu) 
+
+LEGAJO: generar automatico
+
+CARGO: Desplegable si queremos expandir, sino remover ya que siendo un campo de escritura no aporta 
+
+
+DOCUMENTO: int NO - usar string. Si no, saca 00 de adelante etc.
+
+
+LOGIN 
+CARRITO
+COMPRAS
+
+ADMIN VE TODO, EMPLEADO VE PERO NO EDITA, COMPRADOR SOLO PRODUCTOS Y VENTAS.
