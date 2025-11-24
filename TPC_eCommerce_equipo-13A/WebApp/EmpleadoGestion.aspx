@@ -17,7 +17,6 @@
                         <asp:BoundField HeaderText="Nombre" DataField="Usuario.Nombre" />
                         <asp:BoundField HeaderText="Apellido" DataField="Usuario.Apellido" />
                         <asp:BoundField HeaderText="Legajo" DataField="Legajo" />
-                        <asp:BoundField HeaderText="Cargo" DataField="Cargo" />
                         <asp:BoundField HeaderText="Documento" DataField="Usuario.Documento" />
                         <asp:BoundField HeaderText="Email" DataField="Usuario.Email" />
 

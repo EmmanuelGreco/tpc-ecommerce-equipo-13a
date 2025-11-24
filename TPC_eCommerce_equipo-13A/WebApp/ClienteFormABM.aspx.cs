@@ -34,7 +34,7 @@ namespace WebApp
                     txtDireccion.Text = cliente.Usuario.Direccion;
                     txtCodigoPostal.Text = cliente.Usuario.CodigoPostal;
                     txtEmail.Text = cliente.Usuario.Email;
-                    txtFechaAlta.Text = cliente.Usuario.FechaAlta.ToString("yyyy-MM-dd");
+                    //txtFechaAlta.Text = cliente.Usuario.FechaAlta.ToString("yyyy-MM-dd");
 
                     Titulo.InnerText = "Modificar cliente";
                     btnAgregar.Text = "💾 Guardar";
@@ -45,27 +45,28 @@ namespace WebApp
         {
             try
             {
-                int documento = int.Parse(txtDocumento.Text);
+                string documento = txtDocumento.Text.Trim();
                 string nombre = txtNombre.Text.Trim();
                 string apellido = txtApellido.Text.Trim();
                 DateTime fechaNacimiento = DateTime.Parse(txtFechaNacimiento.Text);
-                int telefono = int.Parse(txtTelefono.Text);
+                long telefono = long.Parse(txtTelefono.Text);
                 string direccion = txtDireccion.Text.Trim();
                 string codigoPostal = txtCodigoPostal.Text.Trim();
                 string email = txtEmail.Text.Trim();
-                string contrasenia = txtContrasenia.Text.Trim();
-                DateTime fechaAlta = DateTime.Parse(txtFechaAlta.Text);
+                string contrasenia = documento + nombre.Replace(" ", "");
+                contrasenia = contrasenia.Substring(0, 20);
+                //DateTime fechaAlta = DateTime.Parse(txtFechaAlta.Text);
 
 
                 string idStr = Request.QueryString["id"];
                 if (!string.IsNullOrEmpty(idStr))
                 {
                     int idCliente = int.Parse(idStr);
-                    clienteNegocio.modificar(idCliente, documento, nombre, apellido, fechaNacimiento, telefono, direccion, codigoPostal, email, contrasenia, fechaAlta);
+                    clienteNegocio.modificar(idCliente, documento, nombre, apellido, fechaNacimiento, telefono, direccion, codigoPostal, email);
                 }
                 else
                 {
-                    clienteNegocio.agregar(documento, nombre, apellido, fechaNacimiento, telefono, direccion, codigoPostal, email, contrasenia, fechaAlta);
+                    clienteNegocio.agregar(documento, nombre, apellido, fechaNacimiento, telefono, direccion, codigoPostal, email, contrasenia);
                 }
 
 

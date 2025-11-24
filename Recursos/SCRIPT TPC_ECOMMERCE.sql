@@ -1,8 +1,8 @@
-USE master
-GO
+-- USE master
+-- GO
 
-ALTER DATABASE TPC_ECOMMERCE SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-DROP DATABASE TPC_ECOMMERCE;
+-- ALTER DATABASE TPC_ECOMMERCE SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+-- DROP DATABASE TPC_ECOMMERCE;
 
 CREATE DATABASE TPC_ECOMMERCE
 GO
@@ -87,16 +87,16 @@ GO
 
 CREATE TABLE [dbo].[USUARIOS](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Documento] [int] NOT NULL,
+	[Documento] [varchar](8) NOT NULL,
 	[Nombre] [varchar](50) NOT NULL,
 	[Apellido] [varchar](50) NOT NULL,
 	[FechaNacimiento] [date] NOT NULL,
-	[Telefono] [int] NOT NULL,
+	[Telefono] [bigint] NOT NULL,
 	[Direccion] [varchar](100) NOT NULL,
 	[CodigoPostal] [varchar](20) NOT NULL,
 	[Email] [varchar](50) NOT NULL,
 	[Contrasenia] [varchar](20) NOT NULL,
-	[FechaAlta] [datetime] NOT NULL,
+	[FechaAlta] [datetime] NOT NULL DEFAULT GETDATE(),
  CONSTRAINT [PK_USUARIO] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -126,7 +126,6 @@ CREATE TABLE [dbo].[EMPLEADOS](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[IdUsuario] [int] NOT NULL,
 	[Legajo] [int] NOT NULL,
-	[Cargo] [varchar](50) NOT NULL,
 	[FechaIngreso] [date] NOT NULL,
 	[FechaDespido] [date] NULL,
 	[Activo] [bit] NOT NULL DEFAULT 1,
@@ -169,7 +168,9 @@ insert into imagenes values
 (4, 'https://sony.scene7.com/is/image/sonyglobalsolutions/TVFY24_UM_3_CCW_M?$productIntroPlatemobile$&fmt=png-alpha'),
 (4, 'https://sony.scene7.com/is/image/sonyglobalsolutions/TVFY24_UM_5_Bezel_M?$productIntroPlatemobile$&fmt=png-alpha'),
 (4, 'https://sony.scene7.com/is/image/sonyglobalsolutions/TVFY24_UM_6_Stand_M?$productIntroPlatemobile$&fmt=png-alpha'),
-(4, 'https://sony.scene7.com/is/image/sonyglobalsolutions/TVFY24_UM_0_insitu_M?$productIntroPlatemobile$&fmt=png-alpha')
+(4, 'https://sony.scene7.com/is/image/sonyglobalsolutions/TVFY24_UM_0_insitu_M?$productIntroPlatemobile$&fmt=png-alpha'),
+(5, 'https://http2.mlstatic.com/D_NQ_NP_2X_755172-MEC92794030205_092025-T.webp')
+
 
 insert into Usuarios (Documento, Nombre, Apellido, FechaNacimiento, Telefono, Direccion, CodigoPostal, Email, Contrasenia, FechaAlta) 
 	values ('34902784', 'Carlos', 'Perez', '2001-10-11', 1149283928, 'Rivadavia 1138', 'C1398', 'carlitosp@gmail.com', 'aguantecarlitos123', '2025-11-11 14:39:22')
@@ -178,8 +179,8 @@ insert into Usuarios (Documento, Nombre, Apellido, FechaNacimiento, Telefono, Di
 
 insert into Clientes (IdUsuario) values (1)
 
-insert into Empleados (idUsuario, Legajo, Cargo, FechaIngreso) values (1, 1001, 'Vendedor', '2024-05-02')
-insert into Empleados (idUsuario, Legajo, Cargo, FechaIngreso, FechaDespido) values (2, 1002, 'ClienteSecreto', '2024-10-10', '2025-12-12')
+insert into Empleados (idUsuario, Legajo, FechaIngreso) values (1, 1001, '2024-05-02')
+insert into Empleados (idUsuario, Legajo, FechaIngreso, FechaDespido) values (2, 1002, '2024-10-10', '2025-12-12')
 --SELECT * FROM MARCAS
 --SELECT * FROM CATEGORIAS
 --SELECT * FROM PRODUCTOS
@@ -203,7 +204,6 @@ FROM Clientes C INNER JOIN Usuarios U ON C.IdUsuario = U.Id
 
 SELECT E.Id,
 		E.Legajo,
-		E.Cargo,
 		E.FechaIngreso,
 		E.FechaDespido,
 		U.Documento,

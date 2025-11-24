@@ -1,11 +1,11 @@
 EN EL ALTA DE PRODUCTO:
 	marca y categoría
-		-en agregar, no mostrar las inactivas.
-		-en modificar, pueden estar pero avisando las q no se trabajan mas.
+		-en agregar, no mostrar las inactivas.																				✅
+		-en modificar, pueden estar pero avisando las q no se trabajan mas.													✅
 	
 	
-	Solo dejar manual la fecha de ingreso. 
-	La fecha de dada de alta que sea un default en la BD, o como mínimo un default en el BACK al agregar.
+	Solo dejar manual la fecha de ingreso. 																					✅
+	La fecha de dada de alta que sea un default en la BD, o como mínimo un default en el BACK al agregar.					✅ QUEDA COMO DEFAULT EN LA BD
 	
 
 """" EMPLEADOS:
@@ -18,15 +18,17 @@ PARA USUARIOS:
 
 
 CONTRASEÑA:
-generar una aleatoria o una inicial (que siempre es la misma para todos y luego la cambia el user), 
+generar una aleatoria o una inicial (que siempre es la misma para todos y luego la cambia el user), 						✅
 y mandarsela por correo al empleado o cliente (por ej. nombre + docu) 
 
 LEGAJO: generar automatico (puede ser autoincremental como ID, no necesariamente de a 1 como ID, puede aumentar de a mas)
 
-BORRAR CARGO: Desplegable si queremos expandir, sino remover ya que siendo un campo de escritura no aporta 
+BORRAR CARGO: Desplegable si queremos expandir, sino remover ya que siendo un campo de escritura no aporta 					✅
 BIT ADMIN
 
-DOCUMENTO: int NO - usar string. Si no, saca 00 de adelante etc.
+DOCUMENTO: int NO - usar string. Si no, saca 00 de adelante etc.															✅
+
+TELEFONO: Long, si no no entran diez digitos (9.999.999.999, por ejemplo)													✅
 
 
 LOGIN 

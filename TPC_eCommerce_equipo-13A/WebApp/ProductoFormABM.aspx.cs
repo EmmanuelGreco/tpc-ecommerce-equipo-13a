@@ -72,12 +72,12 @@ namespace WebApp
                     foreach (ListItem item in ddlMarca.Items)
                     {
                         if (item.Text.Contains("INACTIVA"))
-                            item.Attributes.Add("style", "background-color: #ffcccc; color: #900;");
+                            item.Attributes.Add("style", "background-color: #ffcccc; color: #990000;");
                     }
                     foreach (ListItem item in ddlCategoria.Items)
                     {
                         if (item.Text.Contains("INACTIVA"))
-                            item.Attributes.Add("style", "background-color: #ffcccc; color: #900;");
+                            item.Attributes.Add("style", "background-color: #ffcccc; color: #990000;");
                     }
 
 

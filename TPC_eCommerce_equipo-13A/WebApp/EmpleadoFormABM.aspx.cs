@@ -32,10 +32,9 @@ namespace WebApp
                     txtDireccion.Text = empleado.Usuario.Direccion;
                     txtCodigoPostal.Text = empleado.Usuario.CodigoPostal;
                     txtEmail.Text = empleado.Usuario.Email;
-                    txtFechaAlta.Text = empleado.Usuario.FechaAlta.ToString("yyyy-MM-dd");
+                    //txtFechaAlta.Text = empleado.Usuario.FechaAlta.ToString("yyyy-MM-dd");
 
                     txtLegajo.Text = empleado.Legajo.ToString();
-                    txtCargo.Text = empleado.Cargo.ToString();
                     txtFechaIngreso.Text = empleado.FechaIngreso.ToString("yyyy-MM-dd");
                     txtFechaDespido.Text = empleado.FechaDespido?.ToString("yyyy-MM-dd");
 
@@ -48,19 +47,19 @@ namespace WebApp
         {
             try
             {
-                int documento = int.Parse(txtDocumento.Text);
+                string documento = txtDocumento.Text.Trim();
                 string nombre = txtNombre.Text.Trim();
                 string apellido = txtApellido.Text.Trim();
                 DateTime fechaNacimiento = DateTime.Parse(txtFechaNacimiento.Text);
-                int telefono = int.Parse(txtTelefono.Text);
+                long telefono = long.Parse(txtTelefono.Text);
                 string direccion = txtDireccion.Text.Trim();
                 string codigoPostal = txtCodigoPostal.Text.Trim();
                 string email = txtEmail.Text.Trim();
-                string contrasenia = txtContrasenia.Text.Trim();
-                DateTime fechaAlta = DateTime.Parse(txtFechaAlta.Text);
+                string contrasenia = documento + nombre.Replace(" ", "");
+                contrasenia = contrasenia.Substring(0, 20);
+                //DateTime fechaAlta = DateTime.Parse(txtFechaAlta.Text);
 
                 int legajo = int.Parse(txtLegajo.Text);
-                string cargo = txtCargo.Text.Trim();
                 DateTime fechaIngreso = DateTime.Parse(txtFechaIngreso.Text);
                 DateTime? fechaDespido = txtFechaDespido.Text != "" ? (DateTime?)DateTime.Parse(txtFechaDespido.Text) : (DateTime?)null;
 
@@ -69,11 +68,11 @@ namespace WebApp
                 if (!string.IsNullOrEmpty(idStr))
                 {
                     int idEmpleado = int.Parse(idStr);
-                    empleadoNegocio.modificar(idEmpleado, legajo, cargo, fechaIngreso, fechaDespido, documento, nombre, apellido, fechaNacimiento, telefono, direccion, codigoPostal, email, contrasenia, fechaAlta);
+                    empleadoNegocio.modificar(idEmpleado, legajo, fechaIngreso, fechaDespido, documento, nombre, apellido, fechaNacimiento, telefono, direccion, codigoPostal, email);
                 }
                 else
                 {
-                    empleadoNegocio.agregar(legajo, cargo, fechaIngreso, fechaDespido, documento, nombre, apellido, fechaNacimiento, telefono, direccion, codigoPostal, email, contrasenia, fechaAlta);
+                    empleadoNegocio.agregar(legajo, fechaIngreso, fechaDespido, documento, nombre, apellido, fechaNacimiento, telefono, direccion, codigoPostal, email, contrasenia);
                 }
 
 

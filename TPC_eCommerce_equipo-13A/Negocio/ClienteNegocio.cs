@@ -27,8 +27,6 @@ namespace Negocio
                                                 U.Direccion, 
                                                 U.CodigoPostal, 
                                                 U.Email, 
-                                                U.Contrasenia, 
-                                                U.FechaAlta, 
                                                 C.Activo 
                                         FROM Clientes C INNER JOIN Usuarios U ON C.IdUsuario = U.Id");
                 datos.ejecutarLectura();
@@ -39,16 +37,14 @@ namespace Negocio
                     aux.Usuario = new Usuario();
 
                     aux.Id = (int)datos.Lector["Id"];
-                    aux.Usuario.Documento = (int)datos.Lector["Documento"];
+                    aux.Usuario.Documento = (string)datos.Lector["Documento"];
                     aux.Usuario.Nombre = (string)datos.Lector["Nombre"];
                     aux.Usuario.Apellido = (string)datos.Lector["Apellido"];
                     aux.Usuario.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
-                    aux.Usuario.Telefono = (int)datos.Lector["Telefono"];
+                    aux.Usuario.Telefono = (long)datos.Lector["Telefono"];
                     aux.Usuario.Direccion = (string)datos.Lector["Direccion"];
                     aux.Usuario.CodigoPostal = (string)datos.Lector["CodigoPostal"];
                     aux.Usuario.Email = (string)datos.Lector["Email"];
-                    aux.Usuario.Contrasenia = (string)datos.Lector["Contrasenia"];
-                    aux.Usuario.FechaAlta = (DateTime)datos.Lector["FechaAlta"];
                     aux.Activo = (bool)datos.Lector["Activo"];
 
                     listaCliente.Add(aux);
@@ -80,8 +76,6 @@ namespace Negocio
                                                 U.Direccion, 
                                                 U.CodigoPostal, 
                                                 U.Email, 
-                                                U.Contrasenia, 
-                                                U.FechaAlta, 
                                                 C.Activo 
                                         FROM Clientes C INNER JOIN Usuarios U ON C.IdUsuario = U.Id
                                         WHERE C.Id = @IdCliente");
@@ -95,16 +89,14 @@ namespace Negocio
                 {
 
                     aux.Id = (int)datos.Lector["Id"];
-                    aux.Usuario.Documento = (int)datos.Lector["Documento"];
+                    aux.Usuario.Documento = (string)datos.Lector["Documento"];
                     aux.Usuario.Nombre = (string)datos.Lector["Nombre"];
                     aux.Usuario.Apellido = (string)datos.Lector["Apellido"];
                     aux.Usuario.FechaNacimiento = (DateTime)datos.Lector["FechaNacimiento"];
-                    aux.Usuario.Telefono = (int)datos.Lector["Telefono"];
+                    aux.Usuario.Telefono = (long)datos.Lector["Telefono"];
                     aux.Usuario.Direccion = (string)datos.Lector["Direccion"];
                     aux.Usuario.CodigoPostal = (string)datos.Lector["CodigoPostal"];
                     aux.Usuario.Email = (string)datos.Lector["Email"];
-                    aux.Usuario.Contrasenia = (string)datos.Lector["Contrasenia"];
-                    aux.Usuario.FechaAlta = (DateTime)datos.Lector["FechaAlta"];
                     aux.Activo = (bool)datos.Lector["Activo"];
 
                 }
@@ -119,8 +111,8 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-        public void modificar(int idCliente, int documento, string nombre, string apellido, DateTime fechaNacimiento, int telefono,
-                            string direccion, string codigoPostal, string email, string contrasenia, DateTime fechaAlta)
+        public void modificar(int idCliente, string documento, string nombre, string apellido, DateTime fechaNacimiento, long telefono,
+                            string direccion, string codigoPostal, string email)
         {
             AccesoDatos datos = new AccesoDatos();
             int idUsuario = 0;
@@ -142,8 +134,6 @@ namespace Negocio
                                         Direccion = @Direccion, 
                                         CodigoPostal = @CodigoPostal, 
                                         Email = @Email, 
-                                        Contrasenia = @Contrasenia, 
-                                        FechaAlta = @FechaAlta 
                                      WHERE Id = @idUsuario");
                 datos.setearParametro("@Documento", documento);
                 datos.setearParametro("@Nombre", nombre);
@@ -153,8 +143,6 @@ namespace Negocio
                 datos.setearParametro("@Direccion", direccion);
                 datos.setearParametro("@CodigoPostal", codigoPostal);
                 datos.setearParametro("@Email", email);
-                datos.setearParametro("@Contrasenia", contrasenia);
-                datos.setearParametro("@FechaAlta", fechaAlta);
                 datos.setearParametro("@idUsuario", idUsuario);
                 datos.ejecutarAccion();
             }
@@ -167,15 +155,15 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-        public void agregar(int documento, string nombre, string apellido, DateTime fechaNacimiento, int telefono,
-                            string direccion, string codigoPostal, string email, string contrasenia, DateTime fechaAlta)
+        public void agregar(string documento, string nombre, string apellido, DateTime fechaNacimiento, long telefono,
+                            string direccion, string codigoPostal, string email, string contrasenia)
         {
             AccesoDatos datos = new AccesoDatos();
             int idInsertado = 0;
             try
             {
-                datos.setearConsulta(@"INSERT INTO USUARIOS (Documento, Nombre, Apellido, FechaNacimiento, Telefono, Direccion, CodigoPostal, Email, Contrasenia, FechaAlta) 
-                                       VALUES (@Documento, @Nombre, @Apellido, @FechaNacimiento, @Telefono, @Direccion, @CodigoPostal, @Email, @Contrasenia, @FechaAlta);
+                datos.setearConsulta(@"INSERT INTO USUARIOS (Documento, Nombre, Apellido, FechaNacimiento, Telefono, Direccion, CodigoPostal, Email, Contrasenia) 
+                                       VALUES (@Documento, @Nombre, @Apellido, @FechaNacimiento, @Telefono, @Direccion, @CodigoPostal, @Email, @Contrasenia);
                                        SELECT CAST(SCOPE_IDENTITY() AS INT) AS 'IdInsertado';");
                 datos.setearParametro("@Documento", documento);
                 datos.setearParametro("@Nombre", nombre);
@@ -186,7 +174,6 @@ namespace Negocio
                 datos.setearParametro("@CodigoPostal", codigoPostal);
                 datos.setearParametro("@Email", email);
                 datos.setearParametro("@Contrasenia", contrasenia);
-                datos.setearParametro("@FechaAlta", fechaAlta);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
