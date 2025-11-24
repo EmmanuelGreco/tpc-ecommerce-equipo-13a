@@ -54,7 +54,8 @@ namespace WebApp
                 string codigoPostal = txtCodigoPostal.Text.Trim();
                 string email = txtEmail.Text.Trim();
                 string contrasenia = documento + nombre.Replace(" ", "");
-                contrasenia = contrasenia.Substring(0, 20);
+                if (contrasenia.Length > 20)
+                    contrasenia = contrasenia.Substring(0, 20);
                 //DateTime fechaAlta = DateTime.Parse(txtFechaAlta.Text);
 
 

@@ -99,7 +99,7 @@
         <div class="row">
             <div class="col-md-4">
                 <asp:Label runat="server" CssClass="form-label" for="txtLegajo">Legajo:</asp:Label>
-                <asp:TextBox ID="txtLegajo" CssClass="form-control" TextMode="number" placeholder="1001" MaxLength="50" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtLegajo" CssClass="form-control" TextMode="number" placeholder="1001" MaxLength="50" runat="server" Enabled="false"></asp:TextBox>
                 <div style="min-height: 1.5em;">
                     <asp:RequiredFieldValidator ErrorMessage="¡El Legajo es requerido!" ForeColor="Red" ControlToValidate="txtLegajo" runat="server" />
                 </div>

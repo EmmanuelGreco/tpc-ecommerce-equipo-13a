@@ -1,15 +1,15 @@
 EN EL ALTA DE PRODUCTO:
 	marca y categoría
-		-en agregar, no mostrar las inactivas.																				✅
-		-en modificar, pueden estar pero avisando las q no se trabajan mas.													✅
+		-en agregar, no mostrar las inactivas.																				OK
+		-en modificar, pueden estar pero avisando las q no se trabajan mas.													OK
 	
 	
-	Solo dejar manual la fecha de ingreso. 																					✅
-	La fecha de dada de alta que sea un default en la BD, o como mínimo un default en el BACK al agregar.					✅ QUEDA COMO DEFAULT EN LA BD
+	Solo dejar manual la fecha de ingreso. 																					OK
+	La fecha de dada de alta que sea un default en la BD, o como mínimo un default en el BACK al agregar.					OK QUEDA COMO DEFAULT EN LA BD
 	
 
 """" EMPLEADOS:
-sacar despido de AGREGAR - al desactivar, guardar fecha de despido.
+sacar despido de AGREGAR - al desactivar, guardar fecha de despido.															OK
 
 PARA USUARIOS:
 		IDEA DE PEDRO: mínimo 18 años en el feha nacimiento ????  (Maxi dice que no es necesario)
@@ -18,17 +18,17 @@ PARA USUARIOS:
 
 
 CONTRASEÑA:
-generar una aleatoria o una inicial (que siempre es la misma para todos y luego la cambia el user), 						✅
-y mandarsela por correo al empleado o cliente (por ej. nombre + docu) 
+generar una aleatoria o una inicial (que siempre es la misma para todos y luego la cambia el user), 						OK
+y mandarsela por correo al empleado o cliente (por ej. nombre + docu) 														FALTA ENVIO MAIL
 
-LEGAJO: generar automatico (puede ser autoincremental como ID, no necesariamente de a 1 como ID, puede aumentar de a mas)
-
-BORRAR CARGO: Desplegable si queremos expandir, sino remover ya que siendo un campo de escritura no aporta 					✅
+LEGAJO: generar automatico (puede ser autoincremental como ID, no necesariamente de a 1 como ID, puede aumentar de a mas)   OK autoincremental desde 1000, 
+																															   no editable
+BORRAR CARGO: Desplegable si queremos expandir, sino remover ya que siendo un campo de escritura no aporta 					OK
 BIT ADMIN
 
-DOCUMENTO: int NO - usar string. Si no, saca 00 de adelante etc.															✅
+DOCUMENTO: int NO - usar string. Si no, saca 00 de adelante etc.															OK
 
-TELEFONO: Long, si no no entran diez digitos (9.999.999.999, por ejemplo)													✅
+TELEFONO: Long, si no no entran diez digitos (9.999.999.999, por ejemplo)													OK
 
 
 LOGIN 

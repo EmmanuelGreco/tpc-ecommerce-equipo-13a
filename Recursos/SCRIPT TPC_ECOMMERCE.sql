@@ -122,13 +122,19 @@ GO
 ALTER TABLE [dbo].[CLIENTES] CHECK CONSTRAINT [FK_CLIENTES_USUARIOS]
 GO
 
+-- Secuencia creada ya que no se puede tener dos identity en la misma tabla. Legajo comienza en 1000.
+CREATE SEQUENCE [dbo].[SEQ_Legajo]
+    START WITH 1
+    INCREMENT BY 1;
+
 CREATE TABLE [dbo].[EMPLEADOS](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[IdUsuario] [int] NOT NULL,
-	[Legajo] [int] NOT NULL,
+	[Legajo] [int] NOT NULL DEFAULT NEXT VALUE FOR [dbo].[SEQ_Legajo],
 	[FechaIngreso] [date] NOT NULL,
 	[FechaDespido] [date] NULL,
 	[Activo] [bit] NOT NULL DEFAULT 1,
+ CONSTRAINT UQ_EMPLEADOS_Legajo UNIQUE (Legajo),
  CONSTRAINT [PK_EMPLEADOS] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

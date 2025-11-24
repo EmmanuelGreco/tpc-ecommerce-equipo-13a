@@ -65,6 +65,30 @@ namespace Negocio
             }
         }
 
+        public int obtenerUltimoLegajo()
+        {
+            int ultimoLegajo = 0;
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(@"SELECT TOP 1 Legajo FROM EMPLEADOS ORDER BY Legajo DESC");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                    ultimoLegajo = (int)datos.Lector["Legajo"];
+                return ultimoLegajo;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public Empleado buscarPorId(int idEmpleado)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -141,9 +165,7 @@ namespace Negocio
                                         Telefono = @Telefono, 
                                         Direccion = @Direccion, 
                                         CodigoPostal = @CodigoPostal, 
-                                        Email = @Email, 
-                                        Contrasenia = @Contrasenia, 
-                                        FechaAlta = @FechaAlta 
+                                        Email = @Email
                                      WHERE Id = @idUsuario");
                 datos.setearParametro("@Documento", documento);
                 datos.setearParametro("@Nombre", nombre);
@@ -232,7 +254,17 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("UPDATE EMPLEADOS SET Activo = CASE WHEN Activo = 1 THEN 0 ELSE 1 END WHERE Id = @IdEmpleado");
+                datos.setearConsulta(@"UPDATE EMPLEADOS SET 
+                                        	Activo = CASE 
+                                        		WHEN Activo = 1 THEN 0 
+                                        		ELSE 1 
+                                        	END,
+                                        	FechaDespido = CASE 
+                                        		WHEN Activo = 1 THEN GETDATE()
+                                        		ELSE NULL
+                                        	END
+                                        WHERE Id = @IdEmpleado
+                                      ");
                 datos.setearParametro("@IdEmpleado", idEmpleado);
                 datos.ejecutarAccion();
             }

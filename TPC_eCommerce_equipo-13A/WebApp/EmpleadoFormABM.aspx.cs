@@ -40,6 +40,10 @@ namespace WebApp
 
                     Titulo.InnerText = "Modificar empleado";
                     btnAgregar.Text = "💾 Guardar";
+                } else
+                {
+                    txtLegajo.Text = (empleadoNegocio.obtenerUltimoLegajo() + 1).ToString();
+                    txtFechaDespido.Enabled = false;
                 }
             }
         }
@@ -56,7 +60,8 @@ namespace WebApp
                 string codigoPostal = txtCodigoPostal.Text.Trim();
                 string email = txtEmail.Text.Trim();
                 string contrasenia = documento + nombre.Replace(" ", "");
-                contrasenia = contrasenia.Substring(0, 20);
+                if (contrasenia.Length > 20)
+                    contrasenia = contrasenia.Substring(0, 20);
                 //DateTime fechaAlta = DateTime.Parse(txtFechaAlta.Text);
 
                 int legajo = int.Parse(txtLegajo.Text);
@@ -69,6 +74,8 @@ namespace WebApp
                 {
                     int idEmpleado = int.Parse(idStr);
                     empleadoNegocio.modificar(idEmpleado, legajo, fechaIngreso, fechaDespido, documento, nombre, apellido, fechaNacimiento, telefono, direccion, codigoPostal, email);
+                    if (fechaDespido != null)
+                        empleadoNegocio.alternarEstado(idEmpleado);
                 }
                 else
                 {
