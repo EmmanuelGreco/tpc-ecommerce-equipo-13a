@@ -12,7 +12,7 @@ EN EL ALTA DE PRODUCTO:
 sacar despido de AGREGAR - al desactivar, guardar fecha de despido.															OK
 
 PARA USUARIOS:
-		IDEA DE PEDRO: mínimo 18 años en el feha nacimiento ????  (Maxi dice que no es necesario)
+		IDEA DE PEDRO: mínimo 18 años en el feha nacimiento ????  (Maxi dice que no es necesario)							NO HECHO.	
 
 
 
@@ -24,7 +24,6 @@ y mandarsela por correo al empleado o cliente (por ej. nombre + docu) 										
 LEGAJO: generar automatico (puede ser autoincremental como ID, no necesariamente de a 1 como ID, puede aumentar de a mas)   OK autoincremental desde 1000, 
 																															   no editable
 BORRAR CARGO: Desplegable si queremos expandir, sino remover ya que siendo un campo de escritura no aporta 					OK
-BIT ADMIN
 
 DOCUMENTO: int NO - usar string. Si no, saca 00 de adelante etc.															OK
 
@@ -35,4 +34,5 @@ LOGIN
 CARRITO
 COMPRAS
 
+BIT ADMIN
 ADMIN VE TODO, EMPLEADO VE PERO NO EDITA, COMPRADOR SOLO PRODUCTOS Y VENTAS.

@@ -187,6 +187,8 @@ insert into Clientes (IdUsuario) values (1)
 
 insert into Empleados (idUsuario, Legajo, FechaIngreso) values (1, 1001, '2024-05-02')
 insert into Empleados (idUsuario, Legajo, FechaIngreso, FechaDespido) values (2, 1002, '2024-10-10', '2025-12-12')
+insert into Empleados (idUsuario, Legajo, FechaIngreso) values (1, 1003, '2024-05-02')
+insert into Empleados (idUsuario, Legajo, FechaIngreso, FechaDespido) values (2, 1004, '2024-10-10', '2025-12-12')
 --SELECT * FROM MARCAS
 --SELECT * FROM CATEGORIAS
 --SELECT * FROM PRODUCTOS
@@ -228,3 +230,14 @@ FROM Empleados E INNER JOIN Usuarios U ON E.IdUsuario = U.Id
 SELECT IdUsuario FROM CLIENTES WHERE Id = 2
 
 select * from USUARIOS
+
+UPDATE EMPLEADOS SET 
+	Activo = CASE 
+		WHEN Activo = 1 THEN 0 
+		ELSE 1 
+	END,
+	FechaDespido = CASE 
+		WHEN Activo = 1 THEN GETDATE()
+		ELSE NULL
+	END
+WHERE Id = @IdEmpleado
