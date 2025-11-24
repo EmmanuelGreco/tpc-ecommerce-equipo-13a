@@ -37,7 +37,7 @@
                 <asp:DropDownList ID="ddlMarca" CssClass="form-select" runat="server"></asp:DropDownList>
                 <%-- NO SÉ COMO PODRÍA QUEDAR VACÍA UNA DDL, PERO POR LAS DUDAS AGREGO EL VALIDATOR --%>
                 <div style="min-height: 1.5em;">
-                    <asp:RequiredFieldValidator ErrorMessage="¡La Marca es requerida!" ForeColor="Red" ControlToValidate="ddlMarca" runat="server" ValidationGroup="Producto" />
+                    <asp:RequiredFieldValidator ErrorMessage="¡La Marca es requerida!" ForeColor="Red" ControlToValidate="ddlMarca" runat="server" ValidationGroup="Producto" InitialValue=""/>
                 </div>
             </div>
             <div class="col-md-6">

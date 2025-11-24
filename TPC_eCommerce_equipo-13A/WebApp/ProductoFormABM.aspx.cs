@@ -32,16 +32,8 @@ namespace WebApp
             int idProducto = idStr != null ? int.Parse(idStr) : 0;
             if (!IsPostBack)
             {
-                //Siempre carga las ddl
-                ddlMarca.DataSource = marcaNegocio.listar();
-                ddlMarca.DataTextField = "Nombre";
-                ddlMarca.DataValueField = "Id";
-                ddlMarca.DataBind();
-
-                ddlCategoria.DataSource = categoriaNegocio.listar();
-                ddlCategoria.DataTextField = "Nombre";
-                ddlCategoria.DataValueField = "Id";
-                ddlCategoria.DataBind();
+                List<Marca> listaMarcas;
+                List<Categoria> listaCategorias;
 
                 //Si viene de un click al "editar", te traés el ID
                 if (!string.IsNullOrEmpty(idStr))
@@ -65,6 +57,30 @@ namespace WebApp
                     btnAgregar.Text = "💾 Guardar";
 
                     //Cargas en las ddl la marca y cat. correspondiente
+                    listaMarcas = marcaNegocio.listarMarcandoInactivas();
+                    ddlMarca.DataSource = listaMarcas;
+                    ddlMarca.DataTextField = "Nombre";
+                    ddlMarca.DataValueField = "Id";
+                    ddlMarca.DataBind();
+
+                    listaCategorias = categoriaNegocio.listarMarcandoInactivas();
+                    ddlCategoria.DataSource = listaCategorias;
+                    ddlCategoria.DataTextField = "Nombre";
+                    ddlCategoria.DataValueField = "Id";
+                    ddlCategoria.DataBind();
+
+                    foreach (ListItem item in ddlMarca.Items)
+                    {
+                        if (item.Text.Contains("INACTIVA"))
+                            item.Attributes.Add("style", "background-color: #ffcccc; color: #900;");
+                    }
+                    foreach (ListItem item in ddlCategoria.Items)
+                    {
+                        if (item.Text.Contains("INACTIVA"))
+                            item.Attributes.Add("style", "background-color: #ffcccc; color: #900;");
+                    }
+
+
                     ddlMarca.ClearSelection();
                     ddlMarca.Items.FindByValue(producto.Marca.Id.ToString()).Selected = true;
 
@@ -79,6 +95,36 @@ namespace WebApp
                         IdProducto = idProducto,
                         ImagenUrl = "https://www.svgrepo.com/show/508699/landscape-placeholder.svg"
                     });
+
+                    //EN NUEVO PRODUCTO, Cargar las ddl si hay al menos una marca o categoría activa.
+                    //Si no, mostrar en gris con el valor en "", y como es el default el validator lo rechaza.
+                    listaMarcas = marcaNegocio.listarActivas();
+                    if (listaMarcas.Count() == 0)
+                    {
+                        ddlMarca.Items.Add(new ListItem("Ninguna marca activa.", ""));
+                        ddlMarca.Enabled = false;
+                    }
+                    else
+                    {
+                        ddlMarca.DataSource = listaMarcas;
+                        ddlMarca.DataTextField = "Nombre";
+                        ddlMarca.DataValueField = "Id";
+                        ddlMarca.DataBind();
+                    }
+
+                    listaCategorias = categoriaNegocio.listarActivas();
+                    if (listaCategorias.Count() == 0)
+                    {
+                        ddlCategoria.Items.Add(new ListItem("Ninguna categoría activa.", ""));
+                        ddlCategoria.Enabled = false;
+                    }
+                    else
+                    {
+                        ddlCategoria.DataSource = listaCategorias;
+                        ddlCategoria.DataTextField = "Nombre";
+                        ddlCategoria.DataValueField = "Id";
+                        ddlCategoria.DataBind();
+                    }
                 }
                 Session.Add("sessionListaImagenes", listaImagenes);
             }

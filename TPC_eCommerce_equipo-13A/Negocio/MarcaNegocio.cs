@@ -40,6 +40,76 @@ namespace Negocio
             }
         }
 
+        public List<Marca> listarActivas()
+        {
+            List<Marca> listaMarca = new List<Marca>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("SELECT Id, Nombre, Activo FROM MARCAS WHERE Activo = 1");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Marca aux = new Marca();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Activo = bool.Parse(datos.Lector["Activo"].ToString());
+
+                    listaMarca.Add(aux);
+                }
+                return listaMarca;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public List<Marca> listarMarcandoInactivas()
+        {
+            List<Marca> listaMarca = new List<Marca>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(@"SELECT 
+                                        Id, 
+                                        CASE 
+                                            WHEN Activo = 1 THEN Nombre
+                                            ELSE 'INACTIVA - ' + Nombre
+                                        END AS Nombre, 
+                                        Activo 
+                                       FROM MARCAS
+                                       ORDER BY Activo DESC");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Marca aux = new Marca();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Activo = bool.Parse(datos.Lector["Activo"].ToString());
+
+                    listaMarca.Add(aux);
+                }
+                return listaMarca;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public void agregar(string nombre)
         {
             AccesoDatos datos = new AccesoDatos();
