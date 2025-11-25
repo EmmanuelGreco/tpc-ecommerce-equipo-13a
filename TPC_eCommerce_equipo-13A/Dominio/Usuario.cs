@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
+    public enum UserType
+    {
+        CLIENTE = 0,
+        EMPLEADO = 1,
+        ADMIN = 2
+    }
     public class Usuario
     {
         public int Id { get; set; }                               //PK
@@ -18,6 +24,7 @@ namespace Dominio
         public string CodigoPostal { get; set; }
         public string Email { get; set; }
         public string Contrasenia { get; set; }
+        public UserType TipoUsuario { get; set; }
         public DateTime FechaAlta { get; set; }
     }
 }

@@ -75,7 +75,9 @@
     <Content Include="Default.aspx" />
     <Content Include="EmpleadoFormABM.aspx" />
     <Content Include="EmpleadoGestion.aspx" />
+    <Content Include="Error.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Login.aspx" />
     <Content Include="MarcaGestion.aspx" />
     <Content Include="ProductoFormABM.aspx" />
     <Content Include="ProductoGestion.aspx" />
@@ -140,8 +142,22 @@
     <Compile Include="EmpleadoGestion.aspx.designer.cs">
       <DependentUpon>EmpleadoGestion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="MarcaGestion.aspx.cs">
       <DependentUpon>MarcaGestion.aspx</DependentUpon>

@@ -34,3 +34,48 @@ WHERE M.Id = P.IdMarca AND C.Id = P.IdCategoria*/
 SELECT * FROM EMPLEADOS
 SELECT * FROM USUARIOS
 SELECT * FROM CLIENTES
+
+
+/*SELECT C.Id,
+		U.Documento,
+		U.Nombre,
+		U.Apellido,
+		U.FechaNacimiento,
+		U.Telefono,
+		U.Direccion,
+		U.CodigoPostal,
+		U.Email,
+		U.Contrasenia,
+		U.FechaAlta,
+		C.Activo 
+FROM Clientes C INNER JOIN Usuarios U ON C.IdUsuario = U.Id*/
+
+/*SELECT E.Id,
+		E.Legajo,
+		E.FechaIngreso,
+		E.FechaDespido,
+		U.Documento,
+		U.Nombre,
+		U.Apellido,
+		U.FechaNacimiento,
+		U.Telefono,
+		U.Direccion,
+		U.CodigoPostal,
+		U.Email,
+		U.Contrasenia,
+		U.FechaAlta,
+		E.Activo 
+FROM Empleados E INNER JOIN Usuarios U ON E.IdUsuario = U.Id*/
+
+--SELECT IdUsuario FROM CLIENTES WHERE Id = 2
+
+/*UPDATE EMPLEADOS SET 
+	Activo = CASE 
+		WHEN Activo = 1 THEN 0 
+		ELSE 1 
+	END,
+	FechaDespido = CASE 
+		WHEN Activo = 1 THEN GETDATE()
+		ELSE NULL
+	END
+WHERE Id = @IdEmpleado*/

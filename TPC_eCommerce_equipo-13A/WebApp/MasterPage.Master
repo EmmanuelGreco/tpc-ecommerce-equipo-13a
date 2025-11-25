@@ -31,6 +31,7 @@
                         <a class="nav-link" href="/Productos.aspx">Productos</a>
                         <a class="nav-link" href="/SobreNosotros.aspx">Sobre Nosotros</a>
                         <a class="nav-link" href="/Contacto.aspx">Contacto</a>
+                        <a class="nav-link" href="/Login.aspx">Login</a>
                         <a class="nav-link" href="/Carrito.aspx">
                             🛒<%: ((List<Dominio.Producto>)(Session["listaCarrito"] ?? new List<Dominio.Producto>())).Sum(p => p.Stock) %>
                         </a>

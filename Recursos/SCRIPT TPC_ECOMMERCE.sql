@@ -1,8 +1,8 @@
--- USE master
--- GO
+USE master
+GO
 
--- ALTER DATABASE TPC_ECOMMERCE SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
--- DROP DATABASE TPC_ECOMMERCE;
+ALTER DATABASE TPC_ECOMMERCE SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+DROP DATABASE TPC_ECOMMERCE;
 
 CREATE DATABASE TPC_ECOMMERCE
 GO
@@ -96,6 +96,7 @@ CREATE TABLE [dbo].[USUARIOS](
 	[CodigoPostal] [varchar](20) NOT NULL,
 	[Email] [varchar](50) NOT NULL,
 	[Contrasenia] [varchar](20) NOT NULL,
+	[TipoUsuario] [tinyint] NOT NULL,
 	[FechaAlta] [datetime] NOT NULL DEFAULT GETDATE(),
  CONSTRAINT [PK_USUARIO] PRIMARY KEY CLUSTERED 
 (
@@ -103,6 +104,13 @@ CREATE TABLE [dbo].[USUARIOS](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+
+-- TipoUsuario
+/*
+CLIENTE = 0,
+EMPLEADO = 1,
+ADMIN = 2
+*/
 
 CREATE TABLE [dbo].[CLIENTES](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -150,16 +158,16 @@ ALTER TABLE [dbo].[EMPLEADOS] CHECK CONSTRAINT [FK_EMPLEADOS_USUARIOS]
 GO
 
 
-insert into MARCAS (Nombre) values ('Wilson'), ('Logitech'), ('Royal Kludge'), ('Lenovo'), ('Samsung'), ('Sony'), ('LG'), ('Dell'), ('Asus')
-insert into CATEGORIAS (Nombre) values ('Mochilas'),('Periféricos'), ('Accesorios'), ('Televisores'), ('Notebooks')
-insert into PRODUCTOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Origen, Precio, Stock) values
+INSERT INTO MARCAS (Nombre) VALUES ('Wilson'), ('Logitech'), ('Royal Kludge'), ('Lenovo'), ('Samsung'), ('Sony'), ('LG'), ('Dell'), ('Asus')
+INSERT INTO CATEGORIAS (Nombre) VALUES ('Mochilas'),('Periféricos'), ('Accesorios'), ('Televisores'), ('Notebooks')
+INSERT INTO PRODUCTOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Origen, Precio, Stock) VALUES
 ('M01', 'Mochila Porta Notebook', 'Esta mochila combina un diseño elegante y profesional con la robustez necesaria para enfrentar el ajetreo urbano y los viajes de negocios.', 1, 1, 'China', 49999, 15),
 ('P03', 'Mouse Gamer Hero G502', 'Sumérgete en el mundo de los videojuegos con el mouse gamer Logitech G Series Hero G502 en color negro', 2, 2, 'Corea', 64999, 2),
 ('P08', 'Teclado Mecánico 75% Rk M75', 'Este teclado cuenta con un diseño compacto con 81 teclas, por lo que es fácil de transportar y usar en cualquier lugar.', 2, 3, 'Japon', 185000, 10),
 ('65BRAVIA8II', 'Televisor 65" BRAVIA 8 OLED 4K', 'Televisor OLED 4K con tecnología QD-OLED', 6, 4, 'Japon', 6399000, 100),
 ('65X855', 'Televisor 65" Serie X855 4K', 'Este televisor cuenta con resolucion 4K y Triluminos Display', 6, 4, 'Japon', 2300000, 0)
 
-insert into imagenes values
+INSERT INTO imagenes VALUES
 (1, 'https://http2.mlstatic.com/D_NQ_NP_703368-MLU76300898146_052024-O.webp'),
 (1, 'https://http2.mlstatic.com/D_NQ_NP_842545-MLU76300482840_052024-O.webp'),
 (1, 'https://http2.mlstatic.com/D_NQ_NP_747302-MLU76300769244_052024-O.webp'),
@@ -178,66 +186,14 @@ insert into imagenes values
 (5, 'https://http2.mlstatic.com/D_NQ_NP_2X_755172-MEC92794030205_092025-T.webp')
 
 
-insert into Usuarios (Documento, Nombre, Apellido, FechaNacimiento, Telefono, Direccion, CodigoPostal, Email, Contrasenia, FechaAlta) 
-	values ('34902784', 'Carlos', 'Perez', '2001-10-11', 1149283928, 'Rivadavia 1138', 'C1398', 'carlitosp@gmail.com', 'aguantecarlitos123', '2025-11-11 14:39:22')
-insert into Usuarios (Documento, Nombre, Apellido, FechaNacimiento, Telefono, Direccion, CodigoPostal, Email, Contrasenia, FechaAlta)
-	values ('23919203', 'Jose', 'Gonzalez', '2011-08-07', 1139282950, 'Av. La Plata 132', 'C1402', 'JoseElG@gmail.com', 'gonzalezgod!$', '2025-10-09 08:12:37')
+INSERT INTO Usuarios (Documento, Nombre, Apellido, FechaNacimiento, Telefono, Direccion, CodigoPostal, Email, Contrasenia, TipoUsuario, FechaAlta) VALUES
+('44902784', 'Carlos', 'Perez', '2001-10-11', 1149283928, 'Av. Rivadavia 1138', 'C1398', 'carlitosp@gmail.com', 'carlitos123', 0, '2025-11-11 14:39:22'),
+('23919203', 'Jose', 'Gonzalez', '1980-08-07', 1139282950, 'Av. La Plata 132', 'C1402', 'JoseElG@gmail.com', 'josejose', 1, '2023-04-10 12:28:34'),
+('28965413', 'Roberto', 'Gomez', '1986-08-07', 1142357298, 'Centenera 2238', 'C1425', 'RobertoG@gmail.com', 'robertoboca', 2, '2025-03-08 15:43:51'),
+('34559843', 'Maria', 'Hernandez', '1990-08-07', 1154723582, 'Triunvirato 4253', 'C1408', 'MariaH@gmail.com', 'maria123', 1, '2024-12-12 10:12:40')
 
-insert into Clientes (IdUsuario) values (1)
+INSERT INTO Clientes (IdUsuario) SELECT Id FROM Usuarios WHERE TipoUsuario = 0;
 
-insert into Empleados (idUsuario, Legajo, FechaIngreso) values (1, 1001, '2024-05-02')
-insert into Empleados (idUsuario, Legajo, FechaIngreso, FechaDespido) values (2, 1002, '2024-10-10', '2025-12-12')
-insert into Empleados (idUsuario, Legajo, FechaIngreso) values (1, 1003, '2024-05-02')
-insert into Empleados (idUsuario, Legajo, FechaIngreso, FechaDespido) values (2, 1004, '2024-10-10', '2025-12-12')
---SELECT * FROM MARCAS
---SELECT * FROM CATEGORIAS
---SELECT * FROM PRODUCTOS
-SELECT * FROM USUARIOS
-SELECT * FROM CLIENTES
-SELECT * FROM EMPLEADOS
-
-SELECT C.Id,
-		U.Documento,
-		U.Nombre,
-		U.Apellido,
-		U.FechaNacimiento,
-		U.Telefono,
-		U.Direccion,
-		U.CodigoPostal,
-		U.Email,
-		U.Contrasenia,
-		U.FechaAlta,
-		C.Activo 
-FROM Clientes C INNER JOIN Usuarios U ON C.IdUsuario = U.Id
-
-SELECT E.Id,
-		E.Legajo,
-		E.FechaIngreso,
-		E.FechaDespido,
-		U.Documento,
-		U.Nombre,
-		U.Apellido,
-		U.FechaNacimiento,
-		U.Telefono,
-		U.Direccion,
-		U.CodigoPostal,
-		U.Email,
-		U.Contrasenia,
-		U.FechaAlta,
-		E.Activo 
-FROM Empleados E INNER JOIN Usuarios U ON E.IdUsuario = U.Id
-
-SELECT IdUsuario FROM CLIENTES WHERE Id = 2
-
-select * from USUARIOS
-
-UPDATE EMPLEADOS SET 
-	Activo = CASE 
-		WHEN Activo = 1 THEN 0 
-		ELSE 1 
-	END,
-	FechaDespido = CASE 
-		WHEN Activo = 1 THEN GETDATE()
-		ELSE NULL
-	END
-WHERE Id = @IdEmpleado
+INSERT INTO Empleados (idUsuario, Legajo, FechaIngreso) VALUES (2, 1002, '2024-10-10')
+INSERT INTO Empleados (idUsuario, Legajo, FechaIngreso) VALUES (3, 1003, '2024-05-02')
+INSERT INTO Empleados (idUsuario, Legajo, FechaIngreso, FechaDespido) VALUES (4, 1004, '2024-10-10', '2025-12-12')
