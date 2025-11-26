@@ -97,18 +97,44 @@ namespace WebApp
 
         protected void bindearRepeater(List<Producto> lista)
         {
-            if (lista?.Count == 0 || lista == null)
+            if (lista == null || lista.Count == 0)
             {
                 RepeaterCarrito.DataSource = null;
                 RepeaterCarrito.DataBind();
+
                 lblCarritoVacio.Visible = true;
+                lblTotal.Text = string.Empty;
+
+                btnCheckout.Visible = false;
+                lblErrorCarrito.Text = string.Empty;
             }
             else
             {
                 RepeaterCarrito.DataSource = lista;
                 RepeaterCarrito.DataBind();
+
                 lblCarritoVacio.Visible = false;
+
+                decimal total = lista.Sum(p => p.Precio * p.Stock);
+                lblTotal.Text = "Total: " + string.Format("{0:C}", total);
+
+                btnCheckout.Visible = true;
+                lblErrorCarrito.Text = string.Empty;
             }
+        }
+
+
+        protected void btnCheckout_Click(object sender, EventArgs e)
+        {
+            List<Producto> listaCarrito = Session["listaCarrito"] as List<Producto>;
+
+            if (listaCarrito == null || !listaCarrito.Any())
+            {
+                lblErrorCarrito.Text = "No hay productos en el carrito.";
+                return;
+            }
+
+            Response.Redirect("CompraCheckout.aspx", false);
         }
     }
 }

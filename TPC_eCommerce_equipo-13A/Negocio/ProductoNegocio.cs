@@ -223,5 +223,26 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        
+        public void actualizarStock(int idProducto, int nuevoStock)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("UPDATE PRODUCTOS SET Stock = @Stock WHERE Id = @IdProducto");
+                datos.setearParametro("@Stock", nuevoStock);
+                datos.setearParametro("@IdProducto", idProducto);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

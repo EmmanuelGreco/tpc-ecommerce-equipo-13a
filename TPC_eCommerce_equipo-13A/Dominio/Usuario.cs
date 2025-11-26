@@ -12,6 +12,7 @@ namespace Dominio
         EMPLEADO = 1,
         ADMIN = 2
     }
+
     public class Usuario
     {
         public int Id { get; set; }                               //PK

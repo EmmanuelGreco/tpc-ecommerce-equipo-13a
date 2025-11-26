@@ -28,15 +28,24 @@ namespace WebApp
 
                 if (usuarioNegocio.Loguear(usuario))
                 {
-                    Session.Add("usuario", usuario);
-                    Response.Redirect("Default.aspx", false);
+                    Session["usuario"] = usuario;
+
+                    string returnUrl = Request.QueryString["returnUrl"];
+
+                    if (!string.IsNullOrEmpty(returnUrl))
+                    {
+                        Response.Redirect(Server.UrlDecode(returnUrl), false);
+                    }
+                    else
+                    {
+                        Response.Redirect("Default.aspx", false);
+                    }
                 }
                 else
                 {
                     Session.Add("error", "¡Email o Contraseña incorrectos!");
                     Response.Redirect("Error.aspx", false);
                 }
-
             }
             catch (Exception ex)
             {

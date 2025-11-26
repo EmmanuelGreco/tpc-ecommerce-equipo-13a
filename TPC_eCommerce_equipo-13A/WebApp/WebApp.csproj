@@ -71,6 +71,8 @@
     <Content Include="CategoriaGestion.aspx" />
     <Content Include="ClienteFormABM.aspx" />
     <Content Include="ClienteGestion.aspx" />
+    <Content Include="CompraCheckout.aspx" />
+    <Content Include="CompraExitosa.aspx" />
     <Content Include="Contacto.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="EmpleadoFormABM.aspx" />
@@ -113,6 +115,20 @@
     </Compile>
     <Compile Include="ClienteGestion.aspx.designer.cs">
       <DependentUpon>ClienteGestion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CompraCheckout.aspx.cs">
+      <DependentUpon>CompraCheckout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CompraCheckout.aspx.designer.cs">
+      <DependentUpon>CompraCheckout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CompraExitosa.aspx.cs">
+      <DependentUpon>CompraExitosa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CompraExitosa.aspx.designer.cs">
+      <DependentUpon>CompraExitosa.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contacto.aspx.cs">
       <DependentUpon>Contacto.aspx</DependentUpon>
