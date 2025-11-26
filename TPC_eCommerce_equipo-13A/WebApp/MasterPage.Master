@@ -10,6 +10,11 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <style>
+        .btn-fixed {
+            width: 120px;
+        }
+    </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
     <form id="form1" runat="server" class="d-flex flex-column flex-grow-1">
@@ -31,20 +36,42 @@
                         <a class="nav-link" href="/Productos.aspx">Productos</a>
                         <a class="nav-link" href="/SobreNosotros.aspx">Sobre Nosotros</a>
                         <a class="nav-link" href="/Contacto.aspx">Contacto</a>
-                        <a class="nav-link" href="/Login.aspx">Login</a>
+
                         <a class="nav-link" href="/Carrito.aspx">
                             🛒<%: ((List<Dominio.Producto>)(Session["listaCarrito"] ?? new List<Dominio.Producto>())).Sum(p => p.Stock) %>
                         </a>
+
                         <%--<a class="nav-link disabled" aria-disabled="true">Disabled</a>--%>
                     </div>
 
-                    <div class="navbar-nav ms-auto">
+                    <div class="navbar-nav mx-auto">
+                        <% if (Session["usuario"] != null && ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.UserType.ADMIN) { %>
+                        <a class="nav-link" href="/EmpleadoGestion.aspx">Gestión de Empleados</a> <% } %>
+                        <% if (Session["usuario"] != null && (((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.UserType.EMPLEADO ||
+                                                              ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.UserType.ADMIN)) { %>
                         <a class="nav-link" href="/ClienteGestion.aspx">Gestión de Clientes</a>
-                        <a class="nav-link" href="/EmpleadoGestion.aspx">Gestión de Empleados</a>
                         <a class="nav-link" href="/ProductoGestion.aspx">Gestión de Productos</a>
                         <a class="nav-link" href="/MarcaGestion.aspx">Gestión de Marcas</a>
-                        <a class="nav-link" href="/CategoriaGestion.aspx">Gestión de Categorías</a>
+                        <a class="nav-link" href="/CategoriaGestion.aspx">Gestión de Categorías</a> <% } %>
                     </div>
+
+                    <div class="navbar-nav ms-auto">
+                        <asp:PlaceHolder ID="phLogin" runat="server">
+                            <a class="btn btn-success ms-2 btn-fixed" href="/Login.aspx">Login</a>
+                        </asp:PlaceHolder>
+
+                        <asp:PlaceHolder ID="phRegistrar" runat="server">
+                            <a class="btn btn-outline-primary ms-2" href="/ClienteFormABM.aspx">Registrarse</a>
+                        </asp:PlaceHolder>
+
+                        <asp:PlaceHolder ID="phLogout" runat="server" Visible="false">
+                            <asp:Button ID="btnLogout" runat="server" 
+                                        Text="Cerrar Sesión" CssClass="btn btn-danger ms-2 btn-fixed"
+                                        OnClick="btnLogout_Click"
+                                        CausesValidation="false" />
+                        </asp:PlaceHolder>
+                    </div>
+
                 </div>
             </div>
         </nav>

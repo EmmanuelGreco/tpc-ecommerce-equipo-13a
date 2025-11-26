@@ -11,7 +11,21 @@ namespace WebApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                bool logueado = Session["usuario"] != null;
 
+                phLogin.Visible = !logueado;
+                phRegistrar.Visible = !logueado;
+                phLogout.Visible = logueado;
+            }
+        }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Session.Abandon();
+            Response.Redirect("/");
         }
     }
 }

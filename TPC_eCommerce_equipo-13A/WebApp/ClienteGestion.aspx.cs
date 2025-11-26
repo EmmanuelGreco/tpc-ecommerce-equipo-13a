@@ -13,6 +13,13 @@ namespace WebApp
         ClienteNegocio clienteNegocio = new ClienteNegocio();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!(Session["usuario"] != null && (((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.UserType.EMPLEADO ||
+                                                 ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.UserType.ADMIN)))
+            {
+                Session.Add("error", "No tienes permisos para ingreasar a esta pantalla. ¡Necesitas ser EMPLEADO!");
+                Response.Redirect("Error.aspx", false);
+            }
+
             if (!IsPostBack)
                 listarClientes();
         }

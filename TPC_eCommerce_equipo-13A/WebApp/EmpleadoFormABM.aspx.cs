@@ -15,6 +15,12 @@ namespace WebApp
         public Empleado empleado = new Empleado();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!(Session["usuario"] != null && ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.UserType.ADMIN))
+            {
+                Session.Add("error", "No tienes permisos para ingreasar a esta pantalla. ¡Necesitas ser ADMINISTRADOR!");
+                Response.Redirect("Error.aspx", false);
+            }
+
             string idStr = Request.QueryString["id"];
             int idEmpleado = idStr != null ? int.Parse(idStr) : 0;
             if (!IsPostBack)

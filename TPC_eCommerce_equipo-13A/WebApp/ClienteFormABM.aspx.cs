@@ -17,6 +17,13 @@ namespace WebApp
         public Cliente cliente = new Cliente();
         protected void Page_Load(object sender, EventArgs e)
         {
+            /*if (!(Session["usuario"] != null && (((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.UserType.EMPLEADO ||
+                                                 ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.UserType.ADMIN)))
+            {
+                Session.Add("error", "No tienes permisos para ingreasar a esta pantalla. ¡Necesitas ser EMPLEADO!");
+                Response.Redirect("Error.aspx", false);
+            }*/
+
             string idStr = Request.QueryString["id"];
             int idCliente = idStr != null ? int.Parse(idStr) : 0;
             if (!IsPostBack)

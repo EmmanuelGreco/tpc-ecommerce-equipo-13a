@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <h1 runat="server" id="Titulo" style="margin-bottom: 40px;">Agregar cliente</h1>
+    <h1 runat="server" id="Titulo" style="margin-bottom: 40px;">Alta de cliente</h1>
     <div class="container  w-100">
         <div class="row">
             <div class="col-md-3">
@@ -103,6 +103,8 @@
         </div>--%>
 
         <asp:Button ID="btnAgregar" runat="server" Text="➕ Agregar" CssClass="btn btn-primary mt-2" OnClick="btnAgregar_Click" />
-        <a id="btnCancelar" class="btn btn-primary mt-2" href="/ClienteGestion.aspx">❌ Cancelar</a>
+        <% if (Session["usuario"] != null && (((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.UserType.EMPLEADO ||
+                                      ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.UserType.ADMIN)) { %>
+        <a id="btnCancelar" class="btn btn-primary mt-2" href="/ClienteGestion.aspx">❌ Cancelar</a> <% } %>
     </div>
 </asp:Content>

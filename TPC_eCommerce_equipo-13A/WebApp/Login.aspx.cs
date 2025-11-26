@@ -33,7 +33,7 @@ namespace WebApp
                 }
                 else
                 {
-                    Session.Add("error", "Email o Contraseña incorrectos!");
+                    Session.Add("error", "¡Email o Contraseña incorrectos!");
                     Response.Redirect("Error.aspx", false);
                 }
 

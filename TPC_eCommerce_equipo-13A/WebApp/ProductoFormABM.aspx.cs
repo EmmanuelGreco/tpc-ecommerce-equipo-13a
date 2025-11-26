@@ -25,6 +25,13 @@ namespace WebApp
         public Producto producto = new Producto();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!(Session["usuario"] != null && (((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.UserType.EMPLEADO ||
+                                                 ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.UserType.ADMIN)))
+            {
+                Session.Add("error", "No tienes permisos para ingreasar a esta pantalla. Necesitas ser ¡EMPLEADO!");
+                Response.Redirect("Error.aspx", false);
+            }
+
             MarcaNegocio marcaNegocio = new MarcaNegocio();
             CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
 
