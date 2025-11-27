@@ -64,6 +64,13 @@
                             <a class="btn btn-outline-primary ms-2" href="/ClienteFormABM.aspx">Registrarse</a>
                         </asp:PlaceHolder>
 
+                        <asp:PlaceHolder ID="phPedidosHistorial" runat="server" Visible="false">
+                            <asp:Button ID="btnPedidosHistorial" runat="server" 
+                                        Text="Pedidos" CssClass="btn btn-outline-primary ms-2"
+                                        OnClick="btnPedidosHistorial_Click"
+                                        CausesValidation="false" />
+                        </asp:PlaceHolder>
+
                         <asp:PlaceHolder ID="phLogout" runat="server" Visible="false">
                             <asp:Button ID="btnLogout" runat="server" 
                                         Text="Cerrar Sesión" CssClass="btn btn-danger ms-2 btn-fixed"

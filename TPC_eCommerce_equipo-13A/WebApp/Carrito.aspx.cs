@@ -25,7 +25,6 @@ namespace WebApp
                 {
                     listaCarrito = (List<Producto>)Session["listaCarrito"];
 
-
                     bindearRepeater(listaCarrito);
                 }
             }

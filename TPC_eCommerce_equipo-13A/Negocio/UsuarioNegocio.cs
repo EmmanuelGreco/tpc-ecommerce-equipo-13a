@@ -15,7 +15,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("Select Id, TipoUsuario FROM USUARIOS WHERE Email = @email AND Contrasenia = @contrasenia");
+                datos.setearConsulta("SELECT Id, TipoUsuario FROM USUARIOS WHERE Email = @email AND Contrasenia = @contrasenia");
                 datos.setearParametro("@email", usuario.Email);
                 datos.setearParametro("@contrasenia", usuario.Contrasenia);
                 datos.ejecutarLectura();

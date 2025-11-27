@@ -11,88 +11,79 @@ namespace WebApp
 {
 
 
-    public partial class MasterPage
+    public partial class PedidoDetalle
     {
 
         /// <summary>
-        /// Control head.
+        /// Control lblPedido.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.WebControls.Label lblPedido;
 
         /// <summary>
-        /// Control form1.
+        /// Control lblFecha.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.Label lblFecha;
 
         /// <summary>
-        /// Control phLogin.
+        /// Control lblUsuario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phLogin;
+        protected global::System.Web.UI.WebControls.Label lblUsuario;
 
         /// <summary>
-        /// Control phRegistrar.
+        /// Control lblMetodoPago.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phRegistrar;
+        protected global::System.Web.UI.WebControls.Label lblMetodoPago;
 
         /// <summary>
-        /// Control phPedidosHistorial.
+        /// Control lblMetodoEnvio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phPedidosHistorial;
+        protected global::System.Web.UI.WebControls.Label lblMetodoEnvio;
 
         /// <summary>
-        /// Control btnPedidosHistorial.
+        /// Control gvProductos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPedidosHistorial;
+        protected global::System.Web.UI.WebControls.GridView gvProductos;
 
         /// <summary>
-        /// Control phLogout.
+        /// Control lblTotal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phLogout;
+        protected global::System.Web.UI.WebControls.Label lblTotal;
 
         /// <summary>
-        /// Control btnLogout.
+        /// Control lblError.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLogout;
-
-        /// <summary>
-        /// Control ContentPlaceHolder1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
+        protected global::System.Web.UI.WebControls.Label lblError;
     }
 }

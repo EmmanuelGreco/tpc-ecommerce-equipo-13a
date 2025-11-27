@@ -78,10 +78,9 @@ namespace Negocio
         {
             AccesoDatos datos = new AccesoDatos();
             int idInsertado = 0;
+
             try
             {
-
-
                 datos.setearConsulta(@"INSERT INTO PRODUCTOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Origen, Stock, Precio ) 
                                        VALUES (@Codigo, @Nombre, @Descripcion, @IdMarca, @IdCategoria, @Origen, @Stock, @Precio);
                                        SELECT CAST(SCOPE_IDENTITY() AS INT) AS 'IdInsertado';");
@@ -117,8 +116,6 @@ namespace Negocio
 
             try
             {
-
-
                 datos.setearConsulta(@"UPDATE PRODUCTOS SET Codigo = @Codigo, 
                                                             Nombre = @Nombre, 
                                                             Descripcion = @Descripcion, 

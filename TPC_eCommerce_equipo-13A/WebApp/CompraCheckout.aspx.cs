@@ -114,7 +114,7 @@ namespace WebApp
                     ListaProductos = listaCarrito,
 
                     MetodoPago = (PaymentMethod)int.Parse(ddlMetodoPago.SelectedValue),
-                    MetodoEnvio = (ShippingMethod)int.Parse(ddlMetodoPago.SelectedValue),
+                    MetodoEnvio = (ShippingMethod)int.Parse(ddlMetodoEnvio.SelectedValue),
                     FechaHoraVenta = DateTime.Now,
                     // Fecha de entrega: +3 días
                     FechaHoraEntrega = DateTime.Now.AddDays(3),
@@ -124,8 +124,9 @@ namespace WebApp
 
                 VentaNegocio ventaNegocio = new VentaNegocio();
                 int idVenta = ventaNegocio.agregar(venta);
-
                 venta.Id = idVenta;
+
+                ventaNegocio.agregarProductosDeVenta(idVenta, listaCarrito);
 
                 foreach (var prodCarrito in listaCarrito)
                 {

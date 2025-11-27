@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace Dominio
 {
     public enum PaymentMethod
     {
         Efectivo = 1,
+        [Display(Name = "Tarjeta de crédito")]
         TarjetaCredito = 2,
+        [Display(Name = "Tarjeta de débito")]
         TarjetaDebito = 3,
+        [Display(Name = "Transferencia bancaria")]
         Transferencia = 4,
         MercadoPago = 5
     }
@@ -18,6 +22,7 @@ namespace Dominio
     public enum ShippingMethod
     {
         Retiro = 1,
+        [Display(Name = "Envío")]
         Envio = 2
     }
 

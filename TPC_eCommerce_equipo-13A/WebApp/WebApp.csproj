@@ -81,6 +81,8 @@
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
     <Content Include="MarcaGestion.aspx" />
+    <Content Include="PedidoDetalle.aspx" />
+    <Content Include="PedidosHistorial.aspx" />
     <Content Include="ProductoFormABM.aspx" />
     <Content Include="ProductoGestion.aspx" />
     <Content Include="Productos.aspx" />
@@ -188,6 +190,20 @@
     </Compile>
     <Compile Include="MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="PedidoDetalle.aspx.cs">
+      <DependentUpon>PedidoDetalle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PedidoDetalle.aspx.designer.cs">
+      <DependentUpon>PedidoDetalle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PedidosHistorial.aspx.cs">
+      <DependentUpon>PedidosHistorial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PedidosHistorial.aspx.designer.cs">
+      <DependentUpon>PedidosHistorial.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProductoFormABM.aspx.cs">
       <DependentUpon>ProductoFormABM.aspx</DependentUpon>

@@ -17,6 +17,7 @@ namespace WebApp
 
                 phLogin.Visible = !logueado;
                 phRegistrar.Visible = !logueado;
+                phPedidosHistorial.Visible = logueado;
                 phLogout.Visible = logueado;
             }
         }
@@ -26,6 +27,12 @@ namespace WebApp
             Session.Clear();
             Session.Abandon();
             Response.Redirect("/");
+        }
+
+
+        protected void btnPedidosHistorial_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("PedidosHistorial.aspx", false);
         }
     }
 }
