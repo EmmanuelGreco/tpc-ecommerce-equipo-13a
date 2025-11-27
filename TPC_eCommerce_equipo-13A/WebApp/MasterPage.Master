@@ -44,16 +44,17 @@
                     </div>
 
                     <div class="navbar-nav mx-auto">
+                        <% if (Session["usuario"] != null && (((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.UserType.EMPLEADO ||
+                                                              ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.UserType.ADMIN))
+                            { %>
+                        <a class="nav-link" href="/ProductoGestion.aspx">Gestión de Productos</a>
+                        <a class="nav-link" href="/MarcaGestion.aspx">Gestión de Marcas</a>
+                        <a class="nav-link" href="/CategoriaGestion.aspx">Gestión de Categorías</a>
+                        <a class="nav-link" href="/ClienteGestion.aspx">Gestión de Clientes</a> <% } %>
+
                         <% if (Session["usuario"] != null && ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.UserType.ADMIN)
                             { %>
                         <a class="nav-link" href="/EmpleadoGestion.aspx">Gestión de Empleados</a> <% } %>
-                        <% if (Session["usuario"] != null && (((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.UserType.EMPLEADO ||
-                                                                    ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.UserType.ADMIN))
-                            { %>
-                        <a class="nav-link" href="/ClienteGestion.aspx">Gestión de Clientes</a>
-                        <a class="nav-link" href="/ProductoGestion.aspx">Gestión de Productos</a>
-                        <a class="nav-link" href="/MarcaGestion.aspx">Gestión de Marcas</a>
-                        <a class="nav-link" href="/CategoriaGestion.aspx">Gestión de Categorías</a> <% } %>
                     </div>
 
                     <div class="navbar-nav ms-auto">

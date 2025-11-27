@@ -1,4 +1,5 @@
-﻿using Negocio;
+﻿using Dominio;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -28,7 +29,11 @@ namespace WebApp
 
         private void listarMarcas()
         {
-            dgvMarcas.DataSource = marcaNegocio.listar();
+            List<Marca> lista = marcaNegocio.listar();
+
+            Session["listaMarca"] = lista;
+
+            dgvMarcas.DataSource = lista;
             dgvMarcas.DataBind();
         }
 
@@ -179,6 +184,31 @@ namespace WebApp
                 errorMarcaCustom.ForeColor = Color.Red;
                 errorMarcaCustom.ErrorMessage = "❌ Ocurrió un error al agregar la marca. Intenta nuevamente.";
             }
+        }
+
+        protected void filtro_TextChanged(object sender, EventArgs e)
+        {
+            if (Session["listaMarca"] == null)
+                return;
+
+            List<Marca> lista = (List<Marca>)Session["listaMarca"];
+
+            string filtro = txtFiltro.Text.Trim().ToUpper();
+
+            if (filtro == "")
+            {
+                dgvMarcas.DataSource = lista;
+            }
+            else
+            {
+                List<Marca> listaFiltrada = lista.FindAll(x =>
+                    x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper())
+                );
+
+                dgvMarcas.DataSource = listaFiltrada;
+            }
+
+            dgvMarcas.DataBind();
         }
     }
 }

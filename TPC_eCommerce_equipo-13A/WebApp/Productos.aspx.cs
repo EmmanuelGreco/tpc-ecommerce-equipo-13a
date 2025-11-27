@@ -21,6 +21,7 @@ namespace WebApp
                 if (!IsPostBack)
                 {
                     listaProducto = productoNegocio.listar(1);
+                    Session["listaProducto"] = listaProducto;
 
                     foreach (Producto art in listaProducto)
                     {
@@ -114,6 +115,29 @@ namespace WebApp
                     agregar.CssClass = "btn btn-danger w-100";
                 }
             }
+        }
+
+        protected void filtro_TextChanged(object sender, EventArgs e)
+        {
+            if (Session["listaProducto"] == null)
+                return;
+
+            List<Producto> lista = (List<Producto>)Session["listaProducto"];
+
+            if (string.IsNullOrWhiteSpace(txtFiltro.Text))
+            {
+                RepeaterProductos.DataSource = lista;
+                RepeaterProductos.DataBind();
+                return;
+            }
+
+            List<Producto> listaFiltrada = lista.FindAll(x => 
+                x.Codigo.ToUpper().Contains(txtFiltro.Text.ToUpper()) ||
+                x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper())
+            );
+
+            RepeaterProductos.DataSource = listaFiltrada;
+            RepeaterProductos.DataBind();
         }
     }
 }

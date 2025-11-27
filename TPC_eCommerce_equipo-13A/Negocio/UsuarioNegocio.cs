@@ -70,7 +70,7 @@ namespace Negocio
                     usuarioLogueado.Email = datos.Lector["Email"].ToString();
                     usuarioLogueado.Contrasenia = datos.Lector["Contrasenia"].ToString();
                     int tipo = Convert.ToInt32(datos.Lector["TipoUsuario"]);
-                    usuario.TipoUsuario =
+                    usuarioLogueado.TipoUsuario =
                         tipo == 0 ? UserType.CLIENTE :
                         tipo == 1 ? UserType.EMPLEADO :
                         UserType.ADMIN;

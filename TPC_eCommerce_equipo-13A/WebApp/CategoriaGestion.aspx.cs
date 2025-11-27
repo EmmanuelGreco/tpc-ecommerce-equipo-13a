@@ -1,4 +1,5 @@
-﻿using Negocio;
+﻿using Dominio;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -28,7 +29,11 @@ namespace WebApp
 
         private void listarCategorias()
         {
-            dgvCategorias.DataSource = categoriaNegocio.listar();
+            List<Categoria> lista = categoriaNegocio.listar();
+
+            Session["listaCategoria"] = lista;
+
+            dgvCategorias.DataSource = lista;
             dgvCategorias.DataBind();
         }
 
@@ -179,6 +184,31 @@ namespace WebApp
                 errorCategoriaCustom.ForeColor = Color.Red;
                 errorCategoriaCustom.ErrorMessage = "❌ Ocurrió un error al agregar la categoría. Intenta nuevamente.";
             }
+        }
+
+        protected void filtro_TextChanged(object sender, EventArgs e)
+        {
+            if (Session["listaCategoria"] == null)
+                return;
+
+            List<Categoria> lista = (List<Categoria>)Session["listaCategoria"];
+
+            string filtro = txtFiltro.Text.Trim().ToUpper();
+
+            if (filtro == "")
+            {
+                dgvCategorias.DataSource = lista;
+            }
+            else
+            {
+                List<Categoria> listaFiltrada = lista.FindAll(x =>
+                    x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper())
+                );
+
+                dgvCategorias.DataSource = listaFiltrada;
+            }
+
+            dgvCategorias.DataBind();
         }
     }
 }

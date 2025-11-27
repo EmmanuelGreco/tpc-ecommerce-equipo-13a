@@ -1,9 +1,17 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="ProductoGestion.aspx.cs" Inherits="WebApp.ProductoGestion" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1 style="margin-bottom: 40px;">📝 Gestión de productos</h1>
+
+    <div class="row">
+        <div class="col-4">
+            <div class="mb-5">
+                <asp:Label Text="Buscar producto por código o nombre:" runat="server" />
+                <asp:TextBox runat="server" ID="txtFiltro" CssClass="form-control" AutoPostBack="true" OnTextChanged="filtro_TextChanged" />
+            </div>
+        </div>
+    </div>
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:UpdatePanel ID="updProductos" runat="server">
@@ -15,6 +23,9 @@
                     OnRowCommand="dgvProductos_RowCommand"
                     OnRowDataBound="dgvProductos_RowDataBound">
                     <Columns>
+
+                        <asp:BoundField HeaderText="Código" DataField="Codigo" />
+
                         <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
 
                         <asp:CheckBoxField HeaderText="Activo" DataField="Activo" />

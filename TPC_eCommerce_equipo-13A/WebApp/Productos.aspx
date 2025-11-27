@@ -5,6 +5,15 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1 style="margin-bottom: 40px;">Productos</h1>
 
+    <div class="row">
+        <div class="col-4">
+            <div class="mb-5">
+                <asp:Label Text="Buscar producto por código o nombre:" runat="server" />
+                <asp:TextBox runat="server" ID="txtFiltro" CssClass="form-control" AutoPostBack="true" OnTextChanged="filtro_TextChanged" />
+            </div>
+        </div>
+    </div>
+
     <div class="row row-cols-1 row-cols-md-3 g-5">
         <asp:Repeater ID="RepeaterProductos" runat="server" OnItemDataBound="RepeaterProductos_ItemDataBound">
             <ItemTemplate>

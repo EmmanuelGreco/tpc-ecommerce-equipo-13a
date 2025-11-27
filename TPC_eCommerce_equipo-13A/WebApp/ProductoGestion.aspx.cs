@@ -30,7 +30,11 @@ namespace WebApp
 
         private void listarProductos()
         {
-            dgvProductos.DataSource = productoNegocio.listar();
+            List<Producto> lista = productoNegocio.listar();
+
+            Session["listaProducto"] = lista;
+
+            dgvProductos.DataSource = lista;
             dgvProductos.DataBind();
         }
 
@@ -117,5 +121,31 @@ namespace WebApp
         //    dgvProductos.EditIndex = -1;
         //    listarProductos();
         //}
+
+        protected void filtro_TextChanged(object sender, EventArgs e)
+        {
+            if (Session["listaProducto"] == null)
+                return;
+
+            List<Producto> lista = (List<Producto>)Session["listaProducto"];
+
+            string filtro = txtFiltro.Text.Trim().ToUpper();
+
+            if (filtro == "")
+            {
+                dgvProductos.DataSource = lista;
+            }
+            else
+            {
+                List<Producto> listaFiltrada = lista.FindAll(x =>
+                    x.Codigo.ToUpper().Contains(txtFiltro.Text.ToUpper()) ||
+                    x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper())
+                );
+
+                dgvProductos.DataSource = listaFiltrada;
+            }
+
+            dgvProductos.DataBind();
+        }
     }
 }

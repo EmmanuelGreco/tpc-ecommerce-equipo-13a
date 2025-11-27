@@ -161,9 +161,9 @@ namespace WebApp
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex.ToString());
-                Response.Redirect("Error.aspx");
-                //lblErrorCompra.Text = "Ocurrió un error al registrar la compra. Intente nuevamente.";
+                //Session.Add("error", ex.ToString());
+                //Response.Redirect("Error.aspx");
+                lblErrorCompra.Text = "Ocurrió un error al registrar la compra. Intente nuevamente.";
             }
         }
         protected string armarBodyEmail(Venta venta)

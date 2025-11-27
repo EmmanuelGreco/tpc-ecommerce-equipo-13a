@@ -1,4 +1,5 @@
-﻿using Negocio;
+﻿using Dominio;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,11 @@ namespace WebApp
 
         private void listarClientes()
         {
-            dgvClientes.DataSource = clienteNegocio.listar();
+            List<Cliente> lista = clienteNegocio.listar();
+
+            Session["listaCliente"] = lista;
+
+            dgvClientes.DataSource = lista;
             dgvClientes.DataBind();
         }
 
@@ -60,6 +65,39 @@ namespace WebApp
             {
                 Session.Add("error", ex);
             }
+        }
+
+        protected void filtro_TextChanged(object sender, EventArgs e)
+        {
+            if (Session["listaCliente"] == null)
+                return;
+
+            List<Cliente> lista = (List<Cliente>)Session["listaCliente"];
+
+            string filtro = txtFiltro.Text.Trim().ToUpper();
+
+            if (filtro == "")
+            {
+                dgvClientes.DataSource = lista;
+            }
+            else
+            {
+                List<Cliente> listaFiltrada = lista.FindAll(x =>
+                    (
+                        x.Usuario != null &&
+                        (
+                            (x.Usuario.Nombre != null && x.Usuario.Nombre.ToUpper().Contains(filtro)) ||
+                            (x.Usuario.Apellido != null && x.Usuario.Apellido.ToUpper().Contains(filtro)) ||
+                            (x.Usuario.Email != null && x.Usuario.Email.ToUpper().Contains(filtro)) ||
+                            (x.Usuario.Documento != null && x.Usuario.Documento.ToUpper().Contains(filtro))
+                        )
+                    )
+                );
+
+                dgvClientes.DataSource = listaFiltrada;
+            }
+
+            dgvClientes.DataBind();
         }
     }
 }
