@@ -44,7 +44,9 @@
     <Compile Include="AccesoDatos.cs" />
     <Compile Include="CategoriaNegocio.cs" />
     <Compile Include="ClienteNegocio.cs" />
+    <Compile Include="EmailService.cs" />
     <Compile Include="EmpleadoNegocio.cs" />
+    <Compile Include="FuncionesAdicionales.cs" />
     <Compile Include="ProductoImagenNegocio.cs" />
     <Compile Include="MarcaNegocio.cs" />
     <Compile Include="ProductoNegocio.cs" />

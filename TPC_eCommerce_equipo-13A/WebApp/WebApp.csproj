@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CambiarContrasenia.aspx" />
     <Content Include="Carrito.aspx" />
     <Content Include="CategoriaGestion.aspx" />
     <Content Include="ClienteFormABM.aspx" />
@@ -90,6 +91,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CambiarContrasenia.aspx.cs">
+      <DependentUpon>CambiarContrasenia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CambiarContrasenia.aspx.designer.cs">
+      <DependentUpon>CambiarContrasenia.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Carrito.aspx.cs">
       <DependentUpon>Carrito.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -28,17 +28,25 @@ namespace WebApp
 
                 if (usuarioNegocio.Loguear(usuario))
                 {
-                    Session["usuario"] = usuario;
+                    Usuario usuarioLogueado = usuarioNegocio.ObtenerDatos(usuario);
 
-                    string returnUrl = Request.QueryString["returnUrl"];
-
-                    if (!string.IsNullOrEmpty(returnUrl))
+                    FuncionesAdicionales fa = new FuncionesAdicionales();
+                    if (usuario.Contrasenia == fa.generarContrasenia(usuarioLogueado.Nombre, usuarioLogueado.Documento))
                     {
-                        Response.Redirect(Server.UrlDecode(returnUrl), false);
+                        Session["usuarioAEditar"] = usuarioLogueado;
+                        Response.Redirect("CambiarContrasenia.aspx", false);
                     }
                     else
                     {
-                        Response.Redirect("Default.aspx", false);
+                        Session["usuario"] = usuarioLogueado;
+
+                        string returnUrl = Request.QueryString["returnUrl"];
+
+                        if (!string.IsNullOrEmpty(returnUrl))
+
+                            Response.Redirect(Server.UrlDecode(returnUrl), false);
+                        else
+                            Response.Redirect("Default.aspx", false);
                     }
                 }
                 else

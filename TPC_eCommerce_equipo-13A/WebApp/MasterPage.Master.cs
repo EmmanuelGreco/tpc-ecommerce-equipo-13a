@@ -18,6 +18,7 @@ namespace WebApp
                 phLogin.Visible = !logueado;
                 phRegistrar.Visible = !logueado;
                 phPedidosHistorial.Visible = logueado;
+                phCambiarContrasenia.Visible = logueado;
                 phLogout.Visible = logueado;
             }
         }

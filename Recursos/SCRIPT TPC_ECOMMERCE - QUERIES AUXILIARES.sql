@@ -82,3 +82,9 @@ SELECT * FROM CLIENTES
 
 SELECT * FROM VENTAS
 SELECT * FROM VENTAS_PRODUCTOS
+
+SELECT Email FROM Usuarios WHERE Email = 'ptaquino2003@gmail.com'
+SELECT Email FROM Usuarios WHERE Email = 'ptaquino2003@gmail.coasdsam'
+
+delete from clientes where idusuario > 5
+delete from usuarios where id > 5

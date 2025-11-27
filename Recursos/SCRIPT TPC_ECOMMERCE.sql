@@ -97,7 +97,7 @@ CREATE TABLE [dbo].[USUARIOS](
 	[CodigoPostal] [varchar](20) NOT NULL,
 	[Email] [varchar](50) NOT NULL,
 	[Contrasenia] [varchar](20) NOT NULL,
-	[TipoUsuario] [tinyint] NOT NULL,
+	[TipoUsuario] [tinyint] NOT NULL DEFAULT 0,
 	[FechaAlta] [datetime] NOT NULL DEFAULT GETDATE(),
  CONSTRAINT [PK_USUARIO] PRIMARY KEY CLUSTERED 
 (

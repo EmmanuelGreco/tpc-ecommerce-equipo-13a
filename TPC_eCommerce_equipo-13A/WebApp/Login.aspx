@@ -13,8 +13,8 @@
                 <label class="form-label">Password</label>
                 <asp:TextBox runat="server" cssclass="form-control" ID="txtPassword" TextMode="Password"/>
             </div>
-            <asp:Button Text="Ingresar" cssclass="btn btn-primary" ID="btnLogin" OnClick="btnLogin_Click" runat="server" />
-            <a href="/">Cancelar</a>
+            <asp:Button Text="Ingresar" cssclass="btn btn-success mt-2" ID="btnLogin" OnClick="btnLogin_Click" runat="server" />
+            <a href="Productos.aspx" class="btn btn-danger mt-2">Cancelar</a>
         </div>
     </div>
 </asp:Content>
