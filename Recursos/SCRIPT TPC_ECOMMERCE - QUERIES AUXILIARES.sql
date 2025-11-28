@@ -86,16 +86,17 @@ SELECT * FROM VENTAS_PRODUCTOS
 delete from clientes where idusuario > 5
 delete from usuarios where id > 5
 
-DECLARE @email varchar(100) = 'robertog@gmail.com'
-DECLARE @contrasenia varchar(100) = 'robertoboca'
+DECLARE @email varchar(100) = 'ptaquino2003@gmail.com'
+DECLARE @contrasenia varchar(100) = 'Pedrotaq1!'
 
 
-SELECT ISNULL(e.Activo, 0) AS 'Empleado',  ISNULL(c.Activo, 0) AS 'Cliente' FROM Usuarios u
+SELECT e.Activo AS 'Empleado', c.Activo AS 'Cliente' FROM Usuarios u
 	                                        LEFT JOIN Clientes c ON u.Id = c.IdUsuario
 	                                        LEFT JOIN Empleados e ON u.Id = e.IdUsuario
-                                        WHERE u.Email = @email AND u.Contrasenia = @contrasenia AND (
-                                            (u.TipoUsuario = 0 AND c.Activo = 1) OR (u.TipoUsuario IN (1,2) AND e.Activo = 1)
-                                        );
+                                        WHERE u.Email = @email AND u.Contrasenia = @contrasenia 
+										-- AND (
+                                        --     (u.TipoUsuario = 0 AND c.Activo = 1) OR (u.TipoUsuario IN (1,2) AND e.Activo = 1)
+                                        -- );
 
 
 SELECT Id, TipoUsuario

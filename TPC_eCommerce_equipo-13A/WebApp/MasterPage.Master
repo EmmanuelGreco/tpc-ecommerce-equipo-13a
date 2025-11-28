@@ -25,7 +25,7 @@
                 <div class="navbar">
                     <a class="navbar-brand" href="/">
                         <img src="https://cdn-icons-png.flaticon.com/512/12610/12610553.png" style="height: 50px;" />
-                        MiTienda
+                        EP TecnoShop
                     </a>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
