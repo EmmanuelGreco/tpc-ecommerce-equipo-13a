@@ -18,7 +18,8 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta(@"SELECT   C.Id, 
+                datos.setearConsulta(@"SELECT   C.Id,
+                                                U.Id AS IdUsuario,
                                                 U.Documento, 
                                                 U.Nombre, 
                                                 U.Apellido, 
@@ -37,6 +38,7 @@ namespace Negocio
                     aux.Usuario = new Usuario();
 
                     aux.Id = (int)datos.Lector["Id"];
+                    aux.Usuario.Id = (int)datos.Lector["IdUsuario"];
                     aux.Usuario.Documento = (string)datos.Lector["Documento"];
                     aux.Usuario.Nombre = (string)datos.Lector["Nombre"];
                     aux.Usuario.Apellido = (string)datos.Lector["Apellido"];

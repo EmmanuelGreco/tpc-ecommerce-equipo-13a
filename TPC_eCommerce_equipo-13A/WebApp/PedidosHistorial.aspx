@@ -2,7 +2,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1 style="margin-bottom: 40px;">Mis pedidos</h1>
+    <h1 style="margin-bottom: 40px;">
+        <asp:Label ID="lblTitulo" runat="server"></asp:Label>
+    </h1>
 
     <asp:Label ID="lblUsuario" runat="server" CssClass="h5 d-block mb-3"></asp:Label>
 
@@ -24,11 +26,15 @@
                 </ItemTemplate>
             </asp:TemplateField>
 
-            <asp:HyperLinkField 
-                HeaderText="Detalle"
-                Text="Ver detalle"
-                DataNavigateUrlFields="Id"
-                DataNavigateUrlFormatString="PedidoDetalle.aspx?idVenta={0}" />
+            <asp:TemplateField HeaderText="Detalle">
+                <ItemTemplate>
+                    <asp:HyperLink ID="lnkDetalle" 
+                        runat="server" 
+                        Text="Ver detalle"
+                        NavigateUrl='<%# GetDetalleUrl(Eval("Id")) %>' />
+                </ItemTemplate>
+            </asp:TemplateField>
+
         </Columns>
     </asp:GridView>
 

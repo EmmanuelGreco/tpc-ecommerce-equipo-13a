@@ -13,7 +13,6 @@
         </div>
     </div>
 
-    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:UpdatePanel ID="updClientes" runat="server">
         <ContentTemplate>
 
@@ -22,6 +21,7 @@
                     AutoGenerateColumns="false"
                     OnRowDataBound="dgvClientes_RowDataBound">
                     <Columns>
+                        <asp:BoundField HeaderText="IdUsuario" DataField="Usuario.Id" />
                         <asp:BoundField HeaderText="Nombre" DataField="Usuario.Nombre" />
                         <asp:BoundField HeaderText="Apellido" DataField="Usuario.Apellido" />
                         <asp:BoundField HeaderText="Documento" DataField="Usuario.Documento" />
@@ -38,6 +38,14 @@
                         <asp:TemplateField HeaderText="Acción">
                             <ItemTemplate>
                                 <a href='<%# "ClienteFormABM.aspx?id=" + Eval("Id") %>' class="btn" title="Editar Cliente 📝">📝</a>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="Pedidos">
+                            <ItemTemplate>
+                                <asp:Button ID="btnVerPedidos" runat="server" Text="Ver pedidos"
+                                    CssClass="btn btn-info btn-sm" CommandName="VerPedidos"
+                                    CommandArgument='<%# Eval("Usuario.Id") %>' OnClick="btnVerPedidos_Click" />
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

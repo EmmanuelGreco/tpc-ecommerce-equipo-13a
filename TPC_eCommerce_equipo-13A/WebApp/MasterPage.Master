@@ -73,7 +73,7 @@
 
                         <asp:PlaceHolder ID="phPedidosHistorial" runat="server" Visible="false">
                             <asp:Button ID="btnPedidosHistorial" runat="server"
-                                Text="Pedidos" CssClass="btn btn-outline-primary ms-2"
+                                Text="Mis Pedidos" CssClass="btn btn-outline-primary ms-2"
                                 OnClick="btnPedidosHistorial_Click"
                                 CausesValidation="false" />
                         </asp:PlaceHolder>

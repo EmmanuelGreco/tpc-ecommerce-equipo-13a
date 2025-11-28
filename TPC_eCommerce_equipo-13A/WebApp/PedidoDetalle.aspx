@@ -33,6 +33,8 @@
 
         <asp:Label ID="lblError" runat="server" CssClass="text-danger d-block mt-3"></asp:Label>
 
-        <a href="PedidosHistorial.aspx" class="btn btn-primary mt-3">Volver al historial</a>
+        <asp:HyperLink ID="lnkVolverHistorial" runat="server" CssClass="btn btn-primary mt-3">
+            Volver al historial
+        </asp:HyperLink>
     </div>
 </asp:Content>

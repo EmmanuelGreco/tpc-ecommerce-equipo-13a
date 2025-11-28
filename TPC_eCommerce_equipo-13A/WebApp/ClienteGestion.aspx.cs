@@ -99,5 +99,13 @@ namespace WebApp
 
             dgvClientes.DataBind();
         }
+
+        protected void btnVerPedidos_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            int idUsuarioCliente = int.Parse(btn.CommandArgument);
+
+            Response.Redirect("PedidosHistorial.aspx?idUsuarioCliente=" + idUsuarioCliente, false);
+        }
     }
 }

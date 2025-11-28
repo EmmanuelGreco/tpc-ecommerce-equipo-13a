@@ -17,18 +17,46 @@ namespace WebApp
         {
             if (!IsPostBack)
             {
-                Usuario usuario = Session["usuario"] as Usuario;
+                Usuario usuarioLogueado = Session["usuario"] as Usuario;
 
-                if (usuario == null)
+                if (usuarioLogueado == null)
                 {
                     string urlActual = Request.RawUrl;
                     Response.Redirect("Login.aspx?returnUrl=" + Server.UrlEncode(urlActual), false);
                     return;
                 }
 
-                lblUsuario.Text = "Pedidos de: <span style='color:blue'>" + usuario.Email + "</span>";
+                string idUsuarioClienteStr = Request.QueryString["idUsuarioCliente"];
+                int idUsuarioParaHistorial;
 
-                cargarHistorial(usuario.Id);
+                if (!string.IsNullOrEmpty(idUsuarioClienteStr) && int.TryParse(idUsuarioClienteStr, out idUsuarioParaHistorial))
+                {
+                    if (usuarioLogueado.TipoUsuario == 0 && idUsuarioParaHistorial != usuarioLogueado.Id)
+                    {
+                        lblTitulo.Text = "Mis pedidos";
+                        lblUsuario.Text = "No tiene permisos para ver pedidos de otros usuarios.";
+                        cargarHistorial(usuarioLogueado.Id);
+                        return;
+                    }
+
+                    UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+                    Usuario cliente = usuarioNegocio.obtenerPorId(idUsuarioParaHistorial);
+
+                    lblTitulo.Text = "Pedidos del cliente";
+
+                    if (cliente != null)
+                        lblUsuario.Text = "Cliente: <span style='color:blue'>" + cliente.Email + "</span>";
+                    else
+                        lblUsuario.Text = "Cliente seleccionado";
+
+                    cargarHistorial(idUsuarioParaHistorial);
+                }
+                else
+                {
+                    lblTitulo.Text = "Mis pedidos";
+                    lblUsuario.Text = "Pedidos de: <span style='color:blue'>" + usuarioLogueado.Email + "</span>";
+                    cargarHistorial(usuarioLogueado.Id);
+                }
             }
         }
 
@@ -70,6 +98,19 @@ namespace WebApp
             }
 
             return enumValue.ToString();
+        }
+
+        protected string GetDetalleUrl(object idVentaObj)
+        {
+            int idVenta = Convert.ToInt32(idVentaObj);
+            string idUsuarioClienteStr = Request.QueryString["idUsuarioCliente"];
+
+            if (!string.IsNullOrEmpty(idUsuarioClienteStr))
+            {
+                return $"PedidoDetalle.aspx?idVenta={idVenta}&idUsuarioCliente={idUsuarioClienteStr}";
+            }
+
+            return $"PedidoDetalle.aspx?idVenta={idVenta}";
         }
     }
 }

@@ -37,6 +37,12 @@ namespace WebApp
                 }
 
                 cargarDetalle(usuario, idVenta);
+
+                string idUsuarioClienteStr = Request.QueryString["idUsuarioCliente"];
+                if (!string.IsNullOrEmpty(idUsuarioClienteStr))
+                    lnkVolverHistorial.NavigateUrl = "PedidosHistorial.aspx?idUsuarioCliente=" + idUsuarioClienteStr;
+                else
+                    lnkVolverHistorial.NavigateUrl = "PedidosHistorial.aspx";
             }
         }
 
@@ -52,7 +58,8 @@ namespace WebApp
                 return;
             }
 
-            if (venta.Usuario == null || venta.Usuario.Id != usuarioLogueado.Id)
+            if (usuarioLogueado.TipoUsuario == UserType.CLIENTE &&
+                (venta.Usuario == null || venta.Usuario.Id != usuarioLogueado.Id))
             {
                 lblError.Text = "No tiene permisos para ver este pedido.";
                 gvProductos.Visible = false;

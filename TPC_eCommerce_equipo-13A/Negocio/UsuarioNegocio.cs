@@ -45,6 +45,37 @@ namespace Negocio
             }
         }
 
+        public Usuario obtenerPorId(int idUsuario)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            Usuario usuario = null;
+
+            try
+            {
+                datos.setearConsulta("SELECT Id, Email FROM USUARIOS WHERE Id = @id");
+                datos.setearParametro("@id", idUsuario);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    usuario = new Usuario();
+                    usuario.Id = (int)datos.Lector["Id"];
+                    usuario.Email = datos.Lector["Email"].ToString();
+                }
+
+                return usuario;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+
         public Usuario ObtenerDatos(Usuario usuario)
         {
             AccesoDatos datos = new AccesoDatos();
