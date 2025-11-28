@@ -20,7 +20,7 @@
     <form id="form1" runat="server" class="d-flex flex-column flex-grow-1">
         <asp:ScriptManager ID="ScriptManager1" runat="server" />
 
-        <nav class="navbar navbar-expand-lg bg-body-tertiary mb-4" data-bs-theme="dark">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary mb-0" data-bs-theme="dark">
             <div class="container-fluid">
                 <div class="navbar">
                     <a class="navbar-brand" href="/">
@@ -31,6 +31,7 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav me-auto">
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
@@ -48,19 +49,7 @@
                         <%--<a class="nav-link disabled" aria-disabled="true">Disabled</a>--%>
                     </div>
 
-                    <div class="navbar-nav mx-auto">
-                        <% if (Session["usuario"] != null && (((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.UserType.EMPLEADO ||
-                                                              ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.UserType.ADMIN))
-                            { %>
-                        <a class="nav-link" href="/ProductoGestion.aspx">Gestión de Productos</a>
-                        <a class="nav-link" href="/MarcaGestion.aspx">Gestión de Marcas</a>
-                        <a class="nav-link" href="/CategoriaGestion.aspx">Gestión de Categorías</a>
-                        <a class="nav-link" href="/ClienteGestion.aspx">Gestión de Clientes</a> <% } %>
-
-                        <% if (Session["usuario"] != null && ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.UserType.ADMIN)
-                            { %>
-                        <a class="nav-link" href="/EmpleadoGestion.aspx">Gestión de Empleados</a> <% } %>
-                    </div>
+                    
 
                     <div class="navbar-nav ms-auto">
                         <asp:PlaceHolder ID="phLogin" runat="server">
@@ -71,6 +60,11 @@
                             <a class="btn btn-outline-primary ms-2" href="/ClienteFormABM.aspx">Registrarse</a>
                         </asp:PlaceHolder>
 
+                        <asp:PlaceHolder ID="phUsuarioLogueado" runat="server" Visible="false">
+                            <span class="navbar-text me-3 fw-bold text-white d-inline-flex align-items-center">
+                                👤 <asp:Label ID="lblUsuarioHeader" runat="server"></asp:Label>
+                            </span>
+                        </asp:PlaceHolder>
                         <asp:PlaceHolder ID="phPedidosHistorial" runat="server" Visible="false">
                             <asp:Button ID="btnPedidosHistorial" runat="server"
                                 Text="Mis Pedidos" CssClass="btn btn-outline-primary ms-2"
@@ -89,10 +83,40 @@
                                 CausesValidation="false" />
                         </asp:PlaceHolder>
                     </div>
-
                 </div>
             </div>
         </nav>
+
+                
+        <% if (Session["usuario"] != null &&
+              (((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.UserType.EMPLEADO ||
+               ((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.UserType.ADMIN))
+           { %>
+
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+                <div class="container-fluid">
+
+                    <span class="navbar-text text-white me-3 fw-bold">
+                        Empleados: Panel de gestión
+                    </span>
+
+                    <div class="navbar-nav">
+                        <a class="nav-link text-white" href="/ProductoGestion.aspx">Gestión de Productos</a>
+                        <a class="nav-link text-white" href="/MarcaGestion.aspx">Gestión de Marcas</a>
+                        <a class="nav-link text-white" href="/CategoriaGestion.aspx">Gestión de Categorías</a>
+                        <a class="nav-link text-white" href="/ClienteGestion.aspx">Gestión de Clientes</a>
+
+                        <% if (((Dominio.Usuario)Session["usuario"]).TipoUsuario == Dominio.UserType.ADMIN)
+                           { %>
+                            <a class="nav-link text-white" href="/EmpleadoGestion.aspx">Gestión de Empleados</a>
+                        <% } %>
+                    </div>
+
+                </div>
+            </nav>
+
+        <% } %>
+
 
         <main class="container flex-grow-1 mb-4">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

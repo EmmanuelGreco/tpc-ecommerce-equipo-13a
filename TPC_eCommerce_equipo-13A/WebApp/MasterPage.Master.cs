@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,13 +14,24 @@ namespace WebApp
         {
             if (!IsPostBack)
             {
-                bool logueado = Session["usuario"] != null;
+                Usuario usuario = Session["usuario"] as Usuario;
+                bool logueado = usuario != null;
 
                 phLogin.Visible = !logueado;
                 phRegistrar.Visible = !logueado;
                 phPedidosHistorial.Visible = logueado;
                 phCambiarContrasenia.Visible = logueado;
                 phLogout.Visible = logueado;
+
+                phUsuarioLogueado.Visible = logueado;
+
+                if (logueado)
+                {
+                    //Email o Nombre + Apellido
+                    lblUsuarioHeader.Text = usuario.Email;
+                    //lblUsuarioHeader.Text = $"{usuario.Nombre}";
+                    //lblUsuarioHeader.Text = $"{usuario.Nombre} {usuario.Apellido}";
+                }
             }
         }
 
