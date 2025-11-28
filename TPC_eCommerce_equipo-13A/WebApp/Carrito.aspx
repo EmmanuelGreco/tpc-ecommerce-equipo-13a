@@ -7,7 +7,7 @@
     <div class="row row-cols-1 row-cols-md-1 g-5">
         <asp:Repeater ID="RepeaterCarrito" runat="server" OnItemDataBound="RepeaterCarrito_ItemDataBound">
             <ItemTemplate>
-                <div class="container w-100">
+                <div class="container" style="width:100%">
                     <div class="row align-items-center">
                         <div class="col-md-3">
                             <img src="<%# ((Dominio.Producto)Container.DataItem).ListaImagen[0].ImagenUrl  %>" class="d-block w-100" style="max-height: 150px; object-fit: contain;">
@@ -16,10 +16,11 @@
                             <h4 class="card-title"><%# Eval("Nombre") %></h4>
                         </div>
                         <div class="col-md-3">
-                            <div class="input-group" style="max-width: 180px;">
+                            <div class="input-group">
                                 <asp:Button ID="btnRestar" runat="server" Text="➖" CssClass="btn btn-outline-danger" OnClick="btnRestar_Click" CommandArgument='<%# Eval("Id") %>' />
                                 <h4 id="cantidadElegida" runat="server" style="width: 45px; text-align: center;"></h4>
                                 <asp:Button ID="btnSumar" runat="server" Text="➕" CssClass="btn btn-outline-success" OnClick="btnSumar_Click" CommandArgument='<%# Eval("Id") %>' />
+                                <asp:Button ID="btnEliminar" runat="server" Text="🗑" CssClass="btn btn-outline-danger ms-4" OnClick="btnEliminar_Click" CommandArgument='<%# Eval("Id") %>' />
                             </div>
                         </div>
                         <div class="col-md-3">

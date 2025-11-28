@@ -84,6 +84,7 @@
     <Content Include="MarcaGestion.aspx" />
     <Content Include="PedidoDetalle.aspx" />
     <Content Include="PedidosHistorial.aspx" />
+    <Content Include="ProductoDetalle.aspx" />
     <Content Include="ProductoFormABM.aspx" />
     <Content Include="ProductoGestion.aspx" />
     <Content Include="Productos.aspx" />
@@ -212,6 +213,13 @@
     </Compile>
     <Compile Include="PedidosHistorial.aspx.designer.cs">
       <DependentUpon>PedidosHistorial.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProductoDetalle.aspx.cs">
+      <DependentUpon>ProductoDetalle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductoDetalle.aspx.designer.cs">
+      <DependentUpon>ProductoDetalle.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProductoFormABM.aspx.cs">
       <DependentUpon>ProductoFormABM.aspx</DependentUpon>

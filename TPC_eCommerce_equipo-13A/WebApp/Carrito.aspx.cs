@@ -94,6 +94,23 @@ namespace WebApp
             bindearRepeater(listaCarrito);
         }
 
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            int idProducto = int.Parse(btn.CommandArgument);
+
+            List<Producto> listaCarrito = Session["listaCarrito"] as List<Producto>;
+            if (listaCarrito == null)
+                return;
+
+            listaCarrito.RemoveAll(p => p.Id == idProducto);
+
+            Session["listaCarrito"] = listaCarrito;
+
+            bindearRepeater(listaCarrito);
+        }
+
+
         protected void bindearRepeater(List<Producto> lista)
         {
             if (lista == null || lista.Count == 0)

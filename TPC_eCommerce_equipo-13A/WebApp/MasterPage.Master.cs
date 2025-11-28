@@ -30,7 +30,6 @@ namespace WebApp
             Response.Redirect("/");
         }
 
-
         protected void btnPedidosHistorial_Click(object sender, EventArgs e)
         {
             Response.Redirect("PedidosHistorial.aspx", false);
