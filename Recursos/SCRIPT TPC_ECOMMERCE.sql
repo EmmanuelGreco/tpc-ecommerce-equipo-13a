@@ -168,6 +168,7 @@ CREATE TABLE [dbo].[VENTAS](
 	[MetodoEnvio] [tinyint] NOT NULL,
 	[FechaHoraVenta] [datetime] NOT NULL,
 	[FechaHoraEntrega] [datetime] NULL,
+	[EstadoPedido] [tinyint] NOT NULL DEFAULT 0,
 	[MontoTotal] [decimal](18, 2) NOT NULL,
  CONSTRAINT [PK_VENTAS] PRIMARY KEY CLUSTERED 
 (

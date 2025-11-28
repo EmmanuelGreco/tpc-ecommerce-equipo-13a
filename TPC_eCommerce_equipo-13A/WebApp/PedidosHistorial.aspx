@@ -26,6 +26,12 @@
                 </ItemTemplate>
             </asp:TemplateField>
 
+            <asp:TemplateField HeaderText="Estado">
+                <ItemTemplate>
+                    <%# GetEnumDisplayName(Eval("EstadoPedido")) %>
+                </ItemTemplate>
+            </asp:TemplateField>
+
             <asp:TemplateField HeaderText="Detalle">
                 <ItemTemplate>
                     <asp:HyperLink ID="lnkDetalle" 

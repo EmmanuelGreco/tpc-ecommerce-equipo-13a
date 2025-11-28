@@ -16,8 +16,8 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta(@"INSERT INTO VENTAS (IdUsuario, MetodoPago, MetodoEnvio, FechaHoraVenta, FechaHoraEntrega, MontoTotal)
-                                    VALUES (@idUsuario, @metodoPago, @metodoEnvio, @fechaHoraVenta, @fechaHoraEntrega, @montoTotal);
+                datos.setearConsulta(@"INSERT INTO VENTAS (IdUsuario, MetodoPago, MetodoEnvio, FechaHoraVenta, FechaHoraEntrega, EstadoPedido, MontoTotal)
+                                    VALUES (@idUsuario, @metodoPago, @metodoEnvio, @fechaHoraVenta, @fechaHoraEntrega, @estadoPedido, @montoTotal);
                                     SELECT CAST(SCOPE_IDENTITY() AS INT) AS IdInsertado;");
 
                 if (venta.Usuario == null)
@@ -34,6 +34,8 @@ namespace Negocio
                     datos.setearParametro("@fechaHoraEntrega", venta.FechaHoraEntrega.Value);
                 else
                     datos.setearParametro("@fechaHoraEntrega", DBNull.Value);
+
+                datos.setearParametro("@estadoPedido", (int)venta.EstadoPedido);
 
                 datos.setearParametro("@montoTotal", venta.MontoTotal);
 
@@ -63,7 +65,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta(@"SELECT Id, IdUsuario, MetodoPago, MetodoEnvio, FechaHoraVenta, FechaHoraEntrega, MontoTotal
+                datos.setearConsulta(@"SELECT Id, IdUsuario, MetodoPago, MetodoEnvio, FechaHoraVenta, FechaHoraEntrega, EstadoPedido, MontoTotal
                                     FROM VENTAS
                                     WHERE IdUsuario = @idUsuario
                                     ORDER BY FechaHoraVenta DESC");
@@ -88,6 +90,8 @@ namespace Negocio
 
                     if (!(datos.Lector["FechaHoraEntrega"] is DBNull))
                         venta.FechaHoraEntrega = (DateTime)datos.Lector["FechaHoraEntrega"];
+
+                    venta.EstadoPedido = (OrderStatus)Convert.ToInt32(datos.Lector["EstadoPedido"]);
 
                     venta.MontoTotal = (decimal)datos.Lector["MontoTotal"];
 
@@ -146,7 +150,7 @@ namespace Negocio
             try
             {
                 datos.setearConsulta(@"SELECT V.Id, V.IdUsuario, V.MetodoPago, V.MetodoEnvio,
-                                           V.FechaHoraVenta, V.FechaHoraEntrega, V.MontoTotal,
+                                           V.FechaHoraVenta, V.FechaHoraEntrega, V.EstadoPedido, V.MontoTotal,
                                            U.Nombre, U.Apellido, U.Email
                                     FROM VENTAS V
                                     INNER JOIN USUARIOS U ON U.Id = V.IdUsuario
@@ -175,6 +179,8 @@ namespace Negocio
 
                     if (!(datos.Lector["FechaHoraEntrega"] is DBNull))
                         venta.FechaHoraEntrega = (DateTime)datos.Lector["FechaHoraEntrega"];
+
+                    venta.EstadoPedido = (OrderStatus)Convert.ToInt32(datos.Lector["EstadoPedido"]);
 
                     venta.MontoTotal = (decimal)datos.Lector["MontoTotal"];
                 }
@@ -222,6 +228,28 @@ namespace Negocio
                 }
 
                 return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void ActualizarEstadoPedido(int idVenta, OrderStatus nuevoEstado)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("UPDATE VENTAS SET EstadoPedido = @estado WHERE Id = @idVenta");
+                datos.setearParametro("@estado", (int)nuevoEstado);
+                datos.setearParametro("@idVenta", idVenta);
+
+                datos.ejecutarAccion();
             }
             catch (Exception ex)
             {

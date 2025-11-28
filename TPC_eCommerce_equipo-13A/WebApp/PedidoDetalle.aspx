@@ -6,10 +6,24 @@
         <h1 style="margin-bottom: 40px;">Detalle del pedido</h1>
 
         <asp:Label ID="lblPedido" runat="server" CssClass="h4 d-block mt-3"></asp:Label>
-        <asp:Label ID="lblFecha" runat="server" CssClass="d-block"></asp:Label>
+        <asp:Label ID="lblFechaVenta" runat="server" CssClass="d-block"></asp:Label>
         <asp:Label ID="lblUsuario" runat="server" CssClass="d-block"></asp:Label>
         <asp:Label ID="lblMetodoPago" runat="server" CssClass="d-block"></asp:Label>
         <asp:Label ID="lblMetodoEnvio" runat="server" CssClass="d-block"></asp:Label>
+        <asp:Label ID="lblFechaEntrega" runat="server" CssClass="d-block"></asp:Label>
+
+
+        <asp:Label ID="lblEstado" runat="server" CssClass="d-block"></asp:Label>
+        <div class="mt-3">
+            <asp:Panel ID="panelCambiarEstado" runat="server">
+                <asp:Label runat="server" Text="Cambiar estado:" CssClass="me-2"></asp:Label>
+                <asp:DropDownList ID="ddlEstadoPedido" runat="server" CssClass="form-select d-inline-block" Style="width: 250px;">
+                </asp:DropDownList>
+                <asp:Button ID="btnActualizarEstado" runat="server" Text="Actualizar estado"
+                    CssClass="btn btn-warning ms-2"
+                    OnClick="btnActualizarEstado_Click" />
+            </asp:Panel>
+        </div>
 
         <hr />
 

@@ -122,6 +122,7 @@ namespace WebApp
                     FechaHoraVenta = DateTime.Now,
                     // Fecha de entrega: +3 días
                     FechaHoraEntrega = DateTime.Now.AddDays(3),
+                    EstadoPedido = OrderStatus.Pendiente,
 
                     MontoTotal = total
                 };
@@ -180,14 +181,17 @@ namespace WebApp
             	</head>
             	<body style=""font-family: Arial, sans-serif; background-color:#f6f6f6; margin:0; padding:20px;"">
             		<div style=""max-width:800px; background:#ffffff; margin:auto; padding:30px; border-radius:6px; border:1px solid #ddd;"">
-            			<h1 style=""margin-bottom:35px; font-size:26px;"">Detalle del pedido</h1>
+            			<h1 style=""margin-bottom:35px; font-size:26px;"">¡Su compra se ha procesado exitosamente!</h1>
+                        <h3 style=""margin-bottom:35px; font-size:26px;"">Detalle del pedido</h3>
             			<p style=""margin:6px 0; font-size:18px;"">
             				<strong>Pedido N° {venta.Id}</strong>
             			</p>
-            			<p style=""margin:4px 0;"">Fecha: {venta.FechaHoraVenta.ToString("dd/MM/yyyy HH:mm")}hs</p>
+            			<p style=""margin:4px 0;"">Fecha de venta: {venta.FechaHoraVenta.ToString("dd/MM/yyyy HH:mm")}hs</p>
             			<p style=""margin:4px 0;"">Cliente: {venta.Usuario.Nombre} {venta.Usuario.Apellido} ({venta.Usuario.Email})</p>
             			<p style=""margin:4px 0;"">Forma de pago: {GetEnumDisplayName(venta.MetodoPago)}</p>
             			<p style=""margin:4px 0;"">Método de envío: {GetEnumDisplayName(venta.MetodoEnvio)}</p>
+                        <p style=""margin:4px 0;"">Fecha de entrega estimada: {(venta.FechaHoraEntrega?.ToString("dd/MM/yyyy") ?? "Sin fecha")}</p>
+                        <p style=""margin:4px 0;"">Estado actual: {GetEnumDisplayName(venta.EstadoPedido)}</p>
             			<hr style=""margin:25px 0; border:none; border-top:1px solid #ccc;""/>
             			<h3 style=""font-size:22px; margin-bottom:15px;"">Productos</h3>
             			<table cellpadding=""8"" cellspacing=""0"" style=""width:100%; border-collapse:collapse; font-size:14px;"">
