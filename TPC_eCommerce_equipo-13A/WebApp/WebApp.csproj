@@ -73,7 +73,9 @@
     <Content Include="ClienteFormABM.aspx" />
     <Content Include="ClienteGestion.aspx" />
     <Content Include="CompraCheckout.aspx" />
+    <Content Include="CompraError.aspx" />
     <Content Include="CompraExitosa.aspx" />
+    <Content Include="CompraPendiente.aspx" />
     <Content Include="Contacto.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="EmpleadoFormABM.aspx" />
@@ -134,12 +136,26 @@
     <Compile Include="CompraCheckout.aspx.designer.cs">
       <DependentUpon>CompraCheckout.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CompraError.aspx.cs">
+      <DependentUpon>CompraError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CompraError.aspx.designer.cs">
+      <DependentUpon>CompraError.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CompraExitosa.aspx.cs">
       <DependentUpon>CompraExitosa.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CompraExitosa.aspx.designer.cs">
       <DependentUpon>CompraExitosa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CompraPendiente.aspx.cs">
+      <DependentUpon>CompraPendiente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CompraPendiente.aspx.designer.cs">
+      <DependentUpon>CompraPendiente.aspx</DependentUpon>
     </Compile>
     <Compile Include="Contacto.aspx.cs">
       <DependentUpon>Contacto.aspx</DependentUpon>
@@ -269,6 +285,10 @@
     <ProjectReference Include="..\Dominio\Dominio.csproj">
       <Project>{3b940ef5-3c01-4c08-b8e2-e8fa23c075c5}</Project>
       <Name>Dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mercado_Pago\Mercado_Pago.csproj">
+      <Project>{1ed24e5e-7b36-499c-8f26-d1d9c795e75b}</Project>
+      <Name>Mercado_Pago</Name>
     </ProjectReference>
     <ProjectReference Include="..\Negocio\Negocio.csproj">
       <Project>{c9aa52b3-9e6e-4ed4-bd5a-1049ac39bf3d}</Project>

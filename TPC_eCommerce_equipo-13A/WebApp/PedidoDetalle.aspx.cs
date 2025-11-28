@@ -1,5 +1,4 @@
 ﻿using Dominio;
-using negocio;
 using Negocio;
 using System;
 using System.Collections.Generic;
@@ -124,6 +123,7 @@ namespace WebApp
             if (ddlEstadoPedido.Items.Count == 0)
             {
                 ddlEstadoPedido.Items.Add(new ListItem("Pendiente", ((int)OrderStatus.Pendiente).ToString()));
+                ddlEstadoPedido.Items.Add(new ListItem("Rechazado", ((int)OrderStatus.Rechazado).ToString()));
                 ddlEstadoPedido.Items.Add(new ListItem("En preparación", ((int)OrderStatus.EnPreparacion).ToString()));
                 ddlEstadoPedido.Items.Add(new ListItem("Enviado", ((int)OrderStatus.Enviado).ToString()));
                 ddlEstadoPedido.Items.Add(new ListItem("Listo para retirar", ((int)OrderStatus.ListoRetira).ToString()));

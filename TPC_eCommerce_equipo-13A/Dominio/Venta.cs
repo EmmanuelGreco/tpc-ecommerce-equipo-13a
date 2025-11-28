@@ -35,15 +35,17 @@ namespace Dominio
     {
         Pendiente = 0,
 
-        [Display(Name = "En preparación")]
-        EnPreparacion = 1,
+        Rechazado = 1,
 
-        Enviado = 2,
+        [Display(Name = "En preparación")]
+        EnPreparacion = 2,
+
+        Enviado = 3,
 
         [Display(Name = "Listo para retirar")]
-        ListoRetira = 3,
+        ListoRetira = 4,
 
-        Entregado = 4
+        Entregado = 5
     }
 
     public class Venta

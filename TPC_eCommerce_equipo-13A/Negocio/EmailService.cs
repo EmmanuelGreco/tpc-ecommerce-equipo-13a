@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Net;
 
-namespace negocio
+namespace Negocio
 {
     public class EmailService
     {

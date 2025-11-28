@@ -4,3 +4,9 @@ El Eliminar de Categorias y Marcas, puede ser con un cartel de aviso? *Está ok*
 Se debe tener una tabla Stock? Ó puede ser un atributo en Productos. *No es necesario*
 
 La baja es física o lógica? *Baja lógica*
+
+
+
+3ER Hito
+Orden de ejecución del btnConfirmarCompra en CompraCheckout
+El pedido igualmente se guarda (se podría poner a futuro, un estado del pago) pero no descuenta stock, ya que lo hace CompraExitosa
