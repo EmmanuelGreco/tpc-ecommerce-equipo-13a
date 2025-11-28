@@ -9,30 +9,31 @@ namespace Negocio
 {
     public class UsuarioNegocio
     {
-        public bool Loguear(Usuario usuario)
+        public int Loguear(Usuario usuario)
         {
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                datos.setearConsulta("SELECT Id, TipoUsuario FROM USUARIOS WHERE Email = @email AND Contrasenia = @contrasenia");
+                datos.setearConsulta(@"SELECT e.Activo AS 'Empleado', c.Activo AS 'Cliente' FROM Usuarios u
+	                                        LEFT JOIN Clientes c ON u.Id = c.IdUsuario
+	                                        LEFT JOIN Empleados e ON u.Id = e.IdUsuario
+                                        WHERE u.Email = @email AND u.Contrasenia = @contrasenia");
                 datos.setearParametro("@email", usuario.Email);
                 datos.setearParametro("@contrasenia", usuario.Contrasenia);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
-                    usuario.Id = (int)datos.Lector["Id"];
+                    string empleado = datos.Lector["Empleado"].ToString();
+                    string cliente = datos.Lector["Cliente"].ToString();
 
-                    int tipo = Convert.ToInt32(datos.Lector["TipoUsuario"]);
-                    usuario.TipoUsuario =
-                        tipo == 0 ? UserType.CLIENTE :
-                        tipo == 1 ? UserType.EMPLEADO :
-                        UserType.ADMIN;
-
-                    return true;
+                    if (empleado == "True" || cliente == "True")
+                        return 0;
+                    else if (empleado == "False" || cliente == "False")
+                        return 2;
                 }
-                return false;
+                return 1;
 
             }
             catch (Exception ex)
@@ -83,9 +84,8 @@ namespace Negocio
             try
             {
                 datos.setearConsulta(@"SELECT Id, Documento, Nombre, Apellido, FechaNacimiento, Telefono, Direccion, CodigoPostal, Email, Contrasenia, TipoUsuario, FechaAlta 
-                                        FROM USUARIOS WHERE Email = @email AND Contrasenia = @contrasenia");
+                                        FROM USUARIOS WHERE Email = @email");
                 datos.setearParametro("@email", usuario.Email);
-                datos.setearParametro("@contrasenia", usuario.Contrasenia);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())

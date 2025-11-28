@@ -79,7 +79,7 @@
         </div>
 
         <%--CAROUSEL--%>
-        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <%--<asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>--%> <%--QUEDO EN LA MASTER PAGE--%>
 
         <asp:UpdatePanel runat="server" ID="CarouselUP">
             <ContentTemplate>

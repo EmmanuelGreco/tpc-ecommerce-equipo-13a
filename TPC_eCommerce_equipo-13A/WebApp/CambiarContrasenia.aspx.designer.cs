@@ -24,6 +24,15 @@ namespace WebApp
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Titulo;
 
         /// <summary>
+        /// lblContraseniaActual control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblContraseniaActual;
+
+        /// <summary>
         /// txtContraseniaActual control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,24 @@ namespace WebApp
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtContraseniaActual;
+
+        /// <summary>
+        /// rfvContraseniaActual control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvContraseniaActual;
+
+        /// <summary>
+        /// revContraseniaActual control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revContraseniaActual;
 
         /// <summary>
         /// txtContraseniaNueva control.

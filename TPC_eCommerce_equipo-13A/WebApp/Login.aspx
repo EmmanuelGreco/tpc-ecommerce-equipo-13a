@@ -15,6 +15,7 @@
             </div>
             <asp:Button Text="Ingresar" cssclass="btn btn-success mt-2" ID="btnLogin" OnClick="btnLogin_Click" runat="server" />
             <a href="Productos.aspx" class="btn btn-danger mt-2">Cancelar</a>
+            <asp:Button Text="Olvidé mi contraseña" cssclass="btn btn-warning mt-2" ID="btnOlvidada" OnClick="btnOlvidada_Click" runat="server" />
         </div>
     </div>
 </asp:Content>
