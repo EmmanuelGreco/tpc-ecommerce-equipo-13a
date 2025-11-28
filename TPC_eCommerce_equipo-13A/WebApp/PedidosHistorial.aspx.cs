@@ -31,7 +31,7 @@ namespace WebApp
 
                 if (!string.IsNullOrEmpty(idUsuarioClienteStr) && int.TryParse(idUsuarioClienteStr, out idUsuarioParaHistorial))
                 {
-                    if (usuarioLogueado.TipoUsuario == 0 && idUsuarioParaHistorial != usuarioLogueado.Id)
+                    if (usuarioLogueado.TipoUsuario == UserType.CLIENTE && idUsuarioParaHistorial != usuarioLogueado.Id)
                     {
                         lblTitulo.Text = "Mis pedidos";
                         lblUsuario.Text = "No tiene permisos para ver pedidos de otros usuarios.";

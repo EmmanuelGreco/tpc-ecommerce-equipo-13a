@@ -20,6 +20,7 @@ namespace Negocio
 		                                E.Legajo,
 		                                E.FechaIngreso,
 		                                E.FechaDespido,
+                                        U.Id AS IdUsuario,
 		                                U.Documento,
 		                                U.Nombre,
 		                                U.Apellido,
@@ -28,6 +29,7 @@ namespace Negocio
 		                                U.Direccion,
 		                                U.CodigoPostal,
 		                                U.Email,
+                                        U.TipoUsuario,
 		                                E.Activo 
                                       FROM Empleados E INNER JOIN Usuarios U ON E.IdUsuario = U.Id");
                 datos.ejecutarLectura();
@@ -41,6 +43,7 @@ namespace Negocio
                     aux.Legajo = (int)datos.Lector["Legajo"];
                     aux.FechaIngreso = (DateTime)datos.Lector["FechaIngreso"];
                     aux.FechaDespido = datos.Lector["FechaDespido"] != DBNull.Value ? (DateTime)datos.Lector["FechaDespido"] : (DateTime?)null;
+                    aux.Usuario.Id = (int)datos.Lector["IdUsuario"];
                     aux.Usuario.Documento = (string)datos.Lector["Documento"];
                     aux.Usuario.Nombre = (string)datos.Lector["Nombre"];
                     aux.Usuario.Apellido = (string)datos.Lector["Apellido"];
@@ -49,6 +52,7 @@ namespace Negocio
                     aux.Usuario.Direccion = (string)datos.Lector["Direccion"];
                     aux.Usuario.CodigoPostal = (string)datos.Lector["CodigoPostal"];
                     aux.Usuario.Email = (string)datos.Lector["Email"];
+                    aux.Usuario.TipoUsuario = (UserType)Convert.ToInt32(datos.Lector["TipoUsuario"]);
                     aux.Activo = (bool)datos.Lector["Activo"];
 
                     listaEmpleado.Add(aux);

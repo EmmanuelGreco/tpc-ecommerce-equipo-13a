@@ -27,6 +27,12 @@
                         <asp:BoundField HeaderText="Documento" DataField="Usuario.Documento" />
                         <asp:BoundField HeaderText="Email" DataField="Usuario.Email" />
 
+                        <asp:TemplateField HeaderText="Tipo de Empleado">
+                            <ItemTemplate>
+                                <%# GetEnumDisplayName(Eval("Usuario.TipoUsuario")) %>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
                         <asp:CheckBoxField HeaderText="Activo" DataField="Activo" />
 
                         <asp:TemplateField HeaderText="Estado">
@@ -38,6 +44,14 @@
                         <asp:TemplateField HeaderText="Acción">
                             <ItemTemplate>
                                 <a href='<%# "EmpleadoFormABM.aspx?id=" + Eval("Id") %>' class="btn" title="Editar Empleado 📝">📝</a>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        
+                        <asp:TemplateField HeaderText="Pedidos">
+                            <ItemTemplate>
+                                <asp:Button ID="btnVerPedidos" runat="server" Text="Ver pedidos"
+                                    CssClass="btn btn-info btn-sm" CommandName="VerPedidos"
+                                    CommandArgument='<%# Eval("Usuario.Id") %>' OnClick="btnVerPedidos_Click" />
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

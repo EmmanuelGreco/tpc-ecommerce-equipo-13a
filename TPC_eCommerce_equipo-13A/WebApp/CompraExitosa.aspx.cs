@@ -51,7 +51,7 @@ namespace WebApp
                                 productoNegocio.actualizarStock(prod.Id, nuevoStock);
                             }
 
-                            EmailService emailService = new EmailService();
+                            /*EmailService emailService = new EmailService();
                             string email = ultimaVenta.Usuario.Email;
 
                             emailService.armarCorreo(email, "¡Compra exitosa!", armarBodyEmail(ultimaVenta));
@@ -62,7 +62,7 @@ namespace WebApp
                             catch (Exception ex)
                             {
                                 throw ex;
-                            }
+                            }*/
 
                             lblMensaje.Text = "El pedido N° " + idVentaStr + " se ha pagado correctamente.";
                         }

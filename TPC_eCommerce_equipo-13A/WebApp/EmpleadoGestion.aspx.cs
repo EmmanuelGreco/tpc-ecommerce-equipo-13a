@@ -2,7 +2,9 @@
 using Negocio;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -98,6 +100,34 @@ namespace WebApp
             }
 
             dgvEmpleados.DataBind();
+        }
+
+        protected string GetEnumDisplayName(object value)
+        {
+            if (value == null)
+                return string.Empty;
+
+            var enumValue = value as Enum;
+            if (enumValue == null)
+                return value.ToString();
+
+            var member = enumValue.GetType().GetMember(enumValue.ToString());
+            if (member.Length > 0)
+            {
+                var attr = member[0].GetCustomAttribute<DisplayAttribute>();
+                if (attr != null)
+                    return attr.Name;
+            }
+
+            return enumValue.ToString();
+        }
+
+        protected void btnVerPedidos_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            int idUsuarioCliente = int.Parse(btn.CommandArgument);
+
+            Response.Redirect("PedidosHistorial.aspx?idUsuarioCliente=" + idUsuarioCliente, false);
         }
     }
 }
