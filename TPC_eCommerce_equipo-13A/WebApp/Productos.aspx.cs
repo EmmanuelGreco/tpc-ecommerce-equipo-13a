@@ -35,6 +35,8 @@ namespace WebApp
                         }
                     }
 
+                    CargarFiltros(listaProducto);
+
                     RepeaterProductos.DataSource = listaProducto;
                     RepeaterProductos.DataBind();
                 }
@@ -117,27 +119,87 @@ namespace WebApp
             }
         }
 
-        protected void filtro_TextChanged(object sender, EventArgs e)
+        private void CargarFiltros(List<Producto> lista)
+        {
+            var categorias = lista
+                .Where(p => p.Categoria != null)
+                .Select(p => p.Categoria.ToString())
+                .Distinct()
+                .OrderBy(c => c)
+                .ToList();
+
+            cblCategorias.DataSource = categorias;
+            cblCategorias.DataBind();
+
+            var marcas = lista
+                .Where(p => p.Marca != null)
+                .Select(p => p.Marca.ToString())
+                .Distinct()
+                .OrderBy(m => m)
+                .ToList();
+
+            cblMarcas.DataSource = marcas;
+            cblMarcas.DataBind();
+        }
+
+        private void AplicarFiltros()
         {
             if (Session["listaProducto"] == null)
                 return;
 
-            List<Producto> lista = (List<Producto>)Session["listaProducto"];
+            var lista = (List<Producto>)Session["listaProducto"];
 
-            if (string.IsNullOrWhiteSpace(txtFiltro.Text))
+            string texto = txtFiltroRapido.Text.Trim().ToUpper();
+
+            var categoriasSeleccionadas = cblCategorias.Items.Cast<ListItem>()
+                .Where(i => i.Selected)
+                .Select(i => i.Value)
+                .ToList();
+
+            var marcasSeleccionadas = cblMarcas.Items.Cast<ListItem>()
+                .Where(i => i.Selected)
+                .Select(i => i.Value)
+                .ToList();
+
+            var listaFiltrada = lista.Where(p =>
             {
-                RepeaterProductos.DataSource = lista;
-                RepeaterProductos.DataBind();
-                return;
-            }
+                bool coincideTexto = true;
+                if (!string.IsNullOrEmpty(texto))
+                {
+                    coincideTexto =
+                        (!string.IsNullOrEmpty(p.Codigo) && p.Codigo.ToUpper().Contains(texto)) ||
+                        (!string.IsNullOrEmpty(p.Nombre) && p.Nombre.ToUpper().Contains(texto));
+                }
 
-            List<Producto> listaFiltrada = lista.FindAll(x => 
-                x.Codigo.ToUpper().Contains(txtFiltro.Text.ToUpper()) ||
-                x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper())
-            );
+                bool coincideCategoria = true;
+                if (categoriasSeleccionadas.Any())
+                {
+                    var catTexto = p.Categoria != null ? p.Categoria.ToString() : "";
+                    coincideCategoria = categoriasSeleccionadas.Contains(catTexto);
+                }
+
+                bool coincideMarca = true;
+                if (marcasSeleccionadas.Any())
+                {
+                    var marcaTexto = p.Marca != null ? p.Marca.ToString() : "";
+                    coincideMarca = marcasSeleccionadas.Contains(marcaTexto);
+                }
+
+                return coincideTexto && coincideCategoria && coincideMarca;
+            }).ToList();
 
             RepeaterProductos.DataSource = listaFiltrada;
             RepeaterProductos.DataBind();
+        }
+
+        protected void filtroRapido_TextChanged(object sender, EventArgs e)
+        {
+            AplicarFiltros();
+        }
+
+        protected void Filtros_Changed(object sender, EventArgs e)
+        {
+            AplicarFiltros();
         }
     }
 }
