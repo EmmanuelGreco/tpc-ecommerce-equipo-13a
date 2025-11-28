@@ -11,7 +11,7 @@ namespace Dominio
         public int Id { get; set; }                             //PK
         public Usuario Usuario { get; set; }
         public int Legajo { get; set; }
-        public string Cargo { get; set; }
+        //public string Cargo { get; set; }
         public DateTime FechaIngreso { get; set; }
         public DateTime? FechaDespido { get; set; }
         public bool Activo { get; set; }

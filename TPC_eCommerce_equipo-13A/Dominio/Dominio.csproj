@@ -42,16 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Carrito.cs" />
     <Compile Include="Categoria.cs" />
     <Compile Include="Cliente.cs" />
-    <Compile Include="DetalleVenta.cs" />
     <Compile Include="Empleado.cs" />
     <Compile Include="ProductoImagen.cs" />
-    <Compile Include="ItemFavorito.cs" />
-    <Compile Include="ListaFavoritos.cs" />
     <Compile Include="Marca.cs" />
-    <Compile Include="MetodoPago.cs" />
     <Compile Include="Producto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Usuario.cs" />
